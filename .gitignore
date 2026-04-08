@@ -49,8 +49,12 @@ frontend/out/
 
 # Env files
 .env
+.env.server
 .env.local
 frontend/.env.local
+
+# Runtime GROBID output artifacts
+uploads/grobid_outputs/*.tei.xml
 
 # Logs
 npm-debug.log*

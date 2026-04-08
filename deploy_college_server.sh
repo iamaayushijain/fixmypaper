@@ -122,7 +122,7 @@ sudo -u "${APP_USER}" bash -lc "
   set -euo pipefail
   cd '${MAIN_DIR}/frontend'
   cat > .env <<EOF
-NEXT_PUBLIC_API_URL=\"http://127.0.0.1:${BACKEND_PORT}\"
+BACKEND_INTERNAL_URL=\"http://127.0.0.1:${BACKEND_PORT}\"
 UPLOAD_PROXY_TIMEOUT_MS=\"${UPLOAD_TIMEOUT_MS}\"
 EOF
   npm ci
@@ -185,8 +185,7 @@ User=${APP_USER}
 Group=${APP_USER}
 WorkingDirectory=${MAIN_DIR}/frontend
 Environment=NODE_ENV=production
-Environment=API_URL=http://127.0.0.1:${BACKEND_PORT}
-Environment=NEXT_PUBLIC_API_URL=http://127.0.0.1:${BACKEND_PORT}
+Environment=BACKEND_INTERNAL_URL=http://127.0.0.1:${BACKEND_PORT}
 Environment=UPLOAD_PROXY_TIMEOUT_MS=${UPLOAD_TIMEOUT_MS}
 ExecStart=/usr/bin/env node node_modules/next/dist/bin/next start -p ${FRONTEND_PORT}
 Restart=always

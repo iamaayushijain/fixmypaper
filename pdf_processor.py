@@ -973,13 +973,14 @@ class PDFErrorDetector:
 
     @staticmethod
     def analyze_references(citations: List[Dict]) -> Dict:
-        """Send citations to reference-api.onrender.com/analyze."""
+        """Send citations to the configured reference API endpoint."""
         if not citations:
             return {}
 
-        REFERENCE_API = os.environ.get(
-            "REFERENCE_API_URL", "https://reference-api.onrender.com/analyze"
-        )
+        REFERENCE_API = os.environ.get("REFERENCE_API_URL") or os.environ.get("REFERENCE_API")
+        if not REFERENCE_API:
+            return {"error": "REFERENCE_API_URL is not configured"}
+
         payload = {
             "entries": citations,
             "dry_run": False,

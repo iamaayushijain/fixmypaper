@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
-const backendUrl = (
-  "http://backend:7860"
-).replace(/\/$/, "");
+function getRequiredEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value.replace(/\/$/, "");
+}
+
+const backendUrl = getRequiredEnv("BACKEND_INTERNAL_URL");
 
 const nextConfig = {
   async rewrites() {
