@@ -1,12 +1,12 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Virtual environment
+*.pyc
 venv/
 env/
 ENV/
+.venv/
 
 # IDE
 .vscode/
@@ -19,71 +19,36 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Uploads (temporary files)
+# Runtime output files
 uploads/*.pdf
+uploads/grobid_outputs/*.tei.xml
 processed/*.pdf
 processed/*.json
 
 # Keep folders but not contents
 !uploads/.gitkeep
+!uploads/grobid_outputs/.gitkeep
 !processed/.gitkeep
 
 # Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Testing
+# Testing artifacts
 test_sample.pdf
 test_sample_annotated.pdf
-*.pyc
 
 # Environment variables
-.env
-
-# Node
-node_modules/
-frontend/node_modules/
-
-# Next.js
-frontend/.next/
-frontend/out/
-
-# Env files
 .env
 .env.server
 .env.local
 frontend/.env.local
 
-# Runtime GROBID output artifacts
-uploads/grobid_outputs/*.tei.xml
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS
-.DS_Store
-
-# Python
-venv/
-__pycache__/
-*.pyc
+# Node / Next.js
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
 .next/
-4.0K    Dockerfile
-4.0K    Procfile
-4.0K    README.md
-176K    __pycache__
- 12K    app.py
-4.0K    formats.json
-316M    frontend
-116K    pdf_processor.py
- 12K    pix2text_processor.py
- 12K    processed
-4.0K    render.yaml
-4.0K    requirements.txt
-4.0K    runtime.txt
-4.0K    setup.sh
-4.0K    test_sample.py
- 12K    uploads
-602M    venv
-rishabhkumarjain@Aayushi research-paper-checker % .hf-clean/
