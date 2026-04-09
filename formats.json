@@ -29,7 +29,14 @@
         "caption_placement",
         "reference_format",
         "url_doi_validity",
-        "et_al_formatting"
+        "et_al_formatting",
+        "table_footnote_matching",
+        "figure_subpart_definitions",
+        "table_empty_cells",
+        "table_figure_placement",
+        "serial_comma_consistency",
+        "dialect_consistency",
+        "quote_style_consistency"
       ]
     },
     {

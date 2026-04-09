@@ -171,6 +171,57 @@ AVAILABLE_CHECKS: "OrderedDict[str, Dict]" = OrderedDict([
         "error_types": ["writing_style"],
         "default": False,
     }),
+    # ── Tables ────────────────────────────────────────────────────
+    ("table_footnote_matching", {
+        "name": "Table Footnote Matching",
+        "description": "Every footnote marker inside a table has a matching definition below it, and no orphaned definitions exist",
+        "category": "Formatting",
+        "error_types": ["table_footnote_orphan", "table_footnote_ghost"],
+        "default": True,
+    }),
+    # ── Figures ───────────────────────────────────────────────────
+    ("figure_subpart_definitions", {
+        "name": "Figure Sub-part Definitions",
+        "description": "Every sub-part of a multi-part figure (a, b, c…) referenced in the text or implied by sequence must be defined in that figure's caption",
+        "category": "Formatting",
+        "error_types": ["figure_subpart_missing", "figure_subpart_sequence_break", "figure_subpart_orphaned"],
+        "default": True,
+    }),
+    ("table_empty_cells", {
+        "name": "Table Completeness (No Empty Cells)",
+        "description": "All table cells must contain data or an explicit null indicator such as N/A, -, or 0",
+        "category": "Formatting",
+        "error_types": ["table_empty_cell"],
+        "default": True,
+    }),
+    ("table_figure_placement", {
+        "name": "Table/Figure Placement After Mention",
+        "description": "Tables and Figures must appear AFTER their first textual mention in the manuscript",
+        "category": "Formatting",
+        "error_types": ["fig_table_before_mention"],
+        "default": True,
+    }),
+    ("serial_comma_consistency", {
+        "name": "Serial Comma Consistency",
+        "description": "All lists of three or more items must consistently use or omit the serial (Oxford) comma",
+        "category": "Writing",
+        "error_types": ["serial_comma_inconsistent"],
+        "default": True,
+    }),
+    ("dialect_consistency", {
+        "name": "US vs UK English Spelling Consistency",
+        "description": "Dialect-specific spelling must be consistent (American OR British) throughout the manuscript",
+        "category": "Writing",
+        "error_types": ["mixed_dialect_spelling"],
+        "default": True,
+    }),
+    ("quote_style_consistency", {
+        "name": "Straight vs Smart Quotes Consistency",
+        "description": "Quotation marks/apostrophes in prose must consistently use either straight or smart style",
+        "category": "Writing",
+        "error_types": ["mixed_quote_style"],
+        "default": True,
+    }),
 ])
 
 ALL_SECTIONS: List[str] = [
@@ -1304,6 +1355,27 @@ class PDFErrorDetector:
         errors.extend(self._check_et_al_formatting())
         errors.extend(self._check_first_person_pronouns())
         errors.extend(self._check_references_numbered())
+
+        # Table Footnote Matching (28)
+        errors.extend(self._check_table_footnote_matching())
+
+        # Figure Sub-part Definitions (29)
+        errors.extend(self._check_figure_subpart_definitions())
+
+        # Table Completeness: Empty Table Cells (30)
+        errors.extend(self._check_table_empty_cells())
+
+        # Placement After Mention: Tables/Figures (31)
+        errors.extend(self._check_table_figure_placement())
+
+        # Serial Comma Consistency (32)
+        errors.extend(self._check_serial_comma_consistency())
+
+        # US vs UK English Spelling Consistency (33)
+        errors.extend(self._check_dialect_consistency())
+
+        # Straight vs Smart Quotes Consistency (34)
+        errors.extend(self._check_quote_style_consistency())
 
         return errors
 
@@ -2506,8 +2578,919 @@ class PDFErrorDetector:
         return errors
 
     # =========================================================================
+    # CHECK #29 — FIGURE SUB-PART DEFINITIONS
+    # =========================================================================
+
+    # Regex to detect in-text references to a specific figure sub-part.
+    # Matches: "Fig. 1a", "Fig. 1(b)", "Figure 2c", "Figure 3(d)", etc.
+    # Groups: (1) figure number, (2) sub-part letter.
+    _FIG_SUBPART_REF = re.compile(
+        r'(?:Fig(?:ure|\.?))\s*(\d+)\s*[\(\[]?\s*([a-zA-Z])\s*[\)\]]?',
+        re.IGNORECASE,
+    )
+
+    # Regex to extract a sub-part label DEFINED in a figure caption.
+    # Matches: "(a)", "(b)", "a)", "(A)", "A.", "(i)", etc.
+    # Does NOT match plain English words in parentheses or citations.
+    _CAPTION_SUBPART_DEF = re.compile(
+        r'[\(\[]([a-zA-Z]|[ivxlcdmIVXLCDM]+)[\)\]]'   # (a) or [a]
+        r'|(?<!\w)([a-zA-Z])\)'                         # a)  without opening paren
+        r'|(?<!\w)([A-Z])\.\s',                         # A.  capital followed by space
+    )
+
+    # False-positive guard: common English words that appear as "(word)" in captions.
+    _CAPTION_FP_WORDS = frozenset({
+        "aqueous", "left", "right", "top", "bottom", "inset", "adapted",
+        "modified", "reproduced", "courtesy", "adopted", "source", "note",
+        "solid", "dashed", "dotted", "red", "blue", "green", "black",
+        "white", "gray", "grey", "scale", "bar", "nm", "μm", "mm", "cm",
+        "and", "or", "the", "for", "with", "from", "see", "fig", "figure",
+    })
+
+    def _check_figure_subpart_definitions(self) -> List[ErrorInstance]:
+        """
+        CHECK #29 — Figure Sub-part Definitions.
+
+        Rule: Every sub-part of a multi-part figure that is referenced in the
+        manuscript text (e.g. "Fig. 1a", "Figure 2(b)") OR implied by sequence
+        in the caption (e.g. caption defines (a) and (c) → (b) is missing) must
+        be explicitly defined/described in that figure's caption.
+
+        Three violation types:
+          • figure_subpart_missing      — sub-part referenced in text, not in caption.
+          • figure_subpart_sequence_break — caption defines (a),(b),(d) — (c) absent.
+          • figure_subpart_orphaned     — caption defines (a),(b) but only
+                                          one sub-part is referenced in the whole text
+                                          (implies the extra definition is orphaned).
+
+        Data sources (read-only):
+          self._grobid_figure_entries  — preferred; per-figure captions + coords.
+          self.line_info               — full text lines for in-text reference scan.
+          self.full_text               — full document string (fallback).
+        """
+        errors: List[ErrorInstance] = []
+
+        # ── Build per-figure caption map ─────────────────────────────────────
+        # {fig_num: {"caption": str, "page": int, "bbox": tuple}}
+        fig_caption_map: Dict[int, Dict] = {}
+
+        if self._grobid_figure_entries:
+            for fig in self._grobid_figure_entries:
+                num = fig.get("number")
+                if num is None:
+                    continue
+                fig_caption_map[num] = {
+                    "caption": fig.get("caption", "") or "",
+                    "page":    fig.get("page", 0),
+                    "bbox":    fig.get("bbox", (0.0, 0.0, 200.0, 14.0)),
+                }
+        else:
+            # Fallback: scan line_info for "Fig. N caption_text" lines.
+            caption_re = re.compile(
+                r'(?:Fig(?:ure|\.?))\s*(\d+)[:\.]?\s+(.{10,})', re.IGNORECASE
+            )
+            for line_text, line_bbox, page_num in self.line_info:
+                m = caption_re.search(line_text)
+                if m:
+                    num = int(m.group(1))
+                    if num not in fig_caption_map:
+                        fig_caption_map[num] = {
+                            "caption": m.group(2),
+                            "page":    page_num,
+                            "bbox":    line_bbox,
+                        }
+
+        if not fig_caption_map:
+            return errors  # no figures detected — nothing to check
+
+        # ── STEP 2: Mine in-text sub-part references for each figure ─────────
+        # {fig_num: set of sub-part letters referenced in the body text}
+        referenced_subparts: Dict[int, Set[str]] = {}
+
+        for line_text, line_bbox, page_num in self.line_info:
+            for m in self._FIG_SUBPART_REF.finditer(line_text):
+                fig_num_str, sub_letter = m.group(1), m.group(2).lower()
+                try:
+                    fig_num = int(fig_num_str)
+                except ValueError:
+                    continue
+                referenced_subparts.setdefault(fig_num, set()).add(sub_letter)
+
+        # ── STEP 3: Parse sub-part labels from each figure caption ───────────
+        def _extract_caption_subparts(caption: str) -> Set[str]:
+            """Return set of lowercase sub-part labels defined in the caption."""
+            found: Set[str] = set()
+            for m in self._CAPTION_SUBPART_DEF.finditer(caption):
+                raw = (m.group(1) or m.group(2) or m.group(3) or "").strip().lower()
+                if not raw:
+                    continue
+                # Skip false positives: multi-char words that aren't roman numerals
+                if len(raw) > 1 and not re.match(r'^[ivxlcdm]+$', raw):
+                    continue
+                # Skip FP single letters that are part of a word
+                start = m.start()
+                if start > 0 and caption[start - 1].isalpha():
+                    continue
+                end = m.end()
+                if end < len(caption) and caption[end].isalpha():
+                    continue
+                found.add(raw)
+            return found
+
+        # ── STEP 4: Cross-reference per figure ───────────────────────────────
+        for fig_num, fig_data in sorted(fig_caption_map.items()):
+            caption = fig_data["caption"]
+            page_num = fig_data["page"]
+            bbox = fig_data["bbox"]
+            fig_label = f"Figure {fig_num}"
+
+            defined_in_caption = _extract_caption_subparts(caption)
+            referenced_in_text = referenced_subparts.get(fig_num, set())
+
+            print(
+                f"[SUBPART CHECK] {fig_label}: "
+                f"caption_defined={sorted(defined_in_caption)} "
+                f"text_referenced={sorted(referenced_in_text)}"
+            )
+
+            # — Missing definitions: referenced in text, not defined in caption —
+            missing = referenced_in_text - defined_in_caption
+            for part in sorted(missing):
+                errors.append(ErrorInstance(
+                    check_id=29,
+                    check_name="Figure Sub-part: Missing Caption Definition",
+                    description=(
+                        f"{fig_label} sub-part '({part})' is referenced in the "
+                        f"manuscript text (e.g. '{fig_label}{part}') but is not "
+                        f"defined or described in the figure caption."
+                    ),
+                    page_num=page_num,
+                    text=f"[{fig_label}({part}) not defined in caption]",
+                    bbox=bbox,
+                    error_type="figure_subpart_missing",
+                ))
+
+            # — Sequence breaks: caption defines (a),(b),(d) — (c) missing ——
+            if defined_in_caption:
+                alpha_parts = sorted(
+                    p for p in defined_in_caption
+                    if len(p) == 1 and p.isalpha()
+                )
+                # Only check sequence if there are ≥ 2 letters defined
+                if len(alpha_parts) >= 2:
+                    for i in range(len(alpha_parts) - 1):
+                        a, b = alpha_parts[i], alpha_parts[i + 1]
+                        expected_next = chr(ord(a) + 1)
+                        if b != expected_next:
+                            errors.append(ErrorInstance(
+                                check_id=29,
+                                check_name="Figure Sub-part: Sequence Break in Caption",
+                                description=(
+                                    f"{fig_label} caption defines sub-parts up to "
+                                    f"'({a})' then jumps to '({b})', skipping "
+                                    f"'({expected_next})'. All consecutive sub-parts "
+                                    f"must be defined."
+                                ),
+                                page_num=page_num,
+                                text=f"[{fig_label}: ({expected_next}) missing between ({a}) and ({b})]",
+                                bbox=bbox,
+                                error_type="figure_subpart_sequence_break",
+                            ))
+
+            # — Orphaned definitions: caption has more sub-parts than text uses —
+            # Only flag when the text references some (but not all) sub-parts,
+            # indicating the author knows there are sub-parts but forgot some.
+            if referenced_in_text and defined_in_caption:
+                orphaned = defined_in_caption - referenced_in_text
+                # Only flag if text references at least one sub-part (intent clear)
+                # and the orphaned set is non-empty.
+                for part in sorted(orphaned):
+                    errors.append(ErrorInstance(
+                        check_id=29,
+                        check_name="Figure Sub-part: Orphaned Caption Definition",
+                        description=(
+                            f"{fig_label} caption defines sub-part '({part})' but "
+                            f"that sub-part is never referenced in the manuscript text. "
+                            f"Either add an in-text reference or remove the definition."
+                        ),
+                        page_num=page_num,
+                        text=f"[{fig_label}({part}) defined in caption but not cited in text]",
+                        bbox=bbox,
+                        error_type="figure_subpart_orphaned",
+                    ))
+
+        return errors
+
+    # =========================================================================
+    # CHECK #28 — TABLE FOOTNOTE MATCHING
+    # =========================================================================
+
+    # Regex: footnote marker at the VERY END of a cell string.
+    # The capturing group is the marker character(s).
+    # We additionally require either:
+    #   (a) the preceding character is a non-alpha (digit, /, ., %, etc.) — for
+    #       lowercase-letter markers like 'a', 'b'; or
+    #   (b) the marker itself is a non-letter symbol (*, **, †, ‡), which can never
+    #       be an article or variable label.
+    # This correctly handles: "75.4a" "N/A*" "Control†" "p<0.05**"
+    # and avoids:             "a" (standalone article), "b" (column header letter)
+    _FOOTNOTE_MARKER_IN_CELL = re.compile(
+        r'(?:(?<=[^a-zA-Z])([a-z])|\s*(\*{1,2}|[†‡]))$'
+    )
+
+    # Regex: start of a footnote definition line.
+    # e.g. "a Data missing."  "* p < 0.05"  "† Adjusted for inflation."
+    _FOOTNOTE_DEF_LINE = re.compile(
+        r'^\s*([a-z]|\*{1,2}|[†‡])[.\s)]'
+    )
+
+    def _check_table_footnote_matching(self) -> List[ErrorInstance]:
+        """
+        CHECK #28 — Table Footnote Matching.
+
+        Rule: If a table contains footnote markers (a, b, *, **, †, ‡) inside
+        its cells or headers, corresponding definitions MUST exist in the
+        "Footnote Zone" — up to 5 lines immediately below the table on the
+        same page.  Two types of violation are reported:
+
+          • Orphaned Marker  (table_footnote_orphan)
+              Marker used in cell, but no definition found below.
+          • Ghost Footnote   (table_footnote_ghost)
+              Definition exists below table, but its marker is absent from cells.
+
+        Data sources used (read-only, no side effects):
+          self.extracted_tables  — Camelot DataFrames; page is 1-indexed.
+          self.line_info          — ordered (text, bbox, page_num) triples;
+                                    page_num is 0-indexed.
+        """
+        if not self.extracted_tables:
+            return []
+
+        errors: List[ErrorInstance] = []
+
+        for table in self.extracted_tables:
+            df = table.get("dataframe")
+            if df is None or df.empty:
+                continue
+
+            # Camelot page is 1-indexed; line_info uses 0-indexed.
+            tbl_page_0 = int(table["page"]) - 1
+
+            # ── STEP 1: Collect unique markers from table cells ───────────────
+            markers_in_table: Set[str] = set()
+            for _, row in df.iterrows():
+                for cell in row:
+                    cell_str = str(cell).strip()
+                    m = self._FOOTNOTE_MARKER_IN_CELL.search(cell_str)
+                    if m:
+                        # group(1) = letter marker (e.g. 'a'), group(2) = symbol (e.g. '*')
+                        marker = m.group(1) or m.group(2)
+                        if marker:
+                            markers_in_table.add(marker.strip())
+
+            # ── STEP 2: Locate the footnote zone on the same page ─────────────
+            page_lines = [
+                (txt, bbox, pn)
+                for txt, bbox, pn in self.line_info
+                if pn == tbl_page_0
+            ]
+
+            if not page_lines:
+                # No text lines on this page — nothing to cross-reference.
+                if markers_in_table:
+                    anchor_bbox = (0.0, 0.0, 200.0, 14.0)
+                    table_label = f"TABLE {table['index'] + 1}"
+                    for marker in sorted(markers_in_table):
+                        errors.append(ErrorInstance(
+                            check_id=28,
+                            check_name="Table Footnote: Orphaned Marker",
+                            description=(
+                                f"{table_label} uses footnote marker '{marker}' inside a cell "
+                                f"but no footnote zone text was found on page {tbl_page_0 + 1}."
+                            ),
+                            page_num=tbl_page_0,
+                            text=f"[Marker '{marker}' undefined below {table_label}]",
+                            bbox=anchor_bbox,
+                            error_type="table_footnote_orphan",
+                        ))
+                continue
+
+            # Sort page lines by vertical position (y0 ascending = top to bottom).
+            page_lines_sorted = sorted(page_lines, key=lambda x: x[1][1])
+
+            # Use the lower half of page lines as the candidate footnote zone.
+            # This avoids picking up the table caption (which sits above).
+            half = max(1, len(page_lines_sorted) // 2)
+            candidate_lines = page_lines_sorted[half:][:5]  # at most 5 lines
+
+            # ── STEP 3: Parse definitions from the footnote zone ──────────────
+            markers_defined: Set[str] = set()
+            definition_anchor: Optional[Tuple] = None
+
+            for ln_text, ln_bbox, ln_page in candidate_lines:
+                m = self._FOOTNOTE_DEF_LINE.match(ln_text)
+                if m:
+                    markers_defined.add(m.group(1))
+                    if definition_anchor is None:
+                        definition_anchor = (ln_text, ln_bbox, ln_page)
+
+            # Skip table entirely if it has NO markers on either side.
+            if not markers_in_table and not markers_defined:
+                continue
+
+            # Anchor annotation to the topmost line on the table's page.
+            anchor_text, anchor_bbox, anchor_page = page_lines_sorted[0]
+            table_label = f"TABLE {table['index'] + 1}"
+
+            # ── STEP 4: Cross-reference ───────────────────────────────────────
+            orphaned = markers_in_table - markers_defined
+            ghost    = markers_defined  - markers_in_table
+
+            for marker in sorted(orphaned):
+                errors.append(ErrorInstance(
+                    check_id=28,
+                    check_name="Table Footnote: Orphaned Marker",
+                    description=(
+                        f"{table_label} uses footnote marker '{marker}' inside a cell "
+                        f"but no corresponding definition was found in the footnote zone "
+                        f"immediately below the table."
+                    ),
+                    page_num=anchor_page,
+                    text=f"[Marker '{marker}' undefined below {table_label}]",
+                    bbox=anchor_bbox,
+                    error_type="table_footnote_orphan",
+                ))
+
+            for marker in sorted(ghost):
+                def_anchor_tuple = definition_anchor or page_lines_sorted[0]
+                errors.append(ErrorInstance(
+                    check_id=28,
+                    check_name="Table Footnote: Ghost Definition",
+                    description=(
+                        f"A footnote definition for marker '{marker}' appears below "
+                        f"{table_label} but the marker '{marker}' is not used inside "
+                        f"any cell of that table."
+                    ),
+                    page_num=def_anchor_tuple[2],
+                    text=f"[Definition '{marker}' has no marker in {table_label}]",
+                    bbox=def_anchor_tuple[1],
+                    error_type="table_footnote_ghost",
+                ))
+
+            print(
+                f"[FOOTNOTE CHECK] {table_label} (page {tbl_page_0 + 1}): "
+                f"markers={sorted(markers_in_table)} defined={sorted(markers_defined)} "
+                f"orphaned={sorted(orphaned)} ghost={sorted(ghost)}"
+            )
+
+        return errors
+
+    # =========================================================================
+    # CHECK #30 -- TABLE COMPLETENESS (NO EMPTY CELLS)
+    # =========================================================================
+
+    def _check_table_empty_cells(self) -> List[ErrorInstance]:
+        """
+        CHECK #30 -- Table Completeness (No Empty Cells).
+
+        Rule:
+            A table cell is an error only when it is completely empty after
+            whitespace normalization (spaces/newlines/tabs/non-breaking spaces).
+
+        Valid explicit null indicators that are NOT errors include:
+            0, -, --, em-dash, N/A, NA, ND, None, Null, Nil
+        """
+        if not self.extracted_tables:
+            return []
+
+        valid_null_tokens = {
+            "0", "-", "--", "\u2014", "n/a", "na", "nd", "none", "null", "nil",
+        }
+
+        errors: List[ErrorInstance] = []
+
+        for table in self.extracted_tables:
+            df = table.get("dataframe")
+            if df is None or df.empty:
+                continue
+
+            tbl_page_0 = int(table.get("page", 1)) - 1
+            table_label = f"TABLE {int(table.get('index', 0)) + 1}"
+            headers = table.get("headers") or []
+
+            page_lines = [(txt, bbox, pn) for txt, bbox, pn in self.line_info if pn == tbl_page_0]
+            if page_lines:
+                anchor_text, anchor_bbox, anchor_page = sorted(page_lines, key=lambda x: x[1][1])[0]
+            else:
+                anchor_text, anchor_bbox, anchor_page = "", (0.0, 0.0, 200.0, 14.0), max(tbl_page_0, 0)
+
+            for row_idx in range(len(df.index)):
+                row_values = df.iloc[row_idx].tolist()
+                for col_idx, cell in enumerate(row_values):
+                    raw_cell = "" if cell is None else str(cell)
+                    normalized = raw_cell.replace("\xa0", " ").strip()
+                    compact = re.sub(r"\s+", "", normalized).lower()
+
+                    if normalized == "":
+                        is_empty = True
+                    elif compact in valid_null_tokens:
+                        is_empty = False
+                    else:
+                        is_empty = False
+
+                    if not is_empty:
+                        continue
+
+                    if col_idx < len(headers):
+                        col_header = str(headers[col_idx]).strip() or f"Column {col_idx + 1}"
+                    else:
+                        col_header = f"Column {col_idx + 1}"
+
+                    errors.append(ErrorInstance(
+                        check_id=30,
+                        check_name="Table Completeness: Empty Cell",
+                        description=(
+                            f"{table_label} has an empty cell at row {row_idx + 1}, "
+                            f"column {col_idx + 1} ({col_header}). Each table cell must "
+                            f"contain a value or an explicit null indicator like N/A, -, or 0."
+                        ),
+                        page_num=anchor_page,
+                        text=f"[Empty cell at row {row_idx + 1}, col {col_idx + 1}]",
+                        bbox=anchor_bbox,
+                        error_type="table_empty_cell",
+                    ))
+
+            print(
+                f"[TABLE EMPTY CHECK] {table_label} (page {tbl_page_0 + 1}): "
+                f"empty_cells={sum(1 for e in errors if e.error_type == 'table_empty_cell' and table_label in e.description)}"
+            )
+
+        return errors
+
+    # =========================================================================
+    # CHECK #31 -- PLACEMENT AFTER MENTION (Tables/Figures)
+    # =========================================================================
+
+    def _check_table_figure_placement(self) -> List[ErrorInstance]:
+        """
+        Verify that each Figure or Table appears AFTER its first textual mention.
+        Strategy:
+        1. Build sequential line map from line_info
+        2. Identify caption lines (with regex: "Table I:", "Fig. 1", etc.)
+        3. For each caption, search all PRECEDING lines for entity mentions
+        4. If caption has no prior mention, flag as error
+        """
+        if not self.line_info:
+            return []
+
+        errors = []
+
+        # ── STEP 1: Build sequential line map ────────────────────────────
+        # Create a list of (text, bbox, page_num, line_idx) for position tracking
+        lines_with_positions = [
+            (text, bbox, page_num, idx)
+            for idx, (text, bbox, page_num) in enumerate(self.line_info)
+        ]
+
+        # ── STEP 2: Identify figures and tables with captions ──────────────
+        # Patterns: "Table I:", "TABLE 1:", "Fig. 1", "Figure 2:", etc.
+        entity_pattern = r'^\s*(Table|TABLE|Fig\.?|Figure)\s+([IVLCDMivlcdm0-9]+(?:\([a-z]\)?)?)[:\.]'
+        entity_lines = []
+
+        for line_idx, (text, bbox, page_num, pos) in enumerate(lines_with_positions):
+            match = re.match(entity_pattern, text.strip())
+            if match:
+                entity_type = match.group(1).lower()
+                entity_num = match.group(2)
+
+                # Normalize entity for matching
+                if entity_type.startswith('table'):
+                    entity_label = f"Table {entity_num}"
+                    entity_pattern_search = rf'\b(Table|TABLE|Tbl|TBL|tbl)\s*{re.escape(entity_num)}\b'
+                else:  # Figure/Fig
+                    entity_label = f"Figure {entity_num}"
+                    entity_pattern_search = rf'\b(Fig\.?|Figure|fig\.?)\s*{re.escape(entity_num)}\b'
+
+                entity_lines.append({
+                    'label': entity_label,
+                    'caption_line_idx': line_idx,
+                    'text': text,
+                    'bbox': bbox,
+                    'page_num': page_num,
+                    'search_pattern': entity_pattern_search,
+                })
+
+        # ── STEP 3: For each entity, search preceding lines for first mention ──
+        for entity in entity_lines:
+            caption_idx = entity['caption_line_idx']
+            search_pattern = entity['search_pattern']
+            found_mention_idx = None
+
+            # Search ALL preceding lines (index 0 to caption_idx - 1)
+            for search_idx in range(caption_idx):
+                preceding_text = lines_with_positions[search_idx][0]
+                if re.search(search_pattern, preceding_text, re.IGNORECASE):
+                    found_mention_idx = search_idx
+                    break  # First mention found
+
+            # ── STEP 4: Sequential Validation ─────────────────────────────
+            # If caption has NO prior mention, flag as error
+            if found_mention_idx is None:
+                errors.append(ErrorInstance(
+                    check_id=31,
+                    check_name="Placement After Mention",
+                    description=(
+                        f"{entity['label']} appears BEFORE its first textual mention in the manuscript. "
+                        f"Move the float after the sentence that introduces it. "
+                        f"Caption: '{entity['text'].strip()[:80]}'"
+                    ),
+                    page_num=entity['page_num'],
+                    text=f"[{entity['label']} not mentioned before caption]",
+                    bbox=entity['bbox'],
+                    error_type="fig_table_before_mention",
+                ))
+
+        print(
+            f"[PLACEMENT CHECK] Scanned {len(lines_with_positions)} lines, "
+            f"found {len(entity_lines)} entities, flagged {len(errors)} before-mention violations"
+        )
+
+        return errors
+
+    # =========================================================================
+    # CHECK #32 -- SERIAL COMMA CONSISTENCY
+    # =========================================================================
+
+    def _check_serial_comma_consistency(self) -> List[ErrorInstance]:
+        """
+        CHECK #32 — Serial Comma Consistency.
+
+        Rule: An author may choose to use the serial comma (Oxford comma) or omit it,
+        but they must be 100% consistent throughout the entire manuscript. Mixing
+        both styles triggers a WARNING.
+
+        Strategy:
+        1. Find all lists with 3+ items (pattern: item, item, [and/or/nor] item)
+        2. Classify each as "serial_used" or "serial_omitted"
+        3. If both categories have lists, flag inconsistency
+        """
+        if not self.full_text:
+            return []
+
+        errors: List[ErrorInstance] = []
+        lists_with_serial: List[Dict] = []
+        lists_without_serial: List[Dict] = []
+
+        # Split into sentences
+        sentences = re.split(r'[.!?]+', self.full_text)
+
+        for sent_idx, sentence in enumerate(sentences):
+            sentence = sentence.strip()
+            if not sentence or len(sentence) < 10:
+                continue
+
+            # Match lists ending with "and/or/nor"
+            # Pattern: multiple items separated by commas, then [optional comma] conjunction final_item
+            # E.g.: "X, Y, and Z" or "X, Y and Z" or "X, Y, or Z"
+
+            # Key insight: we need to find the conjunction and check what's immediately before it
+            conjunction_pattern = re.compile(
+                r'(\w+(?:\s+\w+){0,3})(?:\s*,\s*(\w+(?:\s+\w+){0,3}))+\s*?'  # First 2+ items with commas
+                r'(,?)\s*'  # Optional comma before conjunction (CRITICAL)
+                r'(and|or|nor)\s+'  # Conjunction
+                r'(\w+(?:\s+\w+){0,3})',  # Final item
+                re.IGNORECASE
+            )
+
+            for match in conjunction_pattern.finditer(sentence):
+                full_match = match.group(0)
+                comma_before_conj = match.group(3)  # Empty string or ','
+                serial_comma_present = (comma_before_conj == ',')
+
+                # Verify we have 3+ items (count commas: N items = N-1 commas for consistent format)
+                comma_count = full_match.count(',')
+                # With serial comma: "A, B, and C" has 2 commas (3 items)
+                # Without: "A, B and C" has 1 comma (3 items)
+                # So for 3+ items, we need:
+                # - If serial comma: comma_count >= 2
+                # - If no serial comma: comma_count >= 1
+                # Combined: comma_count >= 1
+
+                if comma_count >= 1:
+                    list_data = {
+                        'sentence': sentence,
+                        'match': full_match,
+                        'serial_used': serial_comma_present,
+                    }
+
+                    if serial_comma_present:
+                        lists_with_serial.append(list_data)
+                    else:
+                        lists_without_serial.append(list_data)
+
+        # ── Consistency Check ──────────────────────────────────────────────
+        if lists_with_serial and lists_without_serial:
+            # Both styles found — Inconsistency!
+            error_msg = (
+                f"Inconsistent use of serial (Oxford) comma detected. "
+                f"Found {len(lists_with_serial)} list(s) WITH serial comma and "
+                f"{len(lists_without_serial)} list(s) WITHOUT serial comma. "
+                f"Choose one style and apply it consistently throughout."
+            )
+
+            with_example = lists_with_serial[0]['match']
+            without_example = lists_without_serial[0]['match']
+
+            errors.append(ErrorInstance(
+                check_id=32,
+                check_name="Serial Comma Consistency",
+                description=error_msg,
+                page_num=0,
+                text=f"Used: '{with_example[:50]}' | Omitted: '{without_example[:50]}'",
+                bbox=(0.0, 0.0, 200.0, 14.0),
+                error_type="serial_comma_inconsistent",
+            ))
+
+            print(
+                f"[SERIAL COMMA CHECK] Found inconsistency: "
+                f"{len(lists_with_serial)} with comma, {len(lists_without_serial)} without"
+            )
+        else:
+            total = len(lists_with_serial) + len(lists_without_serial)
+            comma_type = "WITH" if lists_with_serial else ("WITHOUT" if lists_without_serial else "none found")
+            print(
+                f"[SERIAL COMMA CHECK] Consistent ({comma_type}): "
+                f"{len(lists_with_serial)} with, {len(lists_without_serial)} without"
+            )
+
+        return errors
+
+    # =========================================================================
+    # CHECK #33 -- DIALECT CONSISTENCY (US vs UK ENGLISH)
+    # =========================================================================
+
+    def _check_dialect_consistency(self) -> List[ErrorInstance]:
+        """
+        CHECK #33 — US vs UK English Spelling Consistency.
+
+        Rule:
+            The manuscript may use either American English or British English,
+            but not both. Mixed regional spellings trigger a WARNING.
+
+        Notes:
+            - Ignores quoted spans in double quotes.
+            - Ignores likely reference-list titles by excluding text under a
+              trailing "References" / "Bibliography" section heading.
+            - Uses conservative, explicit US↔UK variant pairs to reduce
+              false positives.
+        """
+        if not self.full_text:
+            return []
+
+        errors: List[ErrorInstance] = []
+
+        # Conservative US↔UK variants commonly seen in academic writing.
+        us_to_uk_pairs = [
+            ("analyze", "analyse"),
+            ("analyzed", "analysed"),
+            ("analyzing", "analysing"),
+            ("analyzer", "analyser"),
+            ("organize", "organise"),
+            ("organized", "organised"),
+            ("organizing", "organising"),
+            ("organization", "organisation"),
+            ("organizations", "organisations"),
+            ("optimize", "optimise"),
+            ("optimized", "optimised"),
+            ("optimizing", "optimising"),
+            ("recognize", "recognise"),
+            ("recognized", "recognised"),
+            ("recognizing", "recognising"),
+            ("color", "colour"),
+            ("colors", "colours"),
+            ("colored", "coloured"),
+            ("coloring", "colouring"),
+            ("behavior", "behaviour"),
+            ("behaviors", "behaviours"),
+            ("favor", "favour"),
+            ("favors", "favours"),
+            ("favored", "favoured"),
+            ("center", "centre"),
+            ("centers", "centres"),
+            ("meter", "metre"),
+            ("meters", "metres"),
+            ("liter", "litre"),
+            ("liters", "litres"),
+            ("fiber", "fibre"),
+            ("defense", "defence"),
+            ("offense", "offence"),
+            ("modeling", "modelling"),
+            ("modeled", "modelled"),
+            ("traveling", "travelling"),
+            ("traveled", "travelled"),
+            ("traveler", "traveller"),
+            ("catalog", "catalogue"),
+            ("dialog", "dialogue"),
+            ("aging", "ageing"),
+            ("artifact", "artefact"),
+            ("artifacts", "artefacts"),
+            ("program", "programme"),
+            ("check", "cheque"),
+        ]
+
+        us_variants = {us for us, _ in us_to_uk_pairs}
+        uk_variants = {uk for _, uk in us_to_uk_pairs}
+
+        scan_text = self.full_text
+
+        # Ignore bibliography titles by excluding content under References/Bibliography.
+        references_heading = re.search(r'(?im)^\s*(references|bibliography)\s*$', scan_text)
+        if references_heading:
+            scan_text = scan_text[:references_heading.start()]
+
+        # Ignore direct quotes.
+        scan_text = re.sub(r'"[^"\n]{1,400}"', ' ', scan_text)
+        scan_text = re.sub(r'“[^”\n]{1,400}”', ' ', scan_text)
+
+        bucket_us: List[str] = []
+        bucket_uk: List[str] = []
+
+        # Heuristic: ignore likely proper nouns (title-case tokens not at sentence start).
+        def _is_likely_proper_noun(token: str, start: int) -> bool:
+            if not token or not token[0].isupper() or token.isupper():
+                return False
+            if len(token) > 1 and not token[1:].islower():
+                return False
+
+            i = start - 1
+            while i >= 0 and scan_text[i].isspace():
+                i -= 1
+
+            if i < 0:
+                return False  # start of text
+
+            return scan_text[i] not in '.!?'
+
+        for m in re.finditer(r'\b[A-Za-z]+\b', scan_text):
+            token = m.group(0)
+            token_l = token.lower()
+
+            if _is_likely_proper_noun(token, m.start()):
+                continue
+
+            if token_l in us_variants:
+                if token_l not in bucket_us:
+                    bucket_us.append(token_l)
+            elif token_l in uk_variants:
+                if token_l not in bucket_uk:
+                    bucket_uk.append(token_l)
+
+        if bucket_us and bucket_uk:
+            us_words = ", ".join(bucket_us[:8])
+            uk_words = ", ".join(bucket_uk[:8])
+
+            errors.append(ErrorInstance(
+                check_id=33,
+                check_name="Dialect Consistency (US vs UK)",
+                description=(
+                    "Mixed US/UK English spellings detected. "
+                    f"Found US spelling: {us_words}. "
+                    f"Found UK spelling: {uk_words}. "
+                    "Use one dialect consistently throughout the manuscript."
+                ),
+                page_num=0,
+                text=f"US: '{us_words}' | UK: '{uk_words}'",
+                bbox=(0.0, 0.0, 200.0, 14.0),
+                error_type="mixed_dialect_spelling",
+            ))
+
+            print(
+                f"[DIALECT CHECK] Mixed dialect detected: "
+                f"US={len(bucket_us)} UK={len(bucket_uk)}"
+            )
+        elif bucket_us:
+            print(f"[DIALECT CHECK] Consistent US English: {len(bucket_us)} dialect markers")
+        elif bucket_uk:
+            print(f"[DIALECT CHECK] Consistent UK English: {len(bucket_uk)} dialect markers")
+        else:
+            print("[DIALECT CHECK] No dialect-specific markers found")
+
+        return errors
+
+    # =========================================================================
+    # CHECK #34 -- STRAIGHT VS SMART QUOTES CONSISTENCY
+    # =========================================================================
+
+    def _check_quote_style_consistency(self) -> List[ErrorInstance]:
+        """
+        CHECK #34 — Straight vs Smart Quotes Consistency.
+
+        Rule:
+            Manuscript prose may use either straight quotes/apostrophes (" and ')
+            or smart/curly quotes/apostrophes (“, ”, ‘, ’), but not both.
+            Mixed usage in standard prose triggers a WARNING.
+
+        Exclusions (ignored from detection):
+            1) code/script blocks and inline code
+            2) URLs and file paths
+            3) equation-like spans (LaTeX math, variable primes, minute/second marks)
+        """
+        if not self.full_text:
+            return []
+
+        errors: List[ErrorInstance] = []
+        scan_text = self.full_text
+
+        # 1) Exclude fenced/inline code and typical script-like lines.
+        scan_text = re.sub(r'```[\s\S]*?```', ' ', scan_text)
+        scan_text = re.sub(r'`[^`\n]{1,500}`', ' ', scan_text)
+        scan_text = re.sub(
+            r'(?im)^\s*(import\s+\w+|from\s+\w+\s+import|def\s+\w+\(|class\s+\w+|const\s+\w+|let\s+\w+|var\s+\w+|function\s+\w+|#include\b).*$',
+            ' ',
+            scan_text,
+        )
+
+        # 2) Exclude URLs and file paths.
+        scan_text = re.sub(r'https?://\S+|www\.\S+', ' ', scan_text)
+        scan_text = re.sub(r'\b[A-Za-z]:\\[^\s"\'“”‘’]+', ' ', scan_text)
+        scan_text = re.sub(r'(?<!\w)/(?:[A-Za-z0-9._-]+/)+[A-Za-z0-9._-]+', ' ', scan_text)
+
+        # 3) Exclude math/equation-style spans.
+        scan_text = re.sub(r'\$\$[\s\S]*?\$\$', ' ', scan_text)
+        scan_text = re.sub(r'\$[^$\n]{1,500}\$', ' ', scan_text)
+        scan_text = re.sub(r'(?im)^\s*[^\n]{0,120}[A-Za-z0-9_]\s*=\s*[^\n]{0,120}$', ' ', scan_text)
+
+        bucket_straight: List[str] = []
+        bucket_smart: List[str] = []
+        straight_snippet: Optional[str] = None
+        smart_snippet: Optional[str] = None
+
+        def _snippet(text: str, idx: int) -> str:
+            left = max(0, idx - 22)
+            right = min(len(text), idx + 23)
+            s = re.sub(r'\s+', ' ', text[left:right]).strip()
+            return s[:80]
+
+        smart_chars = {'\u2018', '\u2019', '\u201C', '\u201D'}
+
+        for m in re.finditer(r'["\'\u2018\u2019\u201C\u201D]', scan_text):
+            ch = m.group(0)
+            idx = m.start()
+            prev = scan_text[idx - 1] if idx > 0 else ''
+            nxt = scan_text[idx + 1] if idx + 1 < len(scan_text) else ''
+
+            if ch in ('"', "'"):
+                # Exclude minute/second notations like 5' or 30".
+                if prev.isdigit() or nxt.isdigit():
+                    continue
+
+                # Exclude simple prime notation like x' / y'' (equation-like).
+                if ch == "'" and re.search(r'[A-Za-z]{1,2}$', scan_text[max(0, idx - 2):idx]) and not nxt.isalpha():
+                    continue
+
+                bucket_straight.append(ch)
+                if straight_snippet is None:
+                    straight_snippet = _snippet(scan_text, idx)
+            elif ch in smart_chars:
+                bucket_smart.append(ch)
+                if smart_snippet is None:
+                    smart_snippet = _snippet(scan_text, idx)
+
+        if bucket_straight and bucket_smart:
+            s_snip = straight_snippet or 'straight quote usage'
+            c_snip = smart_snippet or 'smart quote usage'
+
+            errors.append(ErrorInstance(
+                check_id=34,
+                check_name="Straight vs Smart Quotes Consistency",
+                description=(
+                    "Mixed quote typography detected in prose. "
+                    "Use either straight quotes/apostrophes or smart quotes/apostrophes consistently. "
+                    f"Evidence (straight): {s_snip}. Evidence (smart): {c_snip}."
+                ),
+                page_num=0,
+                text=f"Straight: '{s_snip}' | Smart: '{c_snip}'",
+                bbox=(0.0, 0.0, 200.0, 14.0),
+                error_type="mixed_quote_style",
+            ))
+
+            print(
+                f"[QUOTE STYLE CHECK] Mixed style detected: "
+                f"straight={len(bucket_straight)} smart={len(bucket_smart)}"
+            )
+        elif bucket_straight:
+            print(f"[QUOTE STYLE CHECK] Consistent straight quotes: {len(bucket_straight)} markers")
+        elif bucket_smart:
+            print(f"[QUOTE STYLE CHECK] Consistent smart quotes: {len(bucket_smart)} markers")
+        else:
+            print("[QUOTE STYLE CHECK] No quote markers found")
+
+        return errors
+
+    # =========================================================================
     # CHECK #27 — REQUIRED SECTIONS (format-driven, called externally)
     # =========================================================================
+
 
     def _check_required_sections(self, required: List[str]) -> List[ErrorInstance]:
         """
@@ -2662,6 +3645,16 @@ class PDFErrorDetector:
             "metadata_incomplete":         (1.00, 0.75, 0.55),
             "abstract_word_count":         (0.90, 0.75, 1.00),
             "missing_required_section":    (1.00, 0.65, 0.65),
+            "table_footnote_orphan":        (1.00, 0.75, 0.50),   # amber
+            "table_footnote_ghost":         (0.75, 0.90, 1.00),   # light-blue
+            "figure_subpart_missing":       (1.00, 0.60, 0.60),   # coral-red
+            "figure_subpart_sequence_break":(0.95, 1.00, 0.60),   # yellow-green
+            "figure_subpart_orphaned":      (0.80, 0.80, 1.00),   # periwinkle
+            "table_empty_cell":             (1.00, 0.58, 0.58),   # soft red
+            "fig_table_before_mention":     (1.00, 0.70, 0.85),   # pink
+            "serial_comma_inconsistent":    (0.80, 0.90, 1.00),   # light blue
+            "mixed_dialect_spelling":       (0.95, 0.78, 0.45),   # orange
+            "mixed_quote_style":            (0.90, 0.75, 0.98),   # violet
         }
 
         for error in errors:
