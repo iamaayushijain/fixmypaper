@@ -4,8 +4,12 @@ Flask application for Research Paper Error Checker.
 import os
 import uuid
 import json
+import threading
 from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 from flask import Flask, render_template, request, jsonify, send_file
 from werkzeug.utils import secure_filename
 from pdf_processor import process_pdf, AVAILABLE_CHECKS, ALL_SECTIONS
@@ -22,7 +26,90 @@ os.makedirs(app.config['PROCESSED_FOLDER'], exist_ok=True)
 
 FORMATS_FILE = Path(__file__).parent / "formats.json"
 
+# Legacy synchronous result store (kept for /download and /results)
 processing_results = {}
+
+# Async job tracking  {job_id: {"checks": [...], "done": bool, "error": str|None}}
+job_progress: dict = {}
+job_results: dict = {}
+
+
+def _build_job_result(job_id, errors, annotated_path, statistics, extracted_data,
+                      reference_analysis, original_filename, output_filename,
+                      required_sections, start_page):
+    """Assemble the JSON payload that /api/result and /upload both return."""
+    error_list = [
+        {
+            'check_id':    e.check_id,
+            'check_name':  e.check_name,
+            'description': e.description,
+            'page_num':    e.page_num + 1,
+            'text':        e.text,
+            'error_type':  e.error_type,
+        }
+        for e in errors
+    ]
+    overview = _build_document_overview(extracted_data, original_filename, statistics, len(errors))
+    return {
+        'job_id':            job_id,
+        'original_filename': original_filename,
+        'output_filename':   output_filename,
+        'input_path':        None,   # omit paths from API responses
+        'output_path':       annotated_path,
+        'start_page':        start_page,
+        'errors':            error_list,
+        'error_count':       len(errors),
+        'statistics':        statistics,
+        'reference_analysis': reference_analysis,
+        'mandatory_sections': required_sections,
+        'document_overview': overview,
+        'processed_at':      datetime.now().isoformat(),
+        'success':           True,
+    }
+
+
+def _run_processing_job(job_id, input_path, output_path, required_sections,
+                        enabled_check_types, start_page, original_filename,
+                        output_filename):
+    """Background worker: process PDF and store result in job_results."""
+    def progress_callback(check_key: str, check_name: str):
+        job_progress[job_id]["checks"].append({"key": check_key, "name": check_name})
+
+    try:
+        print(f"[JOB {job_id}] Starting processing…")
+        errors, annotated_path, statistics, extracted_data, reference_analysis = process_pdf(
+            input_path, output_path,
+            required_sections=required_sections or None,
+            enabled_check_types=enabled_check_types,
+            start_page=start_page,
+            progress_callback=progress_callback,
+        )
+        print(f"[JOB {job_id}] Complete — {len(errors)} errors")
+
+        # Persist extracted data
+        json_path = os.path.join(app.config['PROCESSED_FOLDER'],
+                                 f"{job_id}_extracted_data.json")
+        with open(json_path, 'w', encoding='utf-8') as jf:
+            json.dump(extracted_data, jf, indent=2, ensure_ascii=False)
+
+        result = _build_job_result(
+            job_id, errors, annotated_path, statistics, extracted_data,
+            reference_analysis, original_filename, output_filename,
+            required_sections, start_page,
+        )
+        # Keep legacy store for /download
+        processing_results[job_id] = {**result,
+                                       'input_path': input_path,
+                                       'output_path': output_path}
+        job_results[job_id] = result
+        job_progress[job_id]["done"] = True
+
+    except Exception as exc:
+        import traceback
+        print(f"[JOB {job_id}] ERROR: {exc}")
+        traceback.print_exc()
+        job_progress[job_id]["error"] = str(exc)
+        job_progress[job_id]["done"] = True
 
 
 def allowed_file(filename):
@@ -155,10 +242,9 @@ def upload_file():
     if not allowed_file(file.filename):
         return jsonify({'error': 'Only PDF files are allowed'}), 400
 
-    # Read optional format_id and start_page from the form
-    format_id = request.form.get('format_id', '')
+    format_id  = request.form.get('format_id', '')
     start_page = max(1, int(request.form.get('start_page', '1') or '1'))
-    required_sections = []
+    required_sections  = []
     enabled_check_types = None
 
     if format_id:
@@ -166,7 +252,7 @@ def upload_file():
         fmt = next((f for f in formats if f["id"] == format_id), None)
         if fmt:
             required_sections = fmt.get("mandatory_sections", [])
-            enabled_checks = fmt.get("enabled_checks", [])
+            enabled_checks    = fmt.get("enabled_checks", [])
             if enabled_checks:
                 types = {"missing_required_section"}
                 for cid in enabled_checks:
@@ -175,75 +261,58 @@ def upload_file():
                 enabled_check_types = types
 
     try:
-        job_id = str(uuid.uuid4())
+        job_id           = str(uuid.uuid4())
         original_filename = secure_filename(file.filename)
-        input_path = os.path.join(app.config['UPLOAD_FOLDER'],
-                                  f"{job_id}_{original_filename}")
+        input_path       = os.path.join(app.config['UPLOAD_FOLDER'],
+                                        f"{job_id}_{original_filename}")
         file.save(input_path)
 
         output_filename = f"annotated_{original_filename}"
-        output_path = os.path.join(app.config['PROCESSED_FOLDER'],
-                                   f"{job_id}_{output_filename}")
+        output_path     = os.path.join(app.config['PROCESSED_FOLDER'],
+                                       f"{job_id}_{output_filename}")
 
-        print(f"[PROCESSING] Starting PDF processing (format={format_id or 'none'}, start_page={start_page})…")
-        errors, annotated_path, statistics, extracted_data, reference_analysis = process_pdf(
-            input_path, output_path,
-            required_sections=required_sections or None,
-            enabled_check_types=enabled_check_types,
-            start_page=start_page,
+        # Initialise progress slot before the thread starts so the polling
+        # endpoint never sees a missing key.
+        job_progress[job_id] = {"checks": [], "done": False, "error": None}
+
+        thread = threading.Thread(
+            target=_run_processing_job,
+            args=(job_id, input_path, output_path, required_sections,
+                  enabled_check_types, start_page, original_filename, output_filename),
+            daemon=True,
         )
-        print(f"[PROCESSING] Complete — {len(errors)} errors")
+        thread.start()
+        print(f"[UPLOAD] Job {job_id} queued (format={format_id or 'none'}, start_page={start_page})")
 
-        json_path = os.path.join(app.config['PROCESSED_FOLDER'],
-                                 f"{job_id}_extracted_data.json")
-        with open(json_path, 'w', encoding='utf-8') as jf:
-            json.dump(extracted_data, jf, indent=2, ensure_ascii=False)
-
-        processing_results[job_id] = {
-            'job_id': job_id,
-            'original_filename': original_filename,
-            'output_filename': output_filename,
-            'input_path': input_path,
-            'output_path': output_path,
-            'start_page': start_page,
-            'errors': [
-                {
-                    'check_id': e.check_id,
-                    'check_name': e.check_name,
-                    'description': e.description,
-                    'page_num': e.page_num + 1,
-                    'text': e.text,
-                    'error_type': e.error_type,
-                }
-                for e in errors
-            ],
-            'error_count': len(errors),
-            'statistics': statistics,
-            'reference_analysis': reference_analysis,
-            'mandatory_sections': required_sections,
-            'document_overview': _build_document_overview(
-                extracted_data, original_filename, statistics, len(errors)
-            ),
-            'processed_at': datetime.now().isoformat(),
-        }
-
-        return jsonify({
-            'job_id': job_id,
-            'original_filename': original_filename,
-            'error_count': len(errors),
-            'errors': processing_results[job_id]['errors'],
-            'statistics': statistics,
-            'reference_analysis': reference_analysis,
-            'mandatory_sections': required_sections,
-            'document_overview': processing_results[job_id]['document_overview'],
-            'start_page': start_page,
-            'success': True,
-        })
+        return jsonify({"job_id": job_id, "success": True}), 202
 
     except Exception as e:
         print(f"[UPLOAD] ERROR: {e}")
         import traceback; traceback.print_exc()
-        return jsonify({'error': f'Processing failed: {str(e)}'}), 500
+        return jsonify({'error': f'Upload failed: {str(e)}'}), 500
+
+
+@app.route('/api/progress/<job_id>')
+def get_job_progress(job_id):
+    """Poll endpoint: returns completed check list + done/error flags."""
+    progress = job_progress.get(job_id)
+    if progress is None:
+        return jsonify({"error": "Job not found"}), 404
+    return jsonify(progress)
+
+
+@app.route('/api/result/<job_id>')
+def get_job_result(job_id):
+    """Return the full result once processing is complete."""
+    result = job_results.get(job_id)
+    if result:
+        return jsonify(result)
+    progress = job_progress.get(job_id)
+    if progress is None:
+        return jsonify({"error": "Job not found"}), 404
+    if progress.get("error"):
+        return jsonify({"error": progress["error"]}), 500
+    return jsonify({"error": "Result not ready yet"}), 202
 
 
 @app.route('/download/<job_id>')
@@ -273,4 +342,4 @@ def health():
 if __name__ == '__main__':
     print("Starting Research Paper Error Checker…")
     print("Open your browser to: http://localhost:7860")
-    app.run( host='0.0.0.0', port=7860)
+    app.run(host='0.0.0.0', port=7860, threaded=True)

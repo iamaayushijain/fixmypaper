@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main"></title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Kumar</forename><surname>Bohat</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aarushi</forename><surname>Jain</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aayushi</forename><surname>Jain</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aarushi</forename><surname>Kushwaha</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Dr</roleName><forename type="first">Vijay</forename><forename type="middle">Kumar</forename><surname>Bohat</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science and Engineering</orgName>
+								<orgName type="institution">Netaji Subhas University of Technology</orgName>
+								<address>
+									<settlement>New Delhi</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Department of Computer Science</orgName>
+								<orgName type="department" key="dep2">New Delhi</orgName>
+								<orgName type="department" key="dep3">Department of Computer Science and Engineering</orgName>
+								<orgName type="institution" key="instit1">Netaji Subhas University of Technology</orgName>
+								<orgName type="institution" key="instit2">Netaji Subhas University of Technology</orgName>
+								<address>
+									<settlement>Delhi</settlement>
+								</address>
+							</affiliation>
+						</author>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">61A72C6D4470FE8713A53E0C0AF28C0D</idno>
+					<note type="submission">, is a genuine account of our work carried out during the period from August 2025 to December 2025 under the guidance of Dr. Vijay</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2" ident="GROBID" when="2026-04-29T13:08+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">a91ee48</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=1, consolidateHeader=1, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[s, ref, figure, formula], sentenceSegmentation=true, flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s coords="4,476.34,145.45,46.94,10.37;4,72.00,169.36,451.27,10.37;4,72.00,193.27,146.70,10.37">for his invaluable guidance and support throughout the brainstorming, theoretical framework, and partial implementation of this project.</s><s coords="4,222.32,193.27,300.95,10.37;4,72.00,217.18,346.84,10.37">His insights, encouragement, and constructive feedback greatly enhanced our understanding and helped shape the direction of this work.</s></p><p><s coords="4,89.56,253.05,433.72,10.37;4,72.00,276.96,449.42,10.37">We are also thankful for the environment of learning and collaboration provided by the department, which allowed us to explore ideas freely and translate them into practical outcomes.</s></p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="3" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="4" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="5" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="6" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="7" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="8" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="9" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="10" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="11" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="12" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="13" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="14" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="15" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="16" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="17" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="18" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="19" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="20" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="21" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="22" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="23" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="24" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="25" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="26" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="27" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="28" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="29" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="30" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="31" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="32" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="33" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="34" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="35" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="36" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="37" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="38" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s coords="5,201.01,146.55,193.27,22.28">Table Of Contents</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 1 Abstract</head><p><s coords="8,72.00,269.45,451.27,10.37">The process begins by ingesting the source document, typically a PDF, into a structural parser.</s></p><p><s coords="8,72.00,293.36,451.27,10.37;8,72.00,317.27,254.88,10.37">We will utilize GROBID, a machine learning library specifically designed for scholarly articles, to deconstruct the document into a structured format.</s><s coords="8,331.11,317.27,192.17,10.37;8,72.00,341.18,451.27,10.37;8,72.00,365.09,76.11,10.37">This initial step is critical as it identifies and tags the constituent parts of the paper, such as the abstract, introduction, methods, and results sections.</s><s coords="8,153.02,365.09,370.25,10.37;8,72.00,389.00,451.27,10.37;8,72.00,412.91,135.97,10.37">The output is the document's text enriched with sectional metadata, which is vital for later stages, as grammatical and stylistic conventions (e.g., tense usage) vary significantly across these sections.</s><s coords="8,213.49,412.91,309.78,10.37;8,72.00,436.82,409.96,10.37">The core of both models is the self-attention mechanism, which enables the network to compute contextual relationships across the entire sentence.</s><s coords="8,489.70,436.82,33.57,10.37;8,72.00,460.73,451.27,10.37;8,72.00,484.64,255.39,10.37">This is especially useful for scientific text where long-range dependencies frequently occur (e.g., subjects separated from verbs by complex noun phrases).</s><s coords="8,331.03,484.64,192.24,10.37;8,72.00,508.55,451.27,10.37;8,72.00,532.46,424.78,10.37">Using scaled dot-product attention, each token representation is updated by weighting its relevance with respect to all other tokens, while multi-head attention enables simultaneous extraction of syntactic and semantic features.</s><s coords="8,502.02,532.46,21.26,10.37;8,72.00,556.37,386.95,10.37">This ensures that corrections respect both domain terminology and sentence structure.</s><s coords="8,462.82,556.37,60.46,10.37;8,72.00,580.28,451.27,10.37;8,72.00,604.19,54.16,10.37">For complex grammatical rewriting, the system employs a transformer-based encoder-decoder model such as CoEdIT.</s><s coords="8,129.73,604.19,393.54,10.37;8,72.00,628.10,312.21,10.37">The model treats error correction as a conditional text generation task, producing corrected output token-by-token using learned linguistic patterns.</s><s coords="8,387.20,628.10,13.94,10.37;8,89.56,652.01,433.72,10.37;8,72.00,675.92,357.20,10.37">[?] Instruction tuning allows control over the style of edits such as grammatical fixing or formal language enhancement which is crucial for maintaining the scientific tone.</s><s coords="8,433.54,675.92,89.74,10.37;8,72.00,699.83,451.27,10.37;8,72.00,723.74,109.39,10.37">Relative positional embeddings further improve the model's ability to handle long sentences commonly found in academic manuscripts.</s><s coords="8,186.58,723.74,336.69,10.37;8,72.00,747.65,451.27,10.37;9,72.00,76.17,44.15,10.37">For faster, high-confidence adjustments, the system utilizes GECToR, an encoder-only architecture that predicts token-level edit tags instead of regenerating the entire sentence.</s><s coords="9,120.50,76.17,402.77,10.37;9,72.00,100.08,155.06,10.37">These tags (e.g., KEEP, DELETE, REPLACE) enable minimal, targeted corrections without risking loss of meaning.</s><s coords="9,231.24,100.08,292.03,10.37;9,72.00,123.99,174.44,10.37">The model iteratively refines its output, ensuring consistency across dependent grammatical fixes.</s><s coords="9,251.46,123.99,271.81,10.37;9,72.00,147.90,290.61,10.37">Due to linear inference complexity, this component runs efficiently in real-time environments such as Google Colab.</s><s coords="9,369.02,147.90,154.26,10.37;9,72.00,171.81,451.27,10.37;9,72.00,195.72,451.27,10.37;9,72.00,219.63,52.46,10.37">The final output is produced by intelligently combining the strengths of both models generative corrections from CoEdIT for complex grammatical restructuring and fast tagging-based modifications from GECToR for local edits.</s><s coords="9,130.14,219.63,393.13,10.37;9,72.00,243.55,211.87,10.37">This hybrid strategy balances accuracy and computational efficiency while maintaining the author's original scientific intent.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 2 Introduction</head><p><s coords="10,72.00,269.45,451.27,10.37;10,72.00,293.36,73.45,10.37">Grammatical Error Correction (GEC) in scientific domains is very different from general grammar correction.</s><s coords="10,150.40,293.36,372.87,10.37;10,72.00,317.27,451.27,10.37;10,72.00,341.18,67.57,10.37">Scientific and engineering papers contain many technical terms, detailed sentence structures, and elements like equations or LaTeX commands that are not part of normal language.</s><s coords="10,144.77,341.18,378.50,10.37;10,72.00,365.09,451.27,10.37">Scientific and engineering manuscripts exhibit a much higher concentration of domain-specific terminology, complex syntactic structures, and non-natural language tokens.</s><s coords="10,72.00,389.00,451.27,10.37;10,72.00,412.91,344.52,10.37">These include mathematical equations, chemical expressions, algorithmic pseudo-code, figure/table references, and structured citation formats (e.g., IEEE, ACM).</s><s coords="10,419.79,412.91,103.49,10.37;10,72.00,436.82,244.88,10.37">Such constructs carry high semantic load and must be preserved verbatim.</s><s coords="10,320.41,436.82,202.87,10.37;10,72.00,460.73,315.80,10.37">Any unintended modification risks altering experimental claims, mathematical correctness, or reproducibility.</s></p><p><s coords="10,89.56,484.64,433.72,10.37;10,72.00,508.55,451.27,10.37;10,72.00,532.46,186.05,10.37">General-purpose GEC models, typically trained on learner corpora or web text, optimize for fluency gains and penalize scientific writing characteristics such as passive voice, nominalizations, and discontinuous noun phrases.</s><s coords="10,262.75,532.46,260.53,10.37;10,72.00,556.37,337.03,10.37">These stylistic patterns, however, are core to scientific discourse and reflect pragmatic choices for objectivity and precision.</s><s coords="10,415.84,556.37,107.43,10.37;10,72.00,580.28,451.27,10.37;10,72.00,604.19,308.59,10.37">Consequently, generic models frequently introduce semantic drift, where well-formed scientific content is simplified or restructured in ways that compromise informational fidelity.</s><s coords="10,388.00,604.19,135.27,10.37;10,72.00,628.10,451.27,10.37;10,72.00,652.01,109.58,10.37">Examples include replacing technical jargon with vague synonyms or reordering clauses in a manner that changes causal or temporal relationships.</s><s coords="10,184.57,652.01,13.94,10.37">[?]</s></p><p><s coords="10,89.56,675.92,435.08,10.37;10,72.00,699.83,145.97,10.37">A further domain-specific obstacle arises from LaTeX markup, which functions as a contextsensitive typesetting language.</s><s coords="10,221.69,699.83,301.58,10.37;10,72.00,723.74,423.91,10.37">LaTeX commands commonly involve hierarchical nesting governed by grammar rules beyond the capability of traditional regular-expression tokenizers.</s><s coords="10,499.37,723.74,23.90,10.37;10,72.00,747.65,451.27,10.37;11,72.00,76.17,451.27,10.37;11,72.00,100.08,197.38,10.37">Neural tokenizers may fragment commands such as \frac{a}{b} into unrelated sub-tokens (, frac, {a}, /, {b}), leading to catastrophic "correction" behaviors including token deletion, brace mismatch, or operator substitution.</s><s coords="11,274.11,100.08,249.16,10.37;11,72.00,123.99,325.61,10.37">Such errors not only degrade semantic accuracy but also generate compilation failures, making the manuscript unusable.</s><s coords="11,400.60,123.99,13.94,10.37;11,89.56,147.90,433.72,10.37;11,72.00,171.81,310.37,10.37"><ref type="bibr" coords="11,400.60,123.99,13.94,10.37">[?]</ref> To address these constraints, scientific GEC requires a pipeline architecture that integrates linguistic conservatism with domain-aware structural protection.</s><s coords="11,387.38,171.81,135.89,10.37;11,72.00,195.72,451.27,10.37;11,72.00,219.63,451.27,10.37;11,72.00,243.55,206.27,10.37">The system proposed in this work introduces a dedicated LaTeX masking module that identifies mathematical environments (inline and display modes) using recursive pattern matching and replaces them with immutable placeholders during correction.</s><s coords="11,285.04,243.55,238.23,10.37;11,72.00,267.46,202.68,10.37">This ensures 100% preservation of mathematical content throughout the inference lifecycle.</s><s coords="11,277.67,267.46,13.94,10.37">[?]</s></p><p><s coords="11,89.56,291.37,263.92,10.37">The correction stage employs a hybrid neural strategy.</s><s coords="11,359.22,291.37,164.06,10.37;11,72.00,315.28,451.27,10.37;11,72.00,339.19,451.27,10.37;11,72.00,363.10,90.32,10.37">A minimal-edit sequence-labeling model (e.g., GECToR) performs deterministic local transformations to handle core grammatical violations (article usage, morphology, agreement) while remaining highly conservative toward sentence structure.</s><s coords="11,170.10,363.10,353.17,10.37;11,72.00,387.01,437.88,10.37">In parallel, a large instruction-tuned generative model (e.g., CoEdIT) is engaged only for clauses containing complex error patterns requiring structural rephrasing.</s><s coords="11,514.64,387.01,8.63,10.37;11,72.00,410.92,369.69,10.37">A weighted filtering mechanism governs its influence to prevent overcorrection.</s><s coords="11,444.68,410.92,13.94,10.37;11,89.56,434.83,433.72,10.37;11,72.00,458.74,369.13,10.37">[?] Finally, a semantic reranking module utilizing SciBERT-based perplexity scoring and cosine similarity to scientific embeddings evaluates multiple candidate outputs.</s><s coords="11,445.64,458.74,77.64,10.37;11,72.00,482.65,451.27,10.37;11,72.00,506.56,65.22,10.37">This component determines whether modifications introduce lexical deviation or meaning shift beyond threshold tolerance.</s><s coords="11,141.34,506.56,381.93,10.37;11,72.00,530.47,203.87,10.37">Candidate sentences with strong semantic alignment to the source and syntactic normalization are selected as final outputs.</s></p><p><s coords="11,72.00,554.38,13.94,10.37;11,89.56,578.29,433.72,10.37;11,72.00,602.20,451.27,10.37;11,72.00,626.11,88.60,10.37">[?] Through this integrated workflow LaTeX-aware masking, hybrid constrained correction, and semantic validation, the system maintains a balance between linguistic enhancement and scientific integrity.</s><s coords="11,164.26,626.11,359.01,10.37;11,72.00,650.02,466.66,10.37">The resulting corrections improve readability, coherence, and grammaticality without compromising the mathematical technical precision critical in engineering manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 3 Motivation</head><p><s coords="12,72.00,269.45,451.27,10.37;12,72.00,293.36,387.26,10.37">The motivation behind this project arises from the increasing demand for a domain-specific grammar correction system tailored to scientific and engineering manuscripts.</s><s coords="12,468.63,293.36,54.65,10.37;12,72.00,317.27,451.27,10.37;12,72.00,341.18,204.02,10.37">In research communication, every detail whether a technical term, mathematical expression, or specific sentence structure carries precise meaning.</s><s coords="12,279.65,341.18,243.62,10.37;12,72.00,365.09,451.27,10.37;12,72.00,389.00,27.44,10.37">Even minor grammatical errors or unclear phrasing can lead to misinterpretation of experimental results and negatively impact the credibility of the work.</s><s coords="12,103.68,389.00,419.59,10.37;12,72.00,412.91,451.27,10.37">Moreover, many scientific papers undergo rigorous editorial and peer-review processes, where clarity, correctness, and consistency in language are essential for successful publication.</s></p><p><s coords="12,89.56,436.82,433.72,10.37;12,72.00,460.73,86.76,10.37">However, existing AI-based writing assistants are primarily designed for general-purpose text improvement.</s><s coords="12,162.33,460.73,360.94,10.37;12,72.00,484.64,358.99,10.37">These tools often focus on making sentences sound more fluent or "natural," which can unintentionally modify the author's intended technical meaning.</s><s coords="12,434.96,484.64,88.31,10.37;12,72.00,508.55,451.27,10.37;12,72.00,532.46,147.05,10.37">They also struggle to correctly handle specialized content such as LaTeX equations, algorithmic pseudo-code, and field-specific terminology.</s><s coords="12,224.85,532.46,298.43,10.37;12,72.00,556.37,354.38,10.37">When such elements are mistakenly changed or removed, the document may become scientifically inaccurate or fail to compile entirely.</s><s coords="12,89.56,580.28,433.72,10.37;12,72.00,604.19,147.50,10.37">These limitations highlight the need for a grammar correction system that prioritizes accuracy over aggressive rewriting.</s><s coords="12,223.96,604.19,299.31,10.37;12,72.00,628.10,451.27,10.37;12,72.00,652.01,83.34,10.37">The intended tool should correct grammatical issues, punctuation errors, and stylistic inconsistencies while preserving the author's original scientific content and writing style.</s><s coords="12,159.05,652.01,364.23,10.37;12,72.00,675.92,146.76,10.37">A core objective is to avoid semantic drift and ensure that meaningful scientific details remain unchanged.</s><s coords="12,89.56,699.83,433.72,10.37;12,72.00,723.74,451.27,10.37">This project is motivated by the broader goal of supporting researchers, students, and technical professionals in producing well-structured and publication-ready scientific documents.</s></p><p><s coords="12,72.00,747.65,451.27,10.37;13,72.00,76.17,451.27,10.37;13,72.00,100.08,53.45,10.37">By delivering corrections that maintain mathematical fidelity and technical integrity, the sys-tem enables authors to focus on their research outcomes rather than struggling with linguistic challenges.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 4</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Literature Review</head><p><s coords="14,72.00,269.45,451.27,10.37;14,72.00,293.36,451.27,10.37;14,72.00,317.27,239.93,10.37">This complete literature review provides a comprehensive comparative analysis of twenty-four academic writing and grammar-assistance tools, that detail their origins, underlying technologies, functional capabilities, limitations and faults.</s><s coords="14,315.56,317.27,207.71,10.37;14,72.00,341.18,451.27,10.37;14,72.00,365.09,338.27,10.37">These tools include widely recognized platforms such as Grammarly, ProWritingAid, QuillBot, Ginger, and LanguageTool, along with academic-focused tools like Trinka, Paperpal, Writefull, and SciSpace.</s></p><p><s coords="14,89.56,389.00,433.72,10.37;14,72.00,412.91,243.96,10.37">Together, they illustrate the current technological landscape of writing support systems used by students, researchers, and professional writers.</s><s coords="14,323.07,412.91,200.20,10.37;14,72.00,436.82,451.27,10.37;14,72.00,460.73,451.27,10.37;14,72.00,484.64,289.63,10.37">The tools differ largely in their technical foundations as some rely on large language models and transformer-based architectures, while others use hybrid approaches that combine rule-based and machine-learning components, and a few operate almost entirely through classical rule-based NLP.</s><s coords="14,364.01,484.64,159.27,10.37;14,72.00,508.55,451.27,10.37;14,72.00,532.46,223.82,10.37">This diversity reflects an evolving field that is shifting from deterministic grammar checking to more context-aware and semantically sensitive AI-driven writing enhancement.</s><s coords="14,298.81,532.46,13.94,10.37;14,89.56,556.37,433.72,10.37;14,72.00,580.28,56.13,10.37">[?] Scientific and engineering texts present unique challenges for grammatical error correction (GEC).</s><s coords="14,130.80,580.28,392.48,10.37;14,72.00,604.19,451.27,10.37;14,72.00,628.10,127.85,10.37">Unlike general writing, these documents contain dense terminology, long syntactic structures, and non-natural language tokens such as equations, pseudo-code, algorithm descriptions, and citation formats.</s><s coords="14,202.84,628.10,13.94,10.37;14,89.56,652.01,433.72,10.37;14,72.00,675.92,324.30,10.37">[?] Across all tools researched, a broad range of error types is detected, including grammar, punctuation, spelling, readability, clarity, style, tone, and wordiness.</s><s coords="14,399.97,675.92,123.31,10.37;14,72.00,699.83,451.27,10.37;14,72.00,723.74,252.02,10.37">Many also offer advanced academic functions such as formal tone preservation, scholarly phrasing suggestions, vocabulary enhancement, and real-time structural feedback.</s><s coords="14,328.13,723.74,195.14,10.37;14,72.00,747.65,451.27,10.37;15,72.00,76.17,451.27,10.37;15,72.00,100.08,167.66,10.37">Some platforms provide domain-specific features tailored to academic writing, such as scientific terminology refinement, journal-style consistency checks, integration with LaTeX workflows, or access to discipline-specific corpora, such as published research articles.</s><s coords="15,89.56,123.99,433.72,10.37;15,72.00,147.90,151.70,10.37">However, despite these strengths, most tools consistently struggle with the complexities of scientific and technical writing.</s><s coords="15,229.03,147.90,294.24,10.37;15,72.00,171.81,451.27,10.37;15,72.00,195.72,98.93,10.37">They often misinterpret domain-specific vocabulary, mishandle mathematical expressions and citations, or fail to maintain semantic coherence in longer research paragraphs.</s><s coords="15,176.70,195.72,346.57,10.37;15,72.00,219.63,451.27,10.37;15,72.00,243.55,60.82,10.37">Several tools also cause issues such as over-correction, where technical precision is often not given priority or provide suggestions that dilute academic tone or alter meaning.</s><s coords="15,139.67,243.55,383.61,10.37;15,72.00,267.46,236.25,10.37">Premium features are frequently paywalled, and transparency regarding model decisions remains limited across many platforms.</s><s coords="15,89.56,291.37,433.72,10.37;15,72.00,315.28,38.73,10.37">This review identifies substantial research gaps that existing tools have not addressed appropriately.</s><s coords="15,115.73,315.28,407.54,10.37;15,72.00,339.19,451.27,10.37;15,72.00,363.10,207.67,10.37">A major gap is the lack of domain-aware editing tailored to STEM disciplines; most tools are not trained on scientific corpora, and therefore perform poorly on specialized terminology and context-heavy academic sentences.</s><s coords="15,283.31,363.10,239.96,10.37;15,72.00,387.01,451.27,10.37;15,72.00,410.92,51.44,10.37">Another issue is inadequate handling of long-form scholarly writing, where tools fail to preserve logical flow, argumentation, and paragraph-level coherence.</s><s coords="15,131.66,410.92,391.62,10.37;15,72.00,434.83,212.61,10.37">Tools also struggle with citation-intensive writing, often breaking references or misinterpreting structured academic syntax.</s><s coords="15,291.76,434.83,231.51,10.37;15,72.00,458.74,451.27,10.37;15,72.00,482.65,319.49,10.37">Additionally, almost all tools lack transparency and explainability, making it difficult for users, especially academic writers, to understand why specific suggestions are made or how corrections affect meaning.</s><s coords="15,398.32,482.65,124.96,10.37;15,72.00,506.56,451.27,10.37;15,72.00,530.47,218.15,10.37">Collectively, these limitations suggest that while many writing assistance systems exist, none fully meet the rigorous demands of scientific manuscript preparation.</s><s coords="15,293.14,530.47,13.94,10.37;15,89.56,554.38,433.72,10.37;15,72.00,578.29,264.72,10.37"><ref type="bibr" coords="15,293.14,530.47,13.94,10.37">[?]</ref> Overall, this highlights a clear opportunity for creating a new, domain-specific grammar correction and academic writing enhancement system.</s><s coords="15,343.48,578.29,179.79,10.37;15,72.00,602.20,451.27,10.37;15,72.00,626.11,451.27,10.37;15,72.00,650.02,58.78,10.37">A tool that would integrate scientific terminology awareness, maintain technical precision, support long-form reasoning structures, handle citations and mathematical expressions robustly, and provide transparent, well-justified suggestions.</s><s coords="15,134.82,650.02,388.45,10.37;15,72.00,673.93,451.27,10.37;15,72.00,697.84,235.46,10.37">The documented gaps strongly reinforce the motivation behind developing a specialized academic grammar correction project capable of addressing weaknesses that current commercial and research tools have not resolved.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Comparison of Existing Tools</head><p><s coords="16,72.00,115.31,451.27,10.37;16,72.00,139.22,137.82,10.37">Commercial grammar tools such as Grammarly, ProWritingAid, QuillBot, Trinka AI, and Paperpal dominate the market.</s><s coords="16,217.33,139.22,305.95,10.37;16,72.00,163.13,299.09,10.37">They offer useful features for readability and clarity, yet none provide a minimal-edit approach tailored for scientific writing.</s><s coords="16,374.79,163.13,148.48,10.37;16,72.00,187.04,359.92,10.37">Most tools are generative, risking authorship concerns and potential AI detection by academic publishers.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Key Insights</head><p><s coords="16,72.00,672.71,251.46,10.37">Three consistent findings emerge from the literature:</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">Generative AI Risks</head><p><s coords="16,72.00,738.20,370.37,10.37">Generative tools excel at paraphrasing, but this presents risks for researchers.</s><s coords="16,446.68,738.20,76.60,10.37;16,72.00,762.11,451.27,10.37">They may unintentionally trigger plagiarism detectors, rewrite technical concepts, or change authorial voice.</s></p><p><s coords="17,72.00,76.17,387.83,10.37">These issues are widely documented in academic discussions of AI writing tools.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Lack of Minimal-Edit Philosophy</head><p><s coords="17,72.00,142.47,340.44,10.37">No reviewed tool prioritizes grammatical correction without rewriting.</s><s coords="17,417.57,142.47,105.71,10.37;17,72.00,166.38,356.17,10.37">Literature emphasizes a gap for systems that maintain author intent with minimal changes [?].</s><s coords="17,435.93,166.38,87.34,10.37;17,72.00,190.29,220.18,10.37">Academic writing requires precision rather than stylistic fluency.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Technical Content Remains Unprotected</head><p><s coords="17,72.00,256.58,451.27,10.37;17,72.00,280.49,89.76,10.37">Existing solutions provide no guarantee for LaTeX equations, figures, tables, or structured scientific notation.</s><s coords="17,169.73,280.49,271.74,10.37">This absence is highlighted in work on LaTeX editing.</s><s coords="17,449.44,280.49,73.84,10.37;17,72.00,304.40,304.47,10.37">Preservation of mathematical structure is essential for engineering manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Conclusion</head><p><s coords="17,72.00,380.08,451.27,10.37;17,72.00,403.99,143.86,10.37">Current grammar correction tools are optimized for general writing and generative enhancements, not scientific integrity.</s><s coords="17,221.73,403.99,301.55,10.37;17,72.00,427.90,375.00,10.37">Literature consistently identifies the need for a correction-first methodology that preserves authorial ownership and mathematical structure.</s><s coords="17,454.81,427.90,68.47,10.37;17,72.00,451.81,451.27,10.37;17,72.00,475.72,347.69,10.37">This creates a clear research gap for solutions implementing minimal edits, LaTeX-aware masking, and semantic validation that ensures clarity without compromising correctness.</s></p><p><s coords="18,244.28,146.55,106.71,22.28">Chapter 5</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Problem Statement</head><p><s coords="18,72.00,269.45,465.67,10.37;18,72.00,293.36,338.61,10.37">Scientific and engineering documents frequently contain complex grammatical structures, domainspecific terminology, and mathematical expressions written in LaTeX.</s><s coords="18,414.16,293.36,109.12,10.37;18,72.00,317.27,451.27,10.37;18,72.00,341.18,161.48,10.37">Existing grammar correction systems often improve linguistic fluency but fail to preserve the integrity of embedded equations and symbolic notation.</s><s coords="18,240.60,341.18,282.67,10.37">Even minor corruption of mathematical expressions, such</s></p><p><s coords="18,72.00,364.71,96.40,10.75;18,168.40,363.09,4.23,6.99;18,176.75,365.09,346.53,10.37;18,72.00,389.00,45.49,10.37">as altering E = mc 2 to textual form, renders the output unusable for academic and scientific purposes.</s></p><p><s coords="18,89.56,412.91,433.72,10.37;18,72.00,436.82,157.58,10.37">Additionally, traditional correction approaches rely on single-model architectures that attempt to rewrite entire sentences.</s><s coords="18,233.24,436.82,290.03,10.37;18,72.00,460.73,451.27,10.37;18,72.00,484.64,172.64,10.37">These models are computationally expensive, prone to hallucinations, and unable to efficiently handle large documents containing section-specific writing styles and long-range dependencies.</s></p><p><s coords="18,89.56,508.55,234.39,10.37">There is therefore a need for a methodology that:</s></p><p><s coords="18,91.23,545.41,330.81,10.37">• Corrects grammatical and stylistic issues in scientific writing while</s></p><p><s coords="18,91.23,579.29,332.41,10.37">• Fully preserving LaTeX expressions and mathematical content, and</s></p><p><s coords="18,91.23,613.16,375.98,10.37">• Scales efficiently across long technical documents without altering meaning.</s></p><p><s coords="18,89.56,650.02,433.72,10.37;18,72.00,673.93,451.27,10.37;18,72.00,697.84,451.27,10.37;18,72.00,721.75,451.27,10.37;18,72.00,745.66,176.65,10.37">The problem addressed in this work is the design of a hybrid correction pipeline that combines recursive masking and tokenization to protect LaTeX regions, a dual-model architecture (Sequence-to-Sequence rewriting and Sequence Tagging) to perform high-quality correction, semantic reranking to prevent hallucination, and post-edit reconstruction to ensure exact restoration of mathematical notation.</s></p><p><s coords="19,89.56,76.17,433.72,10.37;19,72.00,100.08,451.27,10.37;19,72.00,123.99,90.81,10.37">The objective is to produce a correction system that improves grammatical accuracy and clarity without modifying the scientific intent, formatting, or mathematical equations present in the original text.</s></p><p><s coords="20,244.28,146.55,106.71,22.28">Chapter 6</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Objectives</head><p><s coords="20,72.00,269.45,451.27,10.37;20,72.00,293.36,451.27,10.37;20,72.00,317.27,291.37,10.37">The aim of this project is to develop a writing assistant that enhances the grammatical accuracy and lexical precision of scientific manuscripts while preserving the researcher's original style and ensuring compliance with academic integrity standards.</s><s coords="20,369.59,317.27,153.68,10.37;20,72.00,341.18,175.88,10.37">To achieve this, the project sets out the following specific objectives:</s></p><p><s coords="20,86.45,377.57,310.15,10.83;20,101.27,406.93,422.01,10.37;20,101.27,430.84,180.83,10.37">1. Develop a Hybrid Scientific Grammar Correction System Scientific writing often contains complex sentence structures, discipline-specific terminology, and long-range dependencies.</s><s coords="20,285.81,430.84,236.21,10.37;20,101.27,575.30,422.01,10.37;20,101.27,599.21,378.73,10.37">To handle these effectively, the project combines: This hybrid approach enables both accuracy and efficiency, ensuring the system corrects nuanced scientific language while remaining suitable for real-time deployment.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Preserve Scientific Meaning Through Semantic Verification</head><p><s coords="20,101.27,661.98,422.01,10.37;20,101.27,685.89,50.14,10.37">Any modification that alters scientific claims could misrepresent results or lead to misinformation.</s></p><p><s coords="20,101.27,714.78,189.85,10.37">To prevent this, the system implements:</s></p><p><s coords="20,116.98,751.17,259.76,10.83">• BERTScore-based semantic similarity evaluation</s></p><p><s coords="21,116.98,75.71,332.02,10.83;21,101.27,113.03,410.42,10.37">• Pseudo-perplexity scoring to detect unnatural, incoherent rewrites Corrections are only accepted if they remain faithful to the author's intended meaning.</s><s coords="21,515.31,113.03,7.96,10.37;21,101.27,136.94,422.01,10.37;21,101.27,160.86,115.70,10.37">If semantic shifts are detected, the system either falls back to safer corrections or keeps the original text unchanged.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Maintain the Integrity of LaTeX Structures and Research Formatting</head><p><s coords="21,101.27,223.62,422.01,10.37">Research manuscripts include mathematical expressions, references, section labels, fig-</s></p><p><s coords="21,101.27,247.53,77.03,10.37">ures, and tables.</s><s coords="21,182.00,247.53,202.89,10.37">Such components must remain untouched.</s><s coords="21,388.60,247.53,107.24,10.37">Therefore, the system:</s></p><p><s coords="21,116.98,284.39,294.26,10.37">• Extracts and masks LaTeX environments during processing</s></p><p><s coords="21,116.98,313.28,178.88,10.37">• Restores them accurately afterward</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Ensures zero loss of formatting or equation correctness</head><p><s coords="21,101.27,379.04,382.17,10.37">This allows text-only processing while safeguarding critical academic elements.</s><s coords="21,101.27,573.31,422.01,10.37;21,101.27,597.22,422.01,10.37;21,101.27,621.13,140.28,10.37">By incorporating structured metadata (e.g., through GROBID), the system applies corrections that maintain these discipline-specific writing rules, resulting in improved consistency and professionalism.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Follow a Precision-First Editing Policy</head><p><s coords="21,101.27,683.89,422.01,10.37;21,101.27,707.80,103.93,10.37">The system aims to build trust among researchers by focusing on correction accuracy instead of aggression.</s><s coords="21,208.90,707.80,50.45,10.37">Therefore:</s></p><p><s coords="21,116.98,744.67,260.03,10.37">• Only unambiguous grammatical errors are corrected</s></p><p><s coords="22,116.98,76.17,235.19,10.37">• Stylistic rewriting and paraphrasing are limited</s></p><p><s coords="22,116.98,105.06,254.37,10.37;22,101.27,141.93,386.86,10.37">• Authorial tone and sentence structure are respected This approach avoids "over-editing" and reinforces academic integrity standards.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Improve Readability, Coherence, and Terminology Accuracy</head><p><s coords="22,101.27,204.69,388.17,10.37">In addition to grammar correction, the system supports better communication by:</s></p><p><s coords="22,116.98,241.55,260.04,10.37">• Recommending clearer or more precise terminology</s></p><p><s coords="22,116.98,270.44,290.92,10.37">• Resolving punctuation, article usage, and agreement errors</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Promoting consistent vocabulary usage across the manuscript</head><p><s coords="22,101.27,336.20,422.01,10.37">The end result is a scientifically polished document that is easier to read and understand.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 7</head><p><s coords="23,203.88,196.37,187.51,22.28">Proposed Method</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">LaTeX Preservation Architecture</head><p><s coords="23,72.00,306.59,451.27,10.37">In the domain of scientific engineering, the preservation of mathematical notation is paramount.</s></p><p><s coords="23,72.00,330.12,388.93,10.75;23,460.93,328.50,4.23,6.99;23,469.15,330.50,54.12,10.37;23,72.00,354.41,167.03,10.37">A GEC system that corrects "the data is" to "the data are" but corrupts E = mc 2 to E equals mc squared is functionally useless.</s><s coords="23,243.25,354.41,280.03,10.37;23,72.00,378.32,238.70,10.37">We introduce a robust architecture for LaTeX preservation centered on a "Mask-Correct-Unmask" paradigm.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.1">The Regex-Based Masking Strategy</head><p><s coords="23,72.00,443.71,275.63,10.37">The first line of defense is identifying LaTeX segments.</s><s coords="23,354.84,443.71,168.44,10.37;23,72.00,467.62,451.27,10.37;23,72.00,491.15,60.45,10.75">While simple regexes (e.g., $.*?$) work for basic inline math, they fail on nested structures common in engineering papers, such as if x &gt; 0 .</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Recursive Pattern Matching</head><p><s coords="23,72.00,553.43,282.60,10.37">Standard Regular Grammars cannot parse nested structures.</s><s coords="23,358.14,553.43,165.14,10.37;23,72.00,577.34,250.75,10.37">However, the PCRE (Perl Compatible Regular Expressions) engine supports recursion.</s><s coords="23,326.36,577.34,196.91,10.37;23,72.00,601.25,136.46,10.37">In Python, the regex library (a superset of the standard re) enables this.</s><s coords="23,212.16,601.25,307.45,10.37">We define a recursive pattern to capture balanced LaTeX braces:</s></p><formula xml:id="formula_0" coords="23,89.56,624.69,36.54,10.75">Python</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Deterministic Micro-Corrections</head><p><s coords="25,72.00,107.80,132.87,10.37">GECToR is responsible for:</s></p><p><s coords="25,91.23,141.68,174.03,10.37">• article and determiner corrections,</s></p><p><s coords="25,91.23,175.55,157.10,10.37">• subject-verb agreement repair,</s></p><p><s coords="25,91.23,209.42,182.52,10.37">• punctuation and capitalization fixes,</s></p><p><s coords="25,91.23,243.30,166.59,10.37">• minor phrase-level restructuring.</s></p><p><s coords="25,89.56,277.17,433.72,10.37;25,72.00,301.08,143.61,10.37">Because sequence tagging constrains the model to minimal edits, the risk of hallucination or semantic drift is negligible.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.2">Deep Lane: CoEdIT Sequence-to-Sequence Editor</head><p><s coords="25,72.00,367.37,451.27,10.37;25,72.00,391.28,24.90,10.37">For sentences requiring major structural improvements, a second, more expressive model is used.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instruction-Tuned Structural Rewriting</head><p><s coords="25,72.00,454.09,451.27,10.37;25,72.00,478.00,26.90,10.37">CoEdIT is a transformer-based seq2seq model specifically trained for controlled text improvement.</s><s coords="25,102.61,478.00,418.96,10.37">Unlike generic LLMs, which may introduce new information, CoEdIT is optimized for:</s></p><p><s coords="25,91.23,511.87,134.53,10.37">• formal tone enhancement,</s></p><p><s coords="25,91.23,545.75,95.68,10.37">• clause reordering,</s></p><p><s coords="25,91.23,579.62,132.24,10.37">• syntactic disambiguation,</s></p><p><s coords="25,91.23,613.49,239.51,10.37">• elimination of awkward or ambiguous phrasing.</s></p><p><s coords="25,89.56,647.36,433.72,10.37;25,72.00,671.27,130.43,10.37">This two-lane strategy ensures both efficiency and linguistic depth, while safeguarding against semantic alteration.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Stage 2: Hybrid Neural Correction Architecture</head><p><s coords="26,72.00,115.31,451.27,10.37;26,72.00,139.22,183.39,10.37">Once LaTeX content is safely masked, the remaining natural language is processed using a dual-lane hybrid correction approach.</s><s coords="26,262.60,139.22,260.67,10.37;26,72.00,163.13,451.27,10.37;26,72.00,187.04,192.90,10.37">This architecture combines the precision of sequence tagging with the expressive power of transformer-based editing, ensuring minimal hallucination while enabling structural improvements.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.1">Fast Lane: GECToR-Based Sequence Tagging</head><p><s coords="26,72.00,253.33,426.82,10.37">GECToR operates through token-level edit tags such as KEEP, REPLACE, and DELETE.</s><s coords="26,502.02,253.33,21.26,10.37;26,72.00,277.24,243.05,10.37">This enables highly localized, deterministic corrections.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Deterministic Micro-Corrections</head><p><s coords="26,72.00,340.05,132.87,10.37">GECToR is responsible for:</s></p><p><s coords="26,91.23,373.92,174.03,10.37">• article and determiner corrections,</s></p><p><s coords="26,91.23,407.80,157.10,10.37">• subject-verb agreement repair,</s></p><p><s coords="26,91.23,441.67,182.52,10.37">• punctuation and capitalization fixes,</s></p><p><s coords="26,91.23,475.54,166.59,10.37">• minor phrase-level restructuring.</s></p><p><s coords="26,89.56,509.41,433.72,10.37;26,72.00,533.33,143.61,10.37">Because sequence tagging constrains the model to minimal edits, the risk of hallucination or semantic drift is negligible.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.2">Deep Lane: CoEdIT Sequence-to-Sequence Editor</head><p><s coords="26,72.00,599.62,451.27,10.37;26,72.00,623.53,24.90,10.37">For sentences requiring major structural improvements, a second, more expressive model is used.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instruction-Tuned Structural Rewriting</head><p><s coords="26,72.00,686.33,451.27,10.37;26,72.00,710.25,26.90,10.37">CoEdIT is a transformer-based seq2seq model specifically trained for controlled text improvement.</s><s coords="26,102.61,710.25,418.96,10.37">Unlike generic LLMs, which may introduce new information, CoEdIT is optimized for:</s></p><p><s coords="26,91.23,744.12,134.53,10.37">• formal tone enhancement,</s></p><p><s coords="27,91.23,76.17,95.68,10.37">• clause reordering,</s></p><p><s coords="27,91.23,110.05,132.24,10.37">• syntactic disambiguation,</s></p><p><s coords="27,91.23,143.92,239.51,10.37">• elimination of awkward or ambiguous phrasing.</s></p><p><s coords="27,89.56,177.79,433.72,10.37;27,72.00,201.70,130.43,10.37">This two-lane strategy ensures both efficiency and linguistic depth, while safeguarding against semantic alteration.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">Stage 3: Semantic Reranking (Meaning Preservation Engine)</head><p><s coords="27,72.00,299.30,331.52,10.37">Neural correction models may generate multiple plausible rewrites.</s><s coords="27,411.41,299.30,111.86,10.37;27,72.00,323.01,349.62,10.57">However, the key constraint of scientific editing is that the meaning must remain unchanged.</s><s coords="27,428.50,323.21,94.77,10.37;27,72.00,347.12,327.88,10.37">To enforce this, we integrate a semantic fidelity module that filters and ranks candidates.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4.1">Candidate Generation and Evaluation</head><p><s coords="27,72.00,413.42,280.23,10.37">Both GECToR and CoEdIT produce candidate corrections.</s><s coords="27,355.85,413.42,167.42,10.37;27,72.00,437.33,101.93,10.37">These are then evaluated relative to the original sentence.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sentence-BERT Similarity Scoring</head><p><s coords="27,72.00,500.13,411.77,10.37">We compute pairwise semantic similarity scores using Sentence-BERT embeddings.</s><s coords="27,490.73,500.13,32.54,10.37;27,72.00,524.04,451.27,10.37;27,72.00,547.95,131.47,10.37">Candidates exhibiting strong semantic alignment are prioritized, while those deviating from the original meaning are penalized.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4.2">Semantic Drift Rejection</head><p><s coords="27,72.00,614.25,360.60,10.37">If a candidate falls below a similarity threshold, it is discarded outright.</s><s coords="27,441.48,614.25,81.80,10.37;27,72.00,638.16,371.35,10.37">The system then defaults to a more conservative correction (typically GECToR), ensuring that:</s></p><p><s coords="27,91.23,672.03,145.04,10.37">• no factual content is altered,</s></p><p><s coords="27,91.23,705.90,219.25,10.37">• no claims or numerical values are modified,</s></p><p><s coords="27,91.23,739.78,337.32,10.37">• no scientific statements are softened or strengthened unintentionally.</s><s coords="28,72.00,100.08,33.25,10.37">tegrity.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5">Stage 4: Reconstruction of Mathematical Structures</head><p><s coords="28,72.00,175.77,451.27,10.37;28,72.00,199.68,130.74,10.37">After linguistic corrections are validated, the system reintroduces all mathematical and LaTeX content previously masked.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5.1">Hash-Based Lookup Restoration</head><p><s coords="28,72.00,265.97,451.27,10.37;28,72.00,289.88,234.78,10.37">Each SHA-256 sentinel token is mapped back to its original LaTeX expression using a deterministic lookup table constructed during Stage 1.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5.2">Zero-Corruption Reintegration</head><p><s coords="28,72.00,356.17,451.27,10.37;28,72.00,380.08,20.92,10.37">Because the correction models never operated on LaTeX tokens directly, reconstruction is lossless.</s><s coords="28,98.61,380.08,424.66,10.37;28,72.00,403.99,33.21,10.37">All equations, environments, symbols, and macros are restored exactly as authored, ensuring:</s></p><p><s coords="28,91.23,437.87,204.92,10.37">• zero corruption of mathematical content,</s></p><p><s coords="28,91.23,471.74,200.13,10.37">• full compilability of LaTeX documents,</s></p><p><s coords="28,91.23,505.61,333.44,10.37">• complete separation between linguistic edits and technical notation.</s></p><p><s coords="28,89.56,539.49,415.20,10.37">The resulting text is grammatically improved while remaining mathematically pristine.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.2">Stage 1: Preprocessing and Segmentation</head><p><s coords="30,72.00,108.40,266.05,10.37">Input text is segmented into sentences and tokenized.</s><s coords="30,346.98,108.40,176.29,10.37;30,72.00,132.31,244.56,10.37">Domain-specific errors such as unit formatting or equation references are flagged early.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.3">Stage 2: Hybrid Neural Correction</head><p><s coords="30,72.00,198.61,451.27,10.37;30,72.00,222.52,259.09,10.37">A fast Sequence Tagging model performs deterministic error tagging while a Transformerbased Seq2Seq model handles more complex rewrites.</s><s coords="30,334.74,222.52,188.53,10.37;30,72.00,246.43,38.18,10.37">Outputs are combined using confidence scoring.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.4">Stage 3: Semantic Reranking</head><p><s coords="30,72.00,312.72,204.55,10.37">Multiple candidate outputs are generated.</s><s coords="30,285.02,312.72,238.26,10.37;30,72.00,336.63,451.27,10.37;30,72.00,360.54,107.27,10.37">A sentence-level encoder (e.g., Sentence-BERT) computes semantic similarity scores and ranks them based on grammatical confidence and semantic preservation.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.5">Stage 4: Reconstruction</head><p><s coords="30,72.00,426.83,313.70,10.37">The corrected text and preserved LaTeX tokens are recombined.</s><s coords="30,392.14,426.83,131.14,10.37;30,72.00,450.74,290.04,10.37">Formatting and whitespace consistency are validated to ensure publication-ready output.</s></p><p><s coords="32,78.38,74.36,35.88,9.81;32,172.85,74.36,68.59,9.81;32,172.85,87.90,45.44,9.81;32,261.95,74.36,30.51,9.81;32,351.05,74.36,43.24,9.81;32,440.15,74.36,59.10,9.81;32,78.38,102.28,54.52,9.46;32,172.85,102.28,38.18,9.46;32,172.85,115.83,45.22,9.46;32,172.85,129.38,40.58,9.46;32,261.95,102.28,64.00,9.46;32,351.05,102.28,63.40,9.46;32,351.05,115.83,42.75,9.46;32,440.15,102.28,38.18,9.46;32,78.38,143.32,141.75,9.46;32,172.85,156.87,31.03,9.46;32,224.15,156.87,25.45,9.46;32,172.85,170.42,37.56,9.46;32,261.95,143.32,76.75,9.46;32,261.95,156.87,30.31,9.46;32,351.05,143.32,76.75,9.46;32,351.05,156.87,16.97,9.46;32,440.15,143.32,72.42,9.46;32,78.38,184.37,78.93,9.46;32,172.85,184.37,76.75,9.46;32,172.85,197.92,24.24,9.46;32,261.95,184.37,76.75,9.46;32,261.95,197.92,67.63,9.46;32,351.05,184.37,19.72,9.46;32,386.58,184.37,41.21,9.46;32,351.05,197.92,46.36,9.46;32,440.15,184.37,41.80,9.46;32,78.38,211.87,70.57,9.46;32,172.85,211.87,41.80,9.46;32,261.95,211.87,76.74,9.46;32,261.95,225.42,27.10,9.46;32,351.05,211.87,68.61,9.46;32,440.15,211.87,41.80,9.46;32,78.38,239.36,114.20,9.46;32,224.15,239.36,25.45,9.46;32,172.85,252.91,76.75,9.46;32,172.85,266.46,20.61,9.46;32,261.95,239.36,76.74,9.46;32,261.95,252.91,22.42,9.46;32,351.05,239.36,20.60,9.46;32,392.65,239.36,35.15,9.46;32,351.05,252.91,36.95,9.46;32,409.90,252.91,17.90,9.46;32,351.05,266.46,30.19,9.46;32,440.15,239.36,41.80,9.46;32,78.38,280.41,73.63,9.46;32,172.85,280.41,16.37,9.46;32,219.90,280.41,29.69,9.46;32,172.85,293.96,35.14,9.46;32,261.95,280.41,105.48,9.46;32,398.10,280.41,29.69,9.46;32,351.05,293.96,35.14,9.46;32,440.15,280.41,75.85,9.46">Feature CoEdIT-Large (Selected) GPT-4 GECToR Standard T5 Architecture Seq2Seq (Encoder-Decoder) Decoder-Only Encoder-Only (Tagging) Seq2Seq Training Objective Instruction Tuning (Editfocused) Next-token Prediction Token Classification Span Corruption Scientific Fluency High (Trained on edits) High (But prone to over-editing) Low (Minimal edits only) Moderate Inference Speed Moderate Slow (API Latency) Fastest (Linear) Moderate Hallucination Risk Low (Constrained generation) High (Generative drift) Zero (Cannot generate new words) Moderate Memory (Colab) Fits (770M params) N/A (Cloud API) Fits (125M params) Fits (Base/Large)</s></p><p><s coords="32,82.01,323.15,431.26,10.37">Table 8.1: Comparative analysis of grammar correction models considered in the pipeline.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2.1">CoEdIT vs. GPT-4</head><p><s coords="32,72.00,389.84,451.27,10.37;32,72.00,413.75,235.60,10.37">GPT-4 performs well on general language tasks, but in scientific writing it often rewrites sentences unnecessarily, affecting tone and meaning.</s><s coords="32,311.26,413.75,212.01,10.37;32,72.00,437.67,160.71,10.37">CoEdIT is trained for minimal edits, making it more suitable for technical text.</s><s coords="32,236.40,437.67,286.88,10.37;32,72.00,461.58,196.44,10.37">Additionally, CoEdIT runs fully in Colab, providing privacy for unpublished or sensitive manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2.2">CoEdIT vs. GECToR</head><p><s coords="32,72.00,527.87,303.73,10.37">GECToR is extremely fast but limited to small, predefined edits.</s><s coords="32,379.32,527.87,143.95,10.37;32,72.00,551.78,122.47,10.37">It cannot restructure sentences or generate new wording.</s><s coords="32,198.89,551.78,324.38,10.37;32,72.00,575.69,129.99,10.37">CoEdIT handles these fluency tasks, while GECToR can be used as a lightweight "Fast Mode".</s><s coords="32,205.70,575.69,315.01,10.37">Using both allows the pipeline to balance accuracy and efficiency.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.3">Frontend / Demo Interface</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion and Future Work</head><p><s coords="33,72.00,269.45,451.27,10.37;33,72.00,293.36,21.59,10.37">This section presents the preliminary results and functional analysis of our grammar correction tool.</s><s coords="33,99.07,293.36,424.21,10.37;33,72.00,317.27,151.71,10.37">The findings are organized sequentially, corresponding to the distinct stages of our proposed data processing pipeline.</s><s coords="33,229.73,317.27,293.55,10.37;33,72.00,341.18,451.27,10.37;33,72.00,365.09,60.06,10.37">These results serve as a proof-of-concept, demonstrating the successful implementation of the foundational components and validating the overall architectural design.</s><s coords="33,138.66,365.09,384.61,10.37;33,72.00,389.00,43.51,10.37">The aim is to create a comprehensive, reliable, and integrity-conscious writing assistant.</s></p><p><s coords="33,89.56,412.91,433.72,10.37;33,72.00,436.82,208.88,10.37">Evaluating grammar correction systems for scientific text is challenging because standard metrics do not reflect scientific correctness.</s><s coords="33,285.62,436.82,237.66,10.37;33,72.00,460.73,232.92,10.37">We therefore combine quantitative metrics with a domain-specific measure of LaTeX preservation.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.1">Dataset Metrics</head><p><s coords="33,72.00,536.41,451.27,10.37;33,72.00,560.32,242.89,10.37">To evaluate the grammar correction pipeline, a synthetic, domain-specific dataset was created to simulate academic and scientific writing errors.</s><s coords="33,320.69,560.32,202.58,10.37;33,72.00,584.23,154.09,10.37">The dataset was designed to cover a wide variety of edge cases, including:</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.2">Quantitative Metrics</head><p><s coords="34,72.00,295.32,376.10,10.37">We report two metrics commonly used in grammatical error correction (GEC):</s></p><p><s coords="34,91.23,331.71,432.05,10.83;34,101.27,356.09,104.24,10.37">• GLEU (Generalized LEU): Measures n-gram overlap between the system output and reference corrections.</s><s coords="34,211.28,356.09,312.00,10.37;34,101.27,380.00,26.90,10.37">It correlates better with human judgment than BLEU for editing tasks.</s></p><p><s coords="34,91.23,413.41,432.05,10.83;34,101.27,437.78,422.01,10.37;34,101.27,461.69,115.02,10.37">• ERRANT (Error Annotation Toolkit): Classifies edits made by the model, allowing us to inspect whether it mainly fixes punctuation and agreement (desired) or modifies nouns and verbs (undesirable).</s></p><p><s coords="34,89.56,498.56,391.28,10.37">These metrics provide a quantitative view of model behavior on scientific writing.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.3">Qualitative Metrics</head><p><s coords="34,72.00,573.77,451.27,10.83;34,72.00,598.15,451.27,10.37;34,72.00,622.06,48.42,10.37">Analysis: The results in Table <ref type="table" coords="34,217.40,574.24,4.98,10.37" target="#tab_4">9</ref>.1 demonstrate that the implemented Stage 1 engine is functioning as intended, fulfilling our objective to develop a high-precision GEC engine for clear-cut errors [?].</s><s coords="34,125.97,622.06,397.31,10.37;34,72.00,645.97,48.68,10.37">The system successfully identifies and rectifies a range of foundational grammatical issues.</s><s coords="34,125.02,645.97,398.25,10.37">The processing times are well within acceptable limits for an interactive prototype.</s></p><p><s coords="34,72.00,669.88,451.27,10.37;34,72.00,693.79,349.31,10.37">The success of this deterministic stage, combined with the functional UI, provides a robust foundation for the more advanced machine learning stages of the project.</s><s coords="35,77.98,147.47,121.85,10.37;35,77.98,161.92,113.87,10.37">The reserch was conducted over six months.</s></p><p><s coords="35,211.78,147.47,121.85,10.37;35,211.78,161.92,113.87,10.37">The research was conducted over six months.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spelling 3.11</head><p><s coords="35,77.98,183.59,121.85,10.37;35,77.98,198.03,115.74,10.37">The samples is prepared in a sterile environment.</s></p><p><s coords="35,211.78,183.59,121.85,10.37;35,211.78,198.03,115.74,10.37">The samples are prepared in a sterile environment.</s></p><p><s coords="35,345.58,183.59,62.42,10.37;35,425.21,183.59,33.19,10.37;35,345.58,198.03,23.91,10.37">Subject-Verb Agreement</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.19</head><p><s coords="35,77.98,219.70,121.85,10.37;35,77.98,234.15,121.85,10.37;35,77.98,248.59,83.02,10.37">We used scanning electron microscope to observe the surface.</s></p><p><s coords="35,211.78,219.70,121.85,10.37;35,211.78,234.15,121.85,10.37;35,211.78,248.59,83.02,10.37">We used a scanning electron microscope to observe the surface.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Missing Article 2.90</head><p><s coords="35,77.98,270.26,121.85,10.37;35,77.98,284.71,81.00,10.37">The list of results show a clear correlation.</s></p><p><s coords="35,211.78,270.26,121.85,10.37;35,211.78,284.71,81.00,10.37">The list of results shows a clear correlation.</s></p><p><s coords="35,345.58,270.26,62.42,10.37;35,425.21,270.26,33.19,10.37;35,345.58,284.71,23.91,10.37">Subject-Verb Agreement</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.01</head><p><s coords="35,77.98,306.38,121.85,10.37;35,77.98,320.82,64.75,10.37">The findings are detailed on Chapter 4.</s></p><p><s coords="35,211.78,306.38,121.85,10.37;35,211.78,320.82,62.09,10.37">The findings are detailed in Chapter 4.</s></p><p><s coords="35,345.58,306.38,82.68,10.37;35,470.36,306.38,20.92,10.37">Preposition Error 3.24</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.4">LaTeX Integrity Score</head><p><s coords="35,72.00,401.34,451.27,10.37;35,72.00,425.25,164.66,10.37">To ensure that mathematical expressions remain unchanged, we introduce a domain-specific metric, the LaTeX Integrity Score:</s></p><formula xml:id="formula_1" coords="35,194.51,461.44,205.05,29.92">S latex = N i=1 I(Unmasked i == Original i ) N</formula><p><s coords="35,89.56,503.07,247.66,10.75">where N is the number of LaTeX blocks in the text.</s></p><p><s coords="35,89.56,526.98,61.62,10.75;35,151.18,531.75,15.37,6.91;35,171.39,526.98,326.12,10.75">A score of S latex = 1.0 indicates that every LaTeX segment was perfectly preserved.</s><s coords="35,502.87,527.36,20.41,10.37;35,72.00,551.27,300.25,10.37">Any value below 1.0 signals a failure in the preservation pipeline.</s><s coords="35,379.33,551.27,143.94,10.37;35,72.00,575.18,140.32,10.37">Using recursive masking, our system consistently achieves:</s></p><p><s coords="35,270.75,622.62,7.20,10.48;35,277.95,627.39,15.37,6.91;35,297.14,622.62,27.39,10.48;35,89.56,653.39,150.80,10.37">S latex = 1.0 across all evaluated documents.</s><s coords="36,89.56,130.09,156.38,10.75">We use a beam width of k = 5.</s><s coords="36,251.93,130.47,271.35,10.37;36,72.00,154.38,451.27,10.37;36,72.00,178.29,131.48,10.37">While this increases inference time by about a factor of five, it substantially improves coherence and grammatical quality, which is acceptable for a batch-processing notebook.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.5">Beam Search Decoding</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.6">Quantization and Distillation</head><p><s coords="36,72.00,253.97,280.27,10.37">For limited-resource environments, the notebook supports:</s></p><p><s coords="36,91.23,290.37,432.05,10.83;36,101.27,314.74,109.72,10.37">• 8-bit Quantized Inference: Reduces model memory usage by approximately 50% with minimal accuracy loss.</s></p><p><s coords="36,91.23,348.15,432.05,10.83;36,101.27,372.53,422.01,10.37;36,101.27,396.44,137.79,10.37">• Model Distillation: Smaller variants such as CoEdIT-Small or GECToR-DistilBERT can be used for rapid experimentation, while the "Large" models remain preferred for final manuscript preparation.</s></p><p><s coords="36,89.56,433.30,433.72,10.37;36,72.00,457.21,127.50,10.37">Quantization enables the pipeline to run even in CPU-only settings, providing flexibility for users without GPU access.</s></p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0" coords="5,72.00,230.87,427.40,10.83;5,72.00,266.49,427.40,10.83;5,72.00,302.11,427.40,10.83;5,72.00,337.72,427.40,10.83;5,72.00,373.34,427.40,10.83;5,72.00,408.96,427.40,10.83;5,72.00,444.57,427.40,10.83;5,89.56,468.95,409.84,10.37;5,89.56,492.86,409.84,10.37;5,116.48,516.77,382.91,10.37;5,116.48,540.68,382.91,10.37;5,116.48,564.59,382.91,10.37;5,89.56,588.50,409.84,10.37;5,72.00,623.65,427.40,10.83;5,72.00,659.27,427.40,10.83;5,72.00,694.88,427.40,10.83;5,89.56,719.26,409.84,10.37;5,116.48,743.17,382.91,10.37;7,89.56,76.17,409.84,10.37;7,89.56,100.08,409.84,10.37;7,89.56,123.99,409.84,10.37;7,89.56,147.90,409.84,10.37;7,89.56,171.81,409.84,10.37;7,72.00,206.96,427.40,10.83"><figDesc><div><p><s coords="5,72.00,230.87,427.40,10.83">CERTIFICATE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,72.00,266.49,427.40,10.83">DECLARATION . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,72.00,302.11,427.40,10.83;5,72.00,337.72,427.40,10.83;5,72.00,373.34,427.40,10.83;5,72.00,408.96,427.40,10.83;5,72.00,444.57,427.40,10.83">ACKNOWLEDGEMENT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 Abstract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 Literature Review . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,89.56,468.95,409.84,10.37">4.1 Comparison of Existing Tools . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,89.56,492.86,409.84,10.37">4.2 Key Insights . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,116.48,516.77,382.91,10.37">4.2.1 Generative AI Risks . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,116.48,540.68,23.91,10.37">4.2.2</s><s coords="5,153.94,540.68,345.46,10.37">Lack of Minimal-Edit Philosophy . . . . . . . . . . . . . . . . . . . .</s><s coords="5,116.48,564.59,23.91,10.37">4.2.3</s><s coords="5,153.94,564.59,345.46,10.37">Technical Content Remains Unprotected . . . . . . . . . . . . . . . . .</s><s coords="5,89.56,588.50,409.84,10.37;5,72.00,623.65,427.40,10.83">4.3 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,72.00,659.27,427.40,10.83">6 Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,72.00,694.88,427.40,10.83">7 Proposed Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,89.56,719.26,409.84,10.37">7.1 LaTeX Preservation Architecture . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="5,116.48,743.17,23.91,10.37">7.1.1</s><s coords="5,153.94,743.17,345.46,10.37">The Regex-Based Masking Strategy . . . . . . . . . . . . . . . . . . .</s><s coords="7,89.56,76.17,409.84,10.37">9.2 Quantitative Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="7,89.56,100.08,409.84,10.37">9.3 Qualitative Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="7,89.56,123.99,409.84,10.37">9.4 LaTeX Integrity Score . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="7,89.56,147.90,409.84,10.37">9.5 Beam Search Decoding . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="7,89.56,171.81,409.84,10.37">9.6 Quantization and Distillation . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s coords="7,72.00,206.96,427.40,10.83">BIBLIOGRAPHY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1" coords="20,116.98,464.25,406.30,10.83;20,127.02,488.63,129.29,10.37;20,116.98,517.05,406.30,10.83;20,127.02,541.43,78.87,10.37"><head>•A</head><figDesc><div><p><s coords="20,138.20,464.25,385.08,10.83;20,127.02,488.63,129.29,10.37;20,116.98,517.05,406.30,10.83;20,127.02,541.43,78.87,10.37">Sequence-to-Sequence model (CoEdIT) to perform deeper grammatical restructuring and improve fluency • A Sequence-Tagging model (GECToR) to perform quick and conservative tokenlevel corrections</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2" coords="21,86.45,412.44,314.36,10.83;21,101.27,441.80,421.16,10.37;21,116.98,478.20,140.41,10.83;21,116.98,507.09,279.79,10.83;21,116.98,535.98,210.03,10.83"><head>4 .</head><label>4</label><figDesc><div><p><s coords="21,101.27,412.44,299.54,10.75;21,101.27,441.80,366.98,10.37">Adapt Editing to Section-Specific Scientific Writing Norms Different sections of a research paper follow different linguistic conventions.</s><s coords="21,471.95,441.80,50.47,10.37;21,116.98,478.20,140.41,10.83;21,116.98,507.09,279.79,10.83;21,116.98,535.98,210.03,10.83">Examples: • Past tense in Methodology • Present tense for established knowledge in Introduction • Objective tone in Results and Discussion</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3" coords="23,129.08,624.69,26.56,10.75;23,72.00,654.88,380.17,8.42;23,72.00,678.79,430.39,10.51;23,89.56,706.26,433.72,10.37;23,72.00,730.17,247.10,10.37;23,294.57,751.41,6.15,10.48;23,295.15,767.70,4.98,10.48;23,500.37,759.88,22.91,10.37"><figDesc><div><p><s coords="23,129.08,624.69,26.56,10.75;23,72.00,654.88,380.17,8.42;23,72.00,678.79,430.39,10.51;23,89.56,706.26,433.72,10.37;23,72.00,730.17,247.10,10.37;23,294.57,751.41,6.15,10.48;23,295.15,767.70,4.98,10.48;23,500.37,759.88,22.91,10.37">Code # Conceptual Recursive Pattern for LaTeX Environments pattern = r'\\begin\{([a-z]+)\}((?:[ˆ{}]|(?R)) * )\\end\{\1\}' Here, (?R) invokes the pattern recursively, allowing the parser to handle arbitrarily deep nesting of braces, ensuring that an environment like a b (7.1)</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4" coords="32,72.00,651.37,258.89,10.37;32,89.56,675.28,154.59,10.37;32,89.56,699.19,168.96,10.37;32,89.56,723.10,141.17,10.37;32,89.56,747.01,155.78,10.37;33,244.28,146.55,106.71,22.28"><head>A minimal frontend was implemented to demonstrate: 1 .</head><label>1</label><figDesc><div><p><s coords="32,102.23,675.28,141.92,10.37;32,89.56,699.19,168.96,10.37;32,89.56,723.10,141.17,10.37;32,89.56,747.01,155.78,10.37;33,244.28,146.55,106.71,22.28">Input editor for academic text 2. Live preview of corrected output 3. Display of semantic scores 4. Option to compare candidates Chapter 9</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5" coords="33,89.56,608.14,219.03,10.37;33,89.56,632.06,199.62,10.37;33,89.56,655.97,143.87,10.37;33,89.56,679.88,154.93,10.37;33,89.56,703.79,241.24,10.37;33,89.56,727.70,132.20,10.37;33,89.56,751.61,433.72,10.37;34,72.00,76.17,54.44,10.37;34,89.56,100.08,433.72,10.37;34,72.00,123.99,311.66,10.37;34,89.56,147.90,433.72,10.37;34,72.00,171.81,215.48,10.37;34,89.56,194.54,433.72,11.96;34,72.00,219.63,68.40,10.37"><head>1 .</head><label>1</label><figDesc><div><p><s coords="33,102.23,608.14,206.36,10.37;33,89.56,632.06,199.62,10.37;33,89.56,655.97,143.87,10.37;33,89.56,679.88,154.93,10.37;33,89.56,703.79,241.24,10.37;33,89.56,727.70,132.20,10.37;33,89.56,751.61,433.72,10.37;34,72.00,76.17,54.44,10.37">LaTeX expressions and math environments 2. Units and measurements (e.g., kg, m/s) 3. Abbreviations and citations 4. Tense, agreement, and plurals 5. Nested clauses and complex sentence structures 6. Dataset Creation Process Seed examples: 50 high-quality, manually curated examples were created to capture diverse error types.</s><s coords="34,89.56,100.08,433.72,10.37;34,72.00,123.99,311.66,10.37">Programmatic generation: Using a Python script, the seed templates were permuted to generate a total of 1,000 unique examples suitable for evaluation.</s><s coords="34,89.56,147.90,433.72,10.37;34,72.00,171.81,215.48,10.37">Validation: Each example was checked to ensure correctness, proper LaTeX formatting, and semantic consistency with scientific text.</s><s coords="34,89.56,194.54,433.72,11.96;34,72.00,219.63,68.40,10.37">Placeholder: Insert a small example table of 5-10 seed examples, showing Input → Corrected Output.</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6" coords="35,72.00,729.07,451.27,10.37;35,72.00,752.60,157.32,10.75;36,214.09,99.70,58.14,10.75;36,278.45,86.55,11.49,6.99;36,277.25,116.17,13.88,6.99;36,294.82,99.70,36.54,10.48;36,331.36,104.22,3.06,6.99;36,338.24,99.70,12.35,10.48;36,350.59,104.22,9.64,6.99;36,360.73,99.70,20.45,10.48"><figDesc><div><p><s coords="35,72.00,729.07,384.07,10.37">To improve sentence fluency, we use Beam Search rather than Greedy decoding.</s><s coords="35,459.85,729.07,63.42,10.37;35,72.00,752.60,157.32,10.75;36,214.09,99.70,58.14,10.75;36,278.45,86.55,11.49,6.99;36,277.25,116.17,13.88,6.99;36,294.82,99.70,36.54,10.48;36,331.36,104.22,3.06,6.99;36,338.24,99.70,12.35,10.48;36,350.59,104.22,9.64,6.99;36,360.73,99.70,20.45,10.48">Beam Search keeps the top k likely sequences: Score(Y ) = |Y | t=1 log P (y t | y &lt;t , X)</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" coords="31,89.56,443.18,451.27,191.93"><graphic coords="31,89.56,443.18,451.27,191.93" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1" coords="16,78.38,213.45,438.52,383.91"><head>Table 4 .</head><label>4</label><figDesc><div><p><s coords="16,168.45,586.99,296.76,10.37">1: Comparison of Grammar Correction Tools and Approaches</s></p></div></figDesc><table coords="16,78.38,213.45,438.52,352.60"><row><cell>Tool/Work</cell><cell cols="2">Features</cell><cell></cell><cell>Strengths</cell><cell></cell><cell cols="2">Limitations</cell><cell>Relevance</cell></row><row><cell>Grammarly</cell><cell>AI</cell><cell cols="2">rewriting,</cell><cell cols="2">Wide adoption,</cell><cell cols="2">Generates text,</cell><cell>Not suitable for</cell></row><row><cell></cell><cell cols="3">tone, grammar</cell><cell>easy UI</cell><cell></cell><cell cols="2">risk of plagia-</cell><cell>academic writ-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">rism detection</cell><cell>ing</cell></row><row><cell>LanguageTool</cell><cell cols="2">Rule-based,</cell><cell></cell><cell cols="2">Open-source,</cell><cell cols="2">Weak for scien-</cell><cell>Limited</cell><cell>aca-</cell></row><row><cell></cell><cell cols="2">multilingual</cell><cell></cell><cell>fast</cell><cell></cell><cell cols="2">tific language</cell><cell>demic value</cell></row><row><cell>Writefull</cell><cell cols="2">Academic-</cell><cell></cell><cell cols="2">Best for re-</cell><cell cols="2">Generates</cell><cell>Risk of AI au-</cell></row><row><cell></cell><cell cols="3">trained, para-</cell><cell cols="2">search papers</cell><cell cols="2">rewritten sen-</cell><cell>thorship flags</cell></row><row><cell></cell><cell cols="2">phrasing</cell><cell></cell><cell></cell><cell></cell><cell>tences</cell></row><row><cell>Ginger</cell><cell cols="3">Real-time gram-</cell><cell>Simple</cell><cell></cell><cell cols="2">Weak domain</cell><cell>General purpose</cell></row><row><cell></cell><cell>mar</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">knowledge</cell><cell>only</cell></row><row><cell>Scribens</cell><cell cols="2">Grammar</cell><cell>+</cell><cell cols="2">No login, un-</cell><cell>Not</cell><cell>context-</cell><cell>Casual writing</cell></row><row><cell></cell><cell>style</cell><cell></cell><cell></cell><cell cols="2">limited words</cell><cell>aware</cell><cell>only</cell></row><row><cell cols="3">CoEdIT (HuggingFace) Seq2Seq</cell><cell>edit</cell><cell cols="2">Minimal-edit</cell><cell cols="2">Requires techni-</cell><cell>Ideal for scien-</cell></row><row><cell></cell><cell>model</cell><cell></cell><cell></cell><cell cols="2">philosophy</cell><cell cols="2">cal setup</cell><cell>tific GEC</cell></row><row><cell>GECToR</cell><cell cols="4">Encoder tagging Fastest</cell><cell>infer-</cell><cell cols="2">Limited rewrite</cell><cell>Best as sec-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>ence</cell><cell></cell><cell>ability</cell><cell>ondary filter</cell></row><row><cell>SciBERT</cell><cell cols="3">Scientific em-</cell><cell cols="2">Highest seman-</cell><cell cols="2">Not a correction</cell><cell>Used for rerank-</cell></row><row><cell></cell><cell cols="2">beddings</cell><cell></cell><cell cols="2">tic accuracy</cell><cell>model</cell><cell>ing</cell></row><row><cell>Textidote</cell><cell cols="3">LaTeX gram-</cell><cell cols="2">Directly works</cell><cell cols="2">Limited gram-</cell><cell>Useful prepro-</cell></row><row><cell></cell><cell cols="2">mar checker</cell><cell></cell><cell>on TeX</cell><cell></cell><cell cols="2">mar depth</cell><cell>cessing</cell></row><row><cell>DeepL Write</cell><cell cols="2">Generative</cell><cell></cell><cell cols="2">High fluency</cell><cell cols="2">Alters sentence</cell><cell>Not safe for re-</cell></row><row><cell></cell><cell cols="2">rewriting</cell><cell></cell><cell></cell><cell></cell><cell cols="2">meaning</cell><cell>search integrity</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4" coords="35,77.98,82.33,446.62,47.76"><head>Table 9 .</head><label>9</label><figDesc><div><p><s coords="35,160.67,82.33,312.32,10.37">1: Performance of the Deterministic Grammar Correction Engine</s></p></div></figDesc><table coords="35,77.98,104.90,446.62,25.19"><row><cell>Original Sentence</cell><cell>Corrected Output</cell><cell>Detected Error Type</cell><cell>Processing</cell></row><row><cell></cell><cell></cell><cell></cell><cell>Time (s)</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s coords="24,72.00,76.17,165.03,10.37">is captured as a single atomic unit.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.2">Sentinel Tokenization and Embedding</head><p><s coords="24,72.00,142.47,346.71,10.37">Once identified, LaTeX segments must be hidden from the GEC model.</s><s coords="24,423.70,142.47,99.57,10.37;24,72.00,166.38,167.55,10.37">We replace the identified segment with a placeholder.</s><s coords="24,248.28,166.38,274.99,10.37;24,72.00,190.29,192.67,10.37">The choice of placeholder is mathematically significant regarding the model's embedding space.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Soft-Masking Problem</head><p><s coords="24,72.00,253.09,451.27,10.37;24,72.00,277.00,22.25,10.37">If the mask token belongs to the model's vocabulary, the embedding layer may inject contextual bias.</s><s coords="24,97.95,277.00,325.06,10.37">This can distort nearby corrections or even modify the LaTeX itself.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Unique Alphanumeric Hash Strategy</head><p><s coords="24,72.00,339.81,451.27,10.37;24,72.00,363.72,86.70,10.37">To combat this, we hash each masked segment at inference time using a cryptographic hash such as SHA-256.</s><s coords="24,162.47,363.72,360.81,10.37;24,72.00,387.63,220.70,10.37">Because each placeholder is unique and out-of-vocabulary, the model treats it as an inert token, eliminating semantic drift.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.3">Post-Editing Reconstruction</head><p><s coords="24,72.00,453.92,451.27,10.37;24,72.00,477.83,95.19,10.37">After correction, hashes are replaced by their corresponding original LaTeX segments from a stored lookup table.</s><s coords="24,171.73,477.83,351.54,10.37;24,72.00,501.74,26.24,10.37">This ensures full restoration without corruption or hallucinated modifications.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Stage 2: Hybrid Neural Correction Architecture</head><p><s coords="24,72.00,577.43,451.27,10.37;24,72.00,601.34,183.39,10.37">Once LaTeX content is safely masked, the remaining natural language is processed using a dual-lane hybrid correction approach.</s><s coords="24,262.60,601.34,260.67,10.37;24,72.00,625.25,451.27,10.37;24,72.00,649.16,192.90,10.37">This architecture combines the precision of sequence tagging with the expressive power of transformer-based editing, ensuring minimal hallucination while enabling structural improvements.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.1">Fast Lane: GECToR-Based Sequence Tagging</head><p><s coords="24,72.00,715.45,426.82,10.37">GECToR operates through token-level edit tags such as KEEP, REPLACE, and DELETE.</s><s coords="24,502.02,715.45,21.26,10.37;24,72.00,739.36,243.05,10.37">This enables highly localized, deterministic corrections.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6">Multi-Stage Pipeline Design</head><p><s coords="29,89.56,560.15,373.66,10.37">The proposed solution for Google Colab is structured as a cascading pipeline.</s><s coords="29,467.59,560.15,55.69,10.37;29,72.00,584.06,451.27,10.37;29,72.00,607.97,279.33,10.37">This design optimizes the trade-off between the computational cost of LLMs and the speed of sequence taggers, while ensuring robustness via semantic reranking.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.1">Stage 0: Parsing and Section Identification</head><p><s coords="29,72.00,674.27,451.27,10.37;29,72.00,698.18,363.04,10.37">The input text provided by the user is first parsed to identify the structural sections of the research paper (e.g., Abstract, Introduction, Methods, Results, Discussion).</s><s coords="29,443.38,698.18,79.90,10.37;29,72.00,722.09,451.27,10.37;29,72.00,746.00,198.22,10.37">Section headers, LaTeX commands, tables, and figures are detected and tagged to ensure that downstream correction respects the document's structure.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2">Comparative Analysis of Model Components</head><p><s coords="31,72.00,711.51,451.27,10.37;31,72.00,735.42,80.91,10.37">We evaluate four models for scientific grammar correction: CoEdIT-Large, GPT-4, GECToR and standard T5.</s><s coords="31,157.97,735.42,365.30,10.37;31,72.00,759.34,231.26,10.37">CoEdIT-Large is chosen because it provides high fluency, low hallucination risk, and runs locally without external API calls.</s></p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Contextual Embedding Decomposition for Scalable Tokenization in Efficient Language Text Generation</title>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Wilson</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Ursula</forename><surname>Montague</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Vincent</forename><surname>Worthington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Winston</forename><surname>Harrington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Xanthe</forename><surname>Pennington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.31219/osf.io/avdmg</idno>
+		<imprint>
+			<date type="published" when="2024-12-13" />
+			<publisher>Center for Open Science</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1.3 Post-Editing Reconstruction . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Stage 2: Hybrid Neural Correction Architecture . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Sequence Tagging for Fast Dependency Parsing</title>
+		<author>
+			<persName><forename type="first">Michalina</forename><surname>Strzyz</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Vilares</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Gómez-Rodríguez</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.3390/proceedings2019021049</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The 2nd XoveTIC Conference (XoveTIC 2019)</title>
+		<imprint>
+			<publisher>MDPI</publisher>
+			<date type="published" when="2019-08-26" />
+			<biblScope unit="page">49</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Sequence-to-Sequence-Modelle</title>
+		<author>
+			<persName><forename type="first">Jochen</forename><surname>Hirschle</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">-Sequence Editor . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.3139/9783446473904.010</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Deep Natural Language Processing</title>
+		<imprint>
+			<publisher>Carl Hanser Verlag GmbH &amp; Co. KG</publisher>
+			<date type="published" when="2022-04-11" />
+			<biblScope unit="page" from="175" to="205" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">3 Stage 2: Hybrid Neural Correction Architecture . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Fast Lane: GECToR-Based Sequence Tagging</title>
+		<author>
+			<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Deep Lane: CoEdIT Sequence-to</title>
+		<author>
+			<orgName type="collaboration">-Sequence Editor . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Meaning Preservation Engine) . . . . . . . . .</orgName>
+		</author>
+		<title level="m">4 Stage 3: Semantic Reranking</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 Candidate Generation and Evaluation . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Semantic Drift Rejection . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">5 Stage 4: Reconstruction of Mathematical Structures . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 Hash-Based Lookup Restoration . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Zero-Corruption Reintegration . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Multi-Stage Pipeline Design . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Section Identification . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 0: Parsing and</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Segmentation . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 1: Preprocessing and</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Stage 2: Hybrid</title>
+		<author>
+			<orgName type="collaboration">Neural Correction . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Semantic Reranking . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 3</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Reconstruction . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 4</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Implementation, Result, Discussion . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 System Architecture Overview . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Comparative Analysis of Model Components . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2.1 CoEdIT vs. GPT-4 . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2.2 CoEdIT vs. GECToR . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Frontend / Demo Interface . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">9 Conclusion and Future Work . . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Dataset Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Bibliography</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<ptr target="https://direct.mit.edu/coli/article/49/3/643/115846/Grammatical-Error-Correction-A-Survey-of-the-State" />
+		<title level="m">Grammatical Error Correction: A Survey of the State of the Art -MIT Press Direct</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<ptr target="https://huggingface.co/grammarly/coedit-large" />
+		<title level="m">grammarly/coedit-large -Hugging Face</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Gector -Kaggle</surname></persName>
+		</author>
+		<ptr target="https://www.kaggle.com/datasets/jasonheesanglee/gector" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<ptr target="https://github.com/allenai/scibert" />
+		<title level="m">BERT model for scientific text</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Adapting LLMs for Minimal-edit Grammatical Error Correction -arXiv</title>
+		<ptr target="https://arxiv.org/html/2506.13148v1" />
+		<imprint>
+			<date type="published" when="2025">cember 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">A Chain-of-Task Framework for Instruction Tuning of LLMs Based on Chinese Grammatical Error Correction -ACL Anthology</title>
+		<ptr target="https://aclanthology.org/2025.coling-main.577.pdf" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Debian -Details of package python3-pylatexenc in sid</title>
+		<ptr target="https://packages.debian.org/sid/python3-pylatexenc" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Regex to match LaTeX equations -Stack Overflow</title>
+		<ptr target="https://stackoverflow.com/questions/14182879/regex-to-match-latex-equations" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Grammarly CoEdIT Model -HuggingFace -GeeksforGeeks</title>
+		<ptr target="https://www.geeksforgeeks.org/artificial-intelligence/grammarly-coedi" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<ptr target="https://aclanthology.org/2023.nlposs-1.9.pdf" />
+		<title level="m">Beyond the Repo: A Case Study on Open Source Integration with GECToR -ACL Anthology</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">LaTeX Formula Spacing Issue with do formula enrichment=True • Issue #2374 • docling-project/docling -GitHub</title>
+		<ptr target="https://github.com/docling-project/docling/issues/2374" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Bug Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">sylvainhalle/textidote: Spelling, grammar and style checking on LaTeX documents -GitHub</title>
+		<ptr target="https://github.com/sylvainhalle/textidote" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">A beam-search decoder for grammatical error correction -ResearchGate</title>
+		<ptr target="https://www.researchgate.net/publication/262282277_" />
+		<imprint>
+			<date type="published" when="2025">cember 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">A_beam-search_decoder_for_grammatical_error_correction</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">8.2 documentation -Lightning AI</title>
+		<ptr target="https://lightning.ai/docs/torchmetrics/stable/text/bert_score.html" />
+	</analytic>
+	<monogr>
+		<title level="s">BERT Score -PyTorch-Metrics 1.</title>
+		<imprint>
+			<date type="published" when="2025">ber 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Leveraging What&apos;s Overfixed: Post-Correction via LLM Grammatical Error Overcorrection</title>
+		<ptr target="https://arxiv.org/html/2509.20811v1" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Loading models -Hugging Face</title>
+		<ptr target="https://huggingface.co/docs/transformers/models" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">LLM-based Code-Switched Text Generation for Grammatical Error Correction -arXiv</title>
+		<ptr target="https://arxiv.org/html/2410.10349v1" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">The summary of AESW 2016 Shared Task participant systems. -ResearchGate</title>
+		<ptr target="https://www.researchgate.net/figure/The-summary-of-AESW-tbl" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+			<biblScope unit="page">306094251</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

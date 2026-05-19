@@ -1,0 +1,1250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Image Segmentation of Nineth image -Girl by all algorithms at distinct thresholds 17 Image Segmentation of Tenth image -Goat by all algorithms at distinct thresholds</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2026-03-30">March 30, 2026</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<title level="a" type="main">Image Segmentation of Nineth image -Girl by all algorithms at distinct thresholds 17 Image Segmentation of Tenth image -Goat by all algorithms at distinct thresholds</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2026-03-30">March 30, 2026</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">222E225EEA75DC2925AABAA1E4664694</idno>
+					<note type="submission">Preprint submitted to Elsevier</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2" ident="GROBID" when="2026-04-21T14:09+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">a91ee48</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=1, consolidateHeader=1, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[true], sentenceSegmentation=true, flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Otsu Thresholding</term>
+					<term>Particle Swarm Optimization algorithm</term>
+					<term>Arithmetic optimization Algorithm</term>
+					<term>Grasshopper Optimization Algorithm</term>
+					<term>Whale Optimization Algorithm</term>
+					<term>Grey Wolf Optimization</term>
+					<term>PSNR</term>
+					<term>SSIM</term>
+					<term>FSIM</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s>Image Segmentation of Third image -Lady by all algorithms at distinct thresholds 11 Image Segmentation of Fourth image -Elephant by all algorithms at distinct thresholds .</s></p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="3" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="4" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="5" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="6" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="7" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="8" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="9" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="10" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="11" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="12" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="13" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="14" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="15" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="16" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="17" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="18" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="19" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="20" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="21" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="22" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="23" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="24" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="25" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="26" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="27" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="28" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="29" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="30" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="31" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="32" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="33" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="34" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="35" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="36" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="37" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="38" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="39" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="40" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="41" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p><s>The potential of imaging science has grown tremendously with the advancement of digital computing and imaging technology.</s><s>Image processing, moreover, is essential for the analysis of images and their interpretation in map-reading, computer aided diagnosis of diseases, fault detection, automated activity recognition, monitoring, and pattern identification <ref type="bibr" target="#b0">[1]</ref>.</s><s>Image segmentation is often utilized as a pre-processing technique to modify the characteristics of an image.</s><s>The primary goal of image segmentation is to divide an image into several nonoverlapping regions of pixels depending on the threshold value <ref type="bibr" target="#b1">[2]</ref>.</s><s>Segmentation, basically, is termed as the categorization of pixels in background and foreground having some characteristics like gray level values.</s><s>Image segmentation can easily extract the section of relevance in an image.</s><s>It is mandatory to have the required common data, for instance, color, form and pattern <ref type="bibr" target="#b2">[3]</ref> of each and every portion of image in order to perform segmentation.</s><s>Image segmentation has been effectively used in a variety of fields, including medical laboratories <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5]</ref>, farming <ref type="bibr" target="#b5">[6]</ref>, pattern matching <ref type="bibr" target="#b6">[7]</ref> and industrialization <ref type="bibr" target="#b7">[8]</ref>.</s><s>Thresholding is one of the most widely utilized and efficient image segmentation technique available.</s></p><p><s>Threshold technique is considered a significant and successful strategies of image segmentation.</s><s>It operates by obtaining a value of threshold and then labelling the pixels based on the threshold as either a part of the object or the background.</s><s>Thresholding comes on top in precision, ease, and resilience when all available segmentation approaches are considered.</s><s>Segmentation on the basis of thresholding separates an image in fragments by defining the boundaries with minimum single gray level value.</s><s>Most real-world images have multi-modal histograms.</s><s>Hence, the thresholding methods based on finding trough between histogram maxima fails.</s><s>Thresholding techniques can be classified as parametric or non-parametric.</s><s>Multi-level thresholding is the evolution of bi-level thresholding <ref type="bibr" target="#b8">[9]</ref> where multiple thresholds are used to segment an image.</s><s>Pixels are divided into several classes in multi-level thresholding, necessitating the use of multiple threshold values <ref type="bibr" target="#b9">[10]</ref>.</s><s>Through identifying over one threshold, multi-level thresholding divides a gray scale image into several non-homogeneous regions <ref type="bibr" target="#b10">[11]</ref>.</s><s>The histogram information of an image is utilized to define the criterion function in determining the ideal threshold in case of non-parametric thresholding techniques <ref type="bibr" target="#b11">[12]</ref>.</s><s>Kapur's entropy is one of the most efficient non-parametric thresholding technique that improves histogram peak and valley prediction <ref type="bibr" target="#b12">[13]</ref>.</s><s>A non parametric technique makes use of spatial information to choose an appropriate threshold for calculating the likelihood of co-occurrence of comparable pixels distanced by a significant interval.</s><s>The provision of an automated global threshold seems to be a critical step in multi-level thresholding <ref type="bibr" target="#b13">[14]</ref>.</s></p><p><s>The Otsu thresholding is an effective methods for image segmentation.</s><s>It finds the optimal threshold by maximizing the between class variance of the segmented classes to divide the image's background and foreground pixels <ref type="bibr" target="#b14">[15]</ref>.</s><s>It utilizes the histogram information of an image in order to determine the threshold and restrict the intensity of the image to the levels determined by the threshold <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b16">17]</ref>.</s><s>The proposed technique uses the GROM algorithm for determining the optimal threshold value for image segmentation.</s><s>Otsu method maximises the between class variance of the segmented classes for image segmentation <ref type="bibr" target="#b10">[11]</ref>.</s><s>This approach is proved to be particularly efficient with bi-level thresholding.</s><s>However, in case of multi-level thresholding where number of thresholds are large, this method becomes quite inefficient.</s><s>With the increasing number of thresholds, the computational complexity of Otsu method also increases exponentially making it inefficient for practical applications.</s><s>Therefore, multi-level thresholding is essentially an optimization problem.</s><s>Also the gray level distribution of non-trivial images can vary widely.</s><s>Optimization strategies can be applied to mitigate these challenges.</s><s>Because these issues are non-convex and difficult, specialised approaches are required to address them <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b18">19]</ref>.</s></p><p><s>In comparison to exhaustive search, multilevel thresholding techniques based on metaheuristic optimization algorithms are very efficient in identifying optimal threshold values in less time <ref type="bibr" target="#b19">[20]</ref>.</s><s>Because the exhaustive approaches are oftentimes computationally costly, natureinspired metaheuristic optimization approaches have got a huge amount of interest in the area of multi-level image thresholding.</s><s>Some of the parameterized algorithms that utilize metaheuristic approach are: Particle Swarm Optimization(PSO) <ref type="bibr" target="#b20">[21]</ref> in which its simple variation employs a population referred to as swarm of potential solutions known as particles.</s><s>Only few basic equations are used to navigate the particles about the search space <ref type="bibr" target="#b21">[22]</ref>.</s><s>The parameters that govern the standard form of PSO includes control social component, control cognitive component, swarm size, number of iterations, and the inertia weight.</s><s>Another population based optimization algorithm is Weighted mean of vectors (INFO) <ref type="bibr" target="#b22">[23]</ref>.</s><s>In INFO algorithm, the weighted mean is computed in the search space for a set of vectors which is an optimization algorithm that is based on population.</s><s>Arithmetic Optimization Algorithm (AOA) <ref type="bibr" target="#b23">[24]</ref> models and reflects the properties of the common arithmetic tasks i.e., addition, subtraction, multiplication, and division and has been used to address various real world issues of optimization with parameters such as time limit, maximum number of iterations, population size, stopping criteria, parameter to adjust search process and states exploitation accuracy in iterations.</s><s>Moreover, the Grey Wolf Optimization algorithm <ref type="bibr" target="#b24">[25]</ref> simulates the natural dominance structure and hunting process of grey wolves.</s><s>The leadership order is simulated using four ranks of grey wolves: alpha, beta, delta, and omega.</s><s>The tuning parameters of GWO are: domain of search for a,b,c, search dimensions, maximum number cycle number, number of search agents and search dimensions.</s><s>Differential Evolution(DE) <ref type="bibr" target="#b25">[26]</ref> proposed by Storn and Price, 1997, improves a possible outcome repeatedly using an evolutionary approach to optimize a challenging task.</s><s>These techniques make little or no assumptions regarding optimization issue and are capable of rapidly exploring very large search space.</s><s>The differential evolution algorithm has four random tuning parameters: Size of population, differential weight, crossover, and generation number.</s><s>Saremi and Mirjalili, 2017 introduced Grasshopper Optimization Algorithm <ref type="bibr" target="#b26">[27]</ref> which is an approach for tackling numerical optimization problems.</s><s>We can say that it is a relatively new swarm intelligence algorithm.</s><s>GOA was inspired, specifically, by the activities and interactions of grasshopper swarms in nature.</s><s>It makes use of number of executions, swarm size, attraction intensity and longitude scale and maximum iteration number as tuning parameters.</s></p><p><s>However, estimating thresholds for multilevel thresholding requires higher computational works and along with the tuning parameters makes it a challenging task.</s><s>Therefore, an algorithm that does not require any parameter tuning may offer some degree of advantage in such challenging optimization problems.</s><s>The proposed image segmentation technique utilizes Golden Ratio Optimization (GROM) algorithm which is nature inspired by natural phenomena <ref type="bibr" target="#b27">[28]</ref>.</s><s>The GROM algorithm is inspired from natural phenomena.</s><s>It has no tuning parameters and easy to implement.</s><s>Also, this approach updates the solutions in two stages using the golden ratio of the Fibonacci sequence.</s><s>Furthermore, it is quite resilient, with nearly identical findings observed in diverse experiments.</s><s>Utilising blended test functions, these aspects, namely exploitation and exploration, are validated concurrently.</s><s>The assessment suggests that the presented strategy may indeed arrive at the optimal result.</s><s>Furthermore, the suggested approach's convergence behaviour demonstrates that this method is capable of finding the optimal solution in fewer number of iterations.</s><s>The GROM algorithm has been successfully applied in diverse areas of engineering problems.</s><s>As of now, the GROM algorithm is applied in solving real engineering issues in different fields such as Tension / Compression spring design <ref type="bibr" target="#b28">[29]</ref>, Welded beam design <ref type="bibr" target="#b29">[30]</ref>, Pressure vessel design <ref type="bibr" target="#b30">[31]</ref>, Cantilever beam design problem <ref type="bibr" target="#b31">[32]</ref>, Gear train design problem <ref type="bibr" target="#b32">[33]</ref>, Optimal power flow <ref type="bibr" target="#b33">[34]</ref>.</s><s>This motivates us to investigate this fascinating algorithm for solving the multi-level image thresholding problem.</s></p><p><s>In the literature, the study by Vijay Kumar Bohat and K.V. Arya <ref type="bibr" target="#b34">[35]</ref>, a novel multi-level thresholding technique with threshold heuristics is proposed by integrating the suggested heuristic into the metaheuristic algorithms such as, PSO, GWO and WOA.</s><s>This algorithm makes use of threshold knowledge base through the use of the TH heuristic, which leads in greater refinement of optimum results.</s><s>The suggested methods beat their basic approaches, when the mean objective values are compared whereas giving competitive outcomes in case of mean SSIM index.</s><s>Another paper by Bhandari, Ashish and Singh, Neha and Kumar, Immadisetty <ref type="bibr" target="#b35">[36]</ref> presents a lightening search method based multi-level segmentation of images.</s><s>The LSA is used in this work to split the model of the threshold based on the resulted fusion of image into multi-level colour segmentation.</s><s>The Otsu threshold approach functions on colour images and is based on fluctuations in a 3D histogram, which affects the efficiency of the method.</s><s>Many research employ an energy curve model that relies on text data in an image to solve this issue.The metaheuristic strategy for partitioning the multi-level threshold image was studied in this research.</s><s>The significant duties in digital image processing is the categorization and picture pixels segmentation based on their intensities.</s><s>For segmentation and threshold phase, classic approaches like Otsu or Kapur <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">38]</ref> are used.</s><s>The research by Ahmed, Rasel and Nazir, Amril and Mahadzir, Shuhaimi and Shorfuzzaman, Mohammad and Islam, Jahedul <ref type="bibr" target="#b38">[39]</ref> offer FER-GWO, a fitness Euclidean distance ratio based niching GWO that is utilised to improve the algorithm's search efficiency.</s><s>This approach guides the wolves to the optimal location.</s><s>These advantages are achieved by adding the level set approach into the fundamental GWO algorithm and changing the location updating equation, while local search improves the ability to find better solution.</s><s>From the result analysis it is observed that the method performed precise exploitation and exploration, that improves the system's accuracy.</s><s>In the approach proposed by Raja, N. and Rajinikanth, Venkatesan and Latha, K. <ref type="bibr" target="#b39">[40]</ref>, firefly algorithm utilising otsu function is used to solve the multi-level thresholding problem.</s><s>They have suggested bounded search approach on the basis of histogram aids to reduce the processing time.</s><s>Furthermore, the functionality is assessed utilizing parameters like CPU time consumption, PSNR, SSIM and standard deviation.</s><s>The processing time of the BD driven firefly algorithm is significantly shorter than that of the Levy flight inspired firefly and the regular FAs due to the shorter search step.</s><s>Another study by Bhandari, Ashish and Singh, Neha and Shubham, Swapnil <ref type="bibr" target="#b40">[41]</ref> used Renyi's entropy along with electromagnetism like mechanism optimization (EMO), to accomplish multi-level thresholding-based colour segmentation of images.</s><s>Renyi's entropy has a broad characteristic for uncorrelated components and is used to determine the appropriate threshold for segmentation.</s><s>The EMO algorithm based technique is found to be more resilient and accurate for multi-level colour segmentation problems.</s><s>These assertions were validated by examining the results by image quality measures including entropy, FSIM, PSNR, mean error (ME), SSIM and mean squared error (MSE).</s></p><p><s>Several multil-level thresholding techniques based on metaheuristic optimization algorithms have been discussed above.</s><s>However, no optimization strategy is capable of resolving every optimization challenge.</s><s>This is a motivating factor behind developing innovative approaches to tackle a broader variety of optimization problems.</s><s>In this work, multilevel image thresholding approach based on the development pattern of plants and other organisms in nature, namely the Golden Ratio Optimization Method (GROM) algorithm, is used.</s><s>The proposed technique uses the GROM algorithm to maximise Otsu's objective function to determine the best thresholds for multi-level image thresholding.</s><s>The provided image is then segmented into different regions depending on the thresholds obtained using GROM Method.</s><s>Several benchmark test images are used to assess the proposed approach.</s><s>The results obtained by the proposed technique are compared with other multi-level thresholding algorithms such as PSO, AOA, INFO, GOA, DE and GWO.</s></p><p><s>The key contributions of the proposed multi-level thresholding technique are as follows:</s></p><p><s>• Application of the GROM algorithm using Otsu function as the evaluation criteria for multilevel thresholding based image segmentation.</s></p><p><s>• Comparative study of the proposed technique with the state-of-the-art multilevel image thresholding techniques based on PSO, AOA, GOA, WOA and GWO algorithms.</s></p><p><s>The following sections give a detailed theoretical explanation of the proposed method and its practical implementation considerations.</s><s>The remainder of the article is organised as follows.</s><s>Chapter 2 provides the background, inspiration, and the mathematical model of GROM algorithm and Otsu's between class variance function.</s><s>Chapter 3 gives the pseudocode of the complete proposed technique.</s><s>Chapter 4 demonstrates the experimental results and their analysis showing how to apply the GROM algorithm to solve the multi-level thresholding problem.</s><s>Finally, chapter 5 draws conclusions and future research direction.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">INTRODUCTION OF GROM'S ALGORITHM AND OTSU'S METHOD</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Golden Ratio Optimization Method's Algorithm</head><p><s>Considering vast nature along with the diversity of organisms surrounding us, there exists specific hierarchy for most of the natural things.</s><s>These fascinating designs in the nature is becoming increasingly apparent as our research approaches improve.</s><s>The evolution of organisms or natural phenomena like typhoons is determined by a golden ratio resulting in optimal presentation of nature.</s><s>The golden ratio was primarily discovered by the mathematician named Fibonacci whose research led to the invention of a number series wherein the addition of two successive numbers yields the subsequent number.</s><s>Furthermore, the ratio of two successive integers equals 1.618, that is known as the golden ratio or U angle which is employed in the snail lacquered section.</s><s>The tree leaves somehow doesn't emerge in unexpected orientations.</s><s>Angles of the stems show that the sequence of its development trend is identical towards the Fibonacci numbers and the golden ratio.</s><s>These type of morphological features allow trees to capture a larger amount of sunlight.</s><s>As of prehistoric days, numerous designers and builders have employed mathematics and geometrical linkages in their creations in supplement to natural phenomena.</s><s>Among such instances are the ruins of Egyptian Civilization.</s><s>The Parthenon Temple, for illustration, is the greatest demonstration of applying the golden ratio (1.618).</s><s>The width-to-length ratios are all same to the golden ratio of the temple's rectangular windows.The golden ratio is generally recognised throughout the Great pyramids and equals to the proportion of length of the Pyramid's height to its bottom length .</s><s>For instance, as shown in figure??.</s><s>The Fibonacci numbers are indicative of the manner in which the seeds of sunflower, for instance, swirl out from the middle of the bloom.</s><s>Not restricted to only this, the series could anticipate natural events such as tree branching, and the quantity of petals of flower as depicted in figure??.</s></p><p><s>The initial few numbers in the Fibonacci sequence are : 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181.</s><s>A particular number in the series can be represented as the sum of the preceding two numbers except for the first two.</s><s>It must additionally be noted that the ratio of every two successive numbers is almost constant (roughly beyond the sixth number), that is known as the U number.</s></p><p><s>The above mentioned angle is inferred from the Fibonacci series that is famous because every digit is derived by summing previous two numbers, and also from the assertion that the proportion of every two successive digits is an incredible number nearer to 1.618, defined as "golden ratio."</s><s>Even further astonishing fact that every Fibonacci value could be derived by a golden number as described in the following:</s></p><formula xml:id="formula_0">s x = ϕ x -(1 -ϕ) x √ 5<label>(1)</label></formula><p><s>also the response is often an integer that is precisely equal to the total of the preceding two members.</s><s>As an instance:</s></p><formula xml:id="formula_1">s 6 = (1.618034..) 6 -(1 -1.618034..) 6 √ 5 = 8<label>(2)</label></formula><p><s>When using a calculating device (with the golden number and six decimal places), result of 8.00000033 is achieved.</s><s>Using high precision calculations, the value would be closer to 8.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.1.">Fibonacci series employment in optimization</head><p><s>Each response emerges like a vector in the optimization technique and also an effort is made to guide responses in vector's orientation with the key features (the target).</s><s>Such a procedure is often used in suggested technique.</s><s>Firstly, the population's mean value is derived in the primary stage of the proposed technique.</s><s>Then it is compared to the worst value.</s><s>If the mean value is better than the worst value in terms of fitness, the worst solution is substituted by the mean.</s><s>This results in acceleration of the algorithm's convergence.</s><s>As in subsequent portion, additional vector is chosen at random for each vector (solution) in the population.</s><s>The mean fitness of the members of the population is utilized to establish the path and magnitude of the new vector movement.</s><s>It enables to evaluate the influence of the population's other solutions on the motion of the concerned vectors.</s><s>To determine the path of newest vector, contrast all chosen vectors (the chosen one, the one picked at random, and mean vector).</s><s>For that , optimal vector with the least value of the objective function is chosen to be the principal vector.</s></p><formula xml:id="formula_2">S best &gt; S average &gt; S worst<label>(3)</label></formula><formula xml:id="formula_3">⃗ F I = ⃗ F average -⃗ F worst<label>(4)</label></formula><p><s>The method of Fibonacci along with the golden ratio are now utilised to calculate the range of movements within the path of the acquired vector.</s><s>Fibonacci's equation is utilised to accomplish the global search and subsequently the local search upon algorithm execution:</s></p><formula xml:id="formula_4">S h = GR × ϕ H -(1 -ϕ) H √ 5 . GR = 1.618H = h h max<label>(5)</label></formula><p><s>The solutions in an evolutionary optimization methods must be logically revised in such a manner that the entire updating leads to an improved solution.</s><s>The update is primarily done in order to find the optimal solution.</s><s>An arbitrary movement is included in newly calculated response for investigating the search space of the optimization problem.</s><s>For updating the solutions the following equation is used:</s></p><formula xml:id="formula_5">F n = (1 -S h )Fbest + rand × S h × F h .<label>(6)</label></formula><p><s>The next step is to analyse the boundary conditions of the variables.</s><s>If the limitations are met, the newest solution will replace the older one only when the fitness of the new solution is better than that of the older one.</s></p><formula xml:id="formula_6">F i = F i n i f S i Newtestpoint &lt; S i testpoint .S i = S i o otherwise<label>(7)</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.3.">PHASE 2</head><p><s>In this stage, each solution seeks to become as near to the optimal solution as possible while avoiding the worst solution.</s><s>For doing this, the golden ratio is utilized in all of the solutions as follows:</s></p><formula xml:id="formula_7">F n = F o + rand × ( 1 GR ) × (F best -F worst ) 1 GR = 0.618. (<label>8</label></formula><formula xml:id="formula_8">)</formula><p><s>Following the updating of the solutions, the lower bound and the upper bound of the variables are verified and the newer solution replaces the older one if any improvement is achieved as shown below:</s></p><formula xml:id="formula_9">F i = F i n i f S i Newtestpoint &lt; S i testpoint .S i = S i o otherwise<label>(9)</label></formula><p><s>The pseudo code of the algorithm is presented as follows: Algorithm 1: Golden Ratio Optimization Method (GROM) Initialize the search agents uniformly in the search space.</s></p><p><s>Compute the fitness of each solution while the end criterion is not satisfied do Calculate the mean i.e.</s><s>F avg of each solution Solution having worst fitness is set as F worst if the fitness of F worst is less than the fitness of F avg then F worst =F avg end For j=1:n (each solution) Choose a random F i that is different from F j Make comparison of solutions i.e., F i , F j and F avg .</s><s>Name the 1 st optimal solution as F best , 2 nd optimal solution as F average , and 3 rd solution as F worst Revise F j by utilizing eq.</s><s>no. 1 to 4 Verify constraints and replace the newer solution by older solution using Eq.</s><s>no. 5 end For k=1:n (every solution) Forl=1:v (no. of variables) Revise the generated output as per eq.</s><s>no.</s><s>6 Again Verify constraints and replace the newer solution by older solution using Eq.</s><s>7 end end stop end The proposed approach is straightforward and does not require any parameter adjustment as shown above.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">Otsu's Method</head><p><s>Otsu thresholding approach is utilised in the field of image processing and computer vision for automated segmentation of the images <ref type="bibr" target="#b41">[42]</ref>.</s><s>It finds the optimal threshold by maximizing the between class vaiance of the segmented classes.</s><s>The method, in its most basic version, provides a threshold of unified intensity that divides pixels into two classes i.e., background and foreground <ref type="bibr" target="#b42">[43]</ref>.</s></p><p><s>This approach uses histogram information of an image to compute the objective function (i.e. between class variance).</s><s>This objective function serves as the criterion for separation of the various classes of objects in the image.</s><s>Typically, this approach yields adequate solution for images having bi-modal histogram.</s><s>The central step is to split the image histogram in clusters using a threshold determined by maximizing the between class variance of the separated classes.</s></p><p><s>Assume a grayscale image S and it needs to be divided into N+1 different classes.</s><s>As a result, N number of thresholds are required to separate the image into N+1 different classes as follows:</s></p><formula xml:id="formula_10">X 0 = f (a, b)ϵS |0 &lt;= f (a, b) &lt;= g 1 1 X 1 = f (a, b)ϵS |g 1 &lt;= f (a, b) &lt;= g 2 1 : : X N = f (a, b)ϵS |g N &lt;= f (a, b) &lt;= K1<label>(10)</label></formula><p><s>In this case, X N represents image's Nth class, g N represents the image's N th threshold value, gray value of the pixel at (a,b) is represented by f(a,b), and K represents the number of grey-levels in image S. To determine the threshold values that split up the histogram in multiple unique classes, is the primary purpose of multi-level thresholding, which can then be assessed by maximising the underlying process:</s></p><formula xml:id="formula_11">V = max g 1 ,g 2 ,...,g N H(g 1 , ...., g N )<label>(11)</label></formula><p><s>Where V represents vector containing values of threshold (g 1 , g 2 , ...g N ); and the Otsu function H(g 1 , ...., g N ) termed as:</s></p><formula xml:id="formula_12">H = N I=0 β i (σ i -σ), 2<label>(12)</label></formula><formula xml:id="formula_13">β i = g m=g i i+1 -1L m (<label>13</label></formula><formula xml:id="formula_14">)</formula><formula xml:id="formula_15">σ i = g i+1 -1 m=g i i L m σ m , L i = k(m)/T otpixel (<label>14</label></formula><formula xml:id="formula_16">)</formula><p><s>where σ is mean intensity of image S. K(m) is frequency of m th gray level and Totpixel defines total pixels in image.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">PROPOSED ALGORITHM</head><p><s>The proposed technique utilizes the GROM Algorithm to find the optimal thresholds.</s><s>Otsu's between class variance function is used as the criterion to find the optimal thresholds.</s><s>By maximising the objective function, this approach returns the optimal set of thrsholds.</s><s>This section presents the proposed multi-level thresholding technique.</s><s>The proposed technique embedds Otsu function as an evaluation criteria.</s><s>It is presented in the form of a pseudocode in algorithm 2 Compute the fitness by calling the Otsu function by passing position, threshold and probability as parameters while the end criterion is not satisfied do Calculate the mean i.e.</s><s>F avg of every solution Solution having worst fitness is set as F worst if the fitness of F worst is less than the fitness of F avg then F worst =F avg end For j=1:n (every solution) Choose a random F i that is different from F j Make comparison of solutions i.e., F i , F j and F avg .</s><s>Name the 1 st optimal solution as F best , 2 nd optimal solution as F average , and 3 rd solution as F worst Revise F j by utilizing eq.</s><s>no. 1 to 4 Verify constraints and replace the newer solution by older solution using Eq.</s><s>no. 5 end For k=1:n (every solution) Forl=1:v (no. of variables) Revise the generated output as per eq.</s><s>no.</s><s>6 Again Verify constraints and replace the newer solution by older solution using Eq.</s><s>7 Display objective function's values, threshold value and calculate MEAN, MEAN˙SSIM, MEAN˙PSNR and MEAN˙FSIM.</s><s>Store it in excel sheet for each image.</s><s>end end end stop</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">EXPERIMENTS AND RESULTS</head><p><s>The experimental setting for the proposed technique is presented in this section.</s><s>The standard test images are shown, following a brief discussion of settings of parameters and a series of criteria utilised to assess the performance of various techniques.</s><s>The findings and explanation are then provided further below.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Benchmark Images</head><p><s>The proposed technique is tested on ten standard grayscale images from the Berkeley database of image segmentation.</s><s>Figure <ref type="figure" target="#fig_2">3</ref> depicts the testing images.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Plot of Experiment</head><p><s>The nature-inspired GROM algorithm is used with the Otsu function serving as the evaluation criterion.</s><s>The proposed technique is tested for the multi-level thresholding problem and it outperformed pre-existing standard nature inspired algorithms such as AOA, PSO, GOA, GWO, and WOA, among others.</s><s>The trials were carried out on test images with varying thresholds of 5, 8, 10, and 12.</s><s>The total no. of evaluations of fitness function is kept 6000 for range of thresholds 5, 8, 10 and 12.The various level of thresholds were chosen to determine the effectiveness of the proposed method in both low and high dimensional multi-level thresholding problem.</s><s>All the algorithms were run 30 times for each image for finding the mean fitness values and other statistical data for comparison.</s><s>The parameters of all the algorithms considered for this study are presented in Table <ref type="table" target="#tab_0">1</ref>.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Metrics for evaluating segmented images</head><p><s>Two measures are used to analyze the quality of segmented images at several number of thresholds: • Mean fitness: This shows the algorithm's resilience in determining various levels of thresholds.</s><s>• Mean Feature Similarity Index Method: This method maps the properties and compares the common features between two different images.</s><s>To further understand FSIM, we must first define two conditions.</s><s>These are as follows: Phase Congruency (PC): It is a novel approach for recognising visual characteristics and are unaffected by variations in light in visuals.</s><s>Gradient Magnitude (GM): In order to represent gradient operators, convolution masks are utilized.</s><s>There are several convolutional masks available for measuring gradients.</s><s>Suppose an image g(a) along with F a and F b are its horizontal and vertical gradients, the magnitude of gf(x) is thus given as <ref type="bibr" target="#b43">[44]</ref>.</s></p><formula xml:id="formula_17">F 2 a + F 2 b (<label>15</label></formula><formula xml:id="formula_18">)</formula><p><s>PC maps derived g1 and g2, as were the GM maps, F1 and F2.</s><s>Following C1, C2, F1 and F2 could be used to define and compute FSIM.</s><s>To begin, we may compute the similarities of two images:</s></p><formula xml:id="formula_19">S im pc = 2C 1 C 2 + K 1 C 2 1 + C 2 2 + K 1<label>(16)</label></formula><p><s>i.e., K1 is +ve constant that boosts S impc's steadiness.</s><s>K1 may be estimated realistically using the PC values.</s><s>Likewise, one may compute the similarities between F1 and F2 as follows:</s></p><formula xml:id="formula_20">S im f = 2F 1 F 2 + K 1 F 2 1 + F 2 2 + K 1<label>(17)</label></formula><p><s>K2 is +ve constant that varies with the dynamic span of GM values.</s><s>S impc and S im f are now merged to compute the similarity Sim of g1 and g2 as follows:</s></p><formula xml:id="formula_21">S im(a) = [S im pc (a)]α × [S im f (a)]β<label>(18)</label></formula><p><s>α and β are utilized in order to tune the relative importance of PC and GM.</s><s>4.4.</s><s>Results and Discussions This section presents the results obtained by the proposed technique.</s><s>These results are then analyzed and the significance of the results are discussed.</s><s>Then the performance of the proposed technique is compared with other state-of-the-art algorithms such as Particle Swarm Optimization (PSO), Arithmetic Optimization Algorithm (AOA), Grey Wolf Optimizer (GWO), Grasshopper Optimization Algorithm (GOA), and the Whale Optimization Algorithm (WOA).</s><s>The results are analyzed and compared based on the image quality metrics such as PSNR, SSIM, FSIM measures.</s></p><p><s>The following section provides the findings of maximizing the between class variance function for the optimal image segmentation.</s><s>Test was carried out on all of the standard test images depicted in figure <ref type="figure" target="#fig_2">3</ref>. Nature inspired algorithms are embedded with stochastic behaviour.</s><s>This means that when these algorithms are run several times, the solutions obtained may vary.</s><s>Therefore, there is a need for statistical analysis of the performance of these algorithms.</s><s>The statistical measures like mean fitness and the best fitness can give a clear picture of the performance of the algorithm.</s><s>A higher value of the mean fitness indicates better performance of the algorithm.</s><s>Similarly a higher value of the best fitness value also indicates better performance.</s><s>The following tables presents mean and the best fitness values.</s><s>Objective function values at 5 and 8 thresholds are displayed in tables 2 and 3, whereas Tables <ref type="table" target="#tab_3">4</ref> and <ref type="table" target="#tab_4">5</ref> illustrates the objective function at significant higher thresholds of 10 and 12.</s><s>The data in the tables indicate that the proposed method (i.e.,the GROM Alogrithm) offers higher values of the mean fitness in most of the tested scenarios.</s><s>Tables <ref type="table" target="#tab_1">2</ref> and <ref type="table" target="#tab_2">3</ref> show that the proposed method give the highest overall fitness value in 16 out of 20 instances.</s><s>At the same time, PSO, AOA, GWO, GOA and WOA obtain higher values of the mean fitness in 1, 3, 0, 0 and 0 instances respectively out of the 20 scenarios.</s><s>Also, with small number of thresholds, our proposed method surpasses its competitors.</s><s>Likewise, the findings shown in Table <ref type="table" target="#tab_3">4</ref> and 5 demonstrate that substantially higher performances of the proposed algorithm against the algorithms in comparison.</s><s>In 14 test scenarios, GROM Algorithm achieves the highest value of mean objective function while comparing with other algorithms like PSO, AOA, GWO, GOA, and WOA in the same tested scenarios.</s></p><p><s>The efficacy of PSO, AOA, GWO, GOA, and WOA algorithms degrades as soon as the number of thresholds increase.</s><s>The lack of domain specific expertise when coping with a multi-level thresholding problem and complexities of all sorts of parameters they have, may be a cause of worsening in the performances of PSO, AOA, GWO, GOA, and WOA algorithms.</s><s>The above methods don't really independently increase every dimension.</s><s>But, the GROM algorithm with no tuning parameters, leverage each dimension of the problem giving better solutions.</s><s>Based on the performance shown the proposed algorithm, it could be inferred that nature inspired algorithms for multi-level thresholding without parameter tuning performs better than the various similar natured algorithms that deals with parameters in their implementation.</s></p><p><s>The results and discussion suggest that the GROM-based thresholding method outperforms PSO, AOA, GWO, GOA, and WOA.</s><s>The table 6 displays the highest fitness obtained by all the mentioned algorithms for 30 runs at various levels of thresholds.</s><s>From the findings it can be observed that the proposed method is capable of determining optimal fitness values for every test image.</s><s>The segmented images obtained by each competing algorithms are shown in figure.</s><s>The pictures demonstrated that as the number of thresholds increase, image quality also increase.</s><s>Figure <ref type="figure">4</ref> shows the highest achieved threshold as well as the segmented images of plants and the corresponding histograms.</s><s>The graphs depict the classification of several classes based on the values of threshold.</s><s>After that, the quality of the segmented images are compared on the basis of MFSIM values.</s><s>(a) GROM (b) AOA (c) GWO (d) GOA (e) WOA Figure 5: Image Segmentation of Plant Image by various algorithms at threshold 8 20 (a) GROM (b) AOA (c) GWO (d) GOA (e) WOA Figure 7: Image Segmentation of Plant Image by various algorithms at threshold 12  <ref type="figure">8</ref>-17 shows the segmentation results achieved by the compared algorithms.</s><s>It can be observed from the segmented images that as the number of thresholds increase, the quality of the segmented images also improve.</s><s>Figure <ref type="figure">4</ref><ref type="figure">5</ref><ref type="figure">6</ref><ref type="figure">7</ref>, presents the segmentation of plant images with their histograms.The quality of the segmented images are evaluated using the mean FSIM index (MFSIM).</s><s>MFSIM method maps the properties and compares the common features between two different images.</s><s>The tables 7, 8, 9 and 10 shows the mean FSIM value produced by every algorithm after 30 runs.</s><s>The proposed method determines optimal results in 14 among 20 test scenarios at 5 and 8 threshold range.</s><s>Among another 20 test scenarios, in 16 test cases the proposed approach performed better with greater range of thresholds i.e., 10 and 12.</s><s>The mean execution time of all the algorithms across 30 runs is shown.</s><s>According to the Table <ref type="table" target="#tab_10">11</ref> results, GROM outperforms other algorithms in the plurality of the test scenarios.</s><s>The lack of domainspecific expertise when coping with a multi-level thresholding problem and complexities of all sorts of parameters they have, may be a cause of worsening in the performances of PSO, AOA, GWO, GOA, and WOA algorithm.</s><s>The above methods don't really independently increase every dimension.</s><s>But, after the usage of Ostu function as an evaluation criteria in calculating fitness in GROM algorithm with no tuning parameters, the algorithm leverage each dimension of acceptable solutions, resulting in higher value of mean objective function.</s><s>The statistical procedures are usually exercised to determine whether an algorithm is actually performing better or the better performance is a mere occurrence by chance (Derrac, 2011).</s><s>For analyzing the statistical significance of the performance of the proposed algorithm, the Wilcoxon signed-rank test is performed in this study.</s><s>The testing was carried out with a five percent relevance limit to see if there was a considerable gap among algorithms.</s><s>The Null hypotheses is taken as-"there is no significant difference in performance between the proposed technique and the compared technique".</s><s>And the alternative hypothese is taken as-"there is substantial difference in the performance between the compared algorithms".</s><s>Then, the algorithms are checked in the trials based on the objective function's mean value attained in distinct test scenarios by algorithm.</s><s>If there is no notable variation between the mean value of the compared algorithms, then it is considered that the NULL hypotheses is true, and if there is a substantial gap in their performance, then the alternative hypotheses is true.</s><s>The p value and h value obtained in Wilcoxon test are reported in the Tables 12, 13, 14 and 15, taking into account the results of 30 trials on every test image.</s><s>In this case, h value is 1 + implies a considerable enhancement on outcomes over compared algorithm, h value is 0 shows that comparable algorithms are of statistical equivalence, and h value is 1 -suggests that the proposed technique performs worse than the competing algorithm.</s><s>NaN means that content of both methods is identical, so no distinction among either.</s></p><p><s>Nevertheless, as the dimensions increase, it is clear how the proposed technique outperforms other compared algorithms.</s><s>From the statistical analysis it can be inferred that the proposed technique proves to be considerably better than other compared algorithms (i.e., PSO, AOA, GWO, GOA and WOA) in 31 test scenarios among 40, accordingly, at 5, 8, and 10 and 12 thresholds.</s><s>This evaluation suggests that the proposed technique shows significant improvement in performance for multi-level thresholding based image segmentation.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">CONCLUSION AND FUTURE WORK</head><p><s>This study introduces a new multi-level thresholding technique utilizing the GROM algorithm.</s><s>The Otsu's inter-class variance function is employed as the evaluation criterion to identify the optimal thresholds.</s><s>The GROM algorithm lacks any tunable parameters, resulting in a less complicated and straightforward implementation of the proposed technique.</s><s>The effectiveness of the proposed technique was evaluated by testing it on standard benchmark images at four different threshold levels.</s><s>The best fitness values, mean fitness values, and MFSIM index were considered to compare the performance of the proposed algorithm against other state-of-the-art algorithms.</s><s>In terms of mean fitness, the proposed algorithm outperformed the compared algorithms while providing comparable results in terms of MFSIM values.</s><s>This is attributed to its simpler implementation, improved convergence, and faster computation time.</s><s>The Wilcoxon test was also performed to determine the statistical significance of the superior results of the proposed algorithm relative to the other compared algorithms.</s><s>The results of the Wilcoxon test indicate that there are significant differences between the proposed algorithm and the other compared nature-inspired algorithms.</s></p><p><s>As future work, the proposed algorithm can be applied to real-world problems such as brain tumor and lesion segmentation, satellite image segmentation, and other scenarios where image segmentation is required.</s></p><p><s>TH=5 GROM PSO AOA GWO GOA WOA TH=8 GROM PSO AOA GWO GOA WOA TH=10 GROM PSO AOA GWO GOA WOA TH=12 GROM PSO AOA GWO GOA WOA</s></p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc><div><p><s>Figure 1: Example of Golden Ratio in nature</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Algorithm 2 :</head><label>2</label><figDesc><div><p><s>Proposed GROM Algorithm using Otsu function as an evaluation criteria Initialize the search agents uniformly in the search space.</s><s>Set the dimensions of the problem and objective function.</s><s>Choose input images and plot the histogram Calculate the distribution of probabilities of each histogram intensity level 0-255.</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc><div><p><s>Figure 3: Benchmark Testing Images</s></p></div></figDesc><graphic coords="17,56.69,511.57,187.20,73.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 : 5 (Figure 5 :</head><label>455</label><figDesc><div><p><s>Figure 4: Image Segmentation of Plant Image by various algorithms at threshold 5</s></p></div></figDesc><graphic coords="20,67.48,364.10,86.39,73.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 6 :(Figure 7 :</head><label>67</label><figDesc><div><p><s>Figure 6: Image Segmentation of Plant Image by various algorithms at threshold 10</s></p></div></figDesc><graphic coords="21,67.48,209.78,86.39,73.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 8 :Figure 9 :Figure 10 :Figure 11 :Figure 12 :Figure 13 :Figure 14 :Figure 15 :Figure 16 :Figure 17 :</head><label>891011121314151617</label><figDesc><div><p><s>Figure 8: Image Segmentation of First image -Plant by all algorithms at distinct thresholds</s></p></div></figDesc><graphic coords="30,56.69,538.11,79.20,73.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc><div><p><s>Parameter settings</s></p></div></figDesc><table><row><cell cols="2">Algorithm Parameters</cell><cell>Values</cell></row><row><cell>WOA</cell><cell>a</cell><cell>[0, 2]</cell></row><row><cell></cell><cell>b</cell><cell>1</cell></row><row><cell></cell><cell>l</cell><cell>[-1, 1]</cell></row><row><cell>GWO</cell><cell>a</cell><cell>[0, 2]</cell></row><row><cell>PSO</cell><cell>Max Velocity</cell><cell>6</cell></row><row><cell></cell><cell>c1</cell><cell>[0, 2]</cell></row><row><cell></cell><cell>c2</cell><cell>[0, 2]</cell></row><row><cell></cell><cell cols="2">Max Inertia Weight 0.9</cell></row><row><cell></cell><cell cols="2">Min Inertia Weight 0.2</cell></row><row><cell>GOA</cell><cell>c</cell><cell>C max = 1, C min =0.00001</cell></row><row><cell></cell><cell>l</cell><cell>1.5</cell></row><row><cell></cell><cell>f</cell><cell>0.5</cell></row><row><cell>AOA</cell><cell>Max Frequency</cell><cell>100 Hz</cell></row><row><cell></cell><cell>Min Frequency</cell><cell>9.5 Hz</cell></row><row><cell></cell><cell>No. of Peaks</cell><cell>6</cell></row><row><cell></cell><cell cols="2">Decimation Factor 2</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc><div><p><s>Mean Fitness Value obtained by algorithms at 5 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">3625.502 3625.451 3625.519 3625.461 3625.468 3625.396</cell></row><row><cell>Shoe</cell><cell cols="5">2952.651 2952.556 2952.649 2952.548 2952.502 2952.532</cell></row><row><cell>Lady</cell><cell cols="5">3169.790 3169.694 3169.789 3169.712 3169.604 3169.548</cell></row><row><cell cols="6">Elephant 5094.699 5094.604 5094.697 5094.581 5094.613 5094.491</cell></row><row><cell>Brush</cell><cell cols="5">4506.964 4506.893 4506.774 4506.814 4506.943 4506.892</cell></row><row><cell cols="6">Landscape 2290.072 2289.962 2290.071 2289.985 2289.997 2289.842</cell></row><row><cell>Bird</cell><cell cols="5">1697.518 1697.405 1697.509 1697.445 1697.266 1697.408</cell></row><row><cell cols="6">Firemen 4463.899 4463.825 4463.897 4463.825 4463.803 4463.800</cell></row><row><cell>Girl</cell><cell cols="5">3021.375 3021.262 3021.341 3021.312 3021.184 3021.257</cell></row><row><cell>Goat</cell><cell cols="5">3363.771 3363.441 3363.287 3363.723 3363.409 3363.623</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc><div><p><s>Mean Fitness Value obtained by algorithms at 8 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">3662.135 3661.897 3662.168 3661.188 3662.046 3661.866</cell></row><row><cell>Shoe</cell><cell cols="5">3005.561 3005.059 3005.517 3004.304 3005.041 3004.232</cell></row><row><cell>Lady</cell><cell cols="5">3232.112 3231.621 3230.314 3229.7897 3231.809 3231.573</cell></row><row><cell cols="6">Elephant 5170.254 5169.922 5168.751 5168.438 5170.007 5169.626</cell></row><row><cell>Brush</cell><cell cols="5">4562.722 4562.893 4562.487 4562.180 4562.480 4562.213</cell></row><row><cell cols="6">Landscape 2345.824 2345.450 2344.163 2344.523 2345.760 2345.379</cell></row><row><cell>Bird</cell><cell cols="5">1740.821 1740.452 1740.819 1740.223 1740.442 1740.289</cell></row><row><cell cols="6">Firemen 4534.519 4534.148 4534.324 4532.913 4534.306 4533.631</cell></row><row><cell>Girl</cell><cell cols="5">3084.520 3084.143 3084.587 3083.004 3084.130 3084.027</cell></row><row><cell>Goat</cell><cell cols="5">3415.325 3414.941 3415.356 3414.715 3414.913 3414.159</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 :</head><label>4</label><figDesc><div><p><s>Mean Fitness Value obtained by algorithms at 10 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">3671.815 3671.743 3672.128 3670.244 3671.449 3671.928</cell></row><row><cell>Shoe</cell><cell cols="5">3018.240 3017.097 3018.134 3015.725 3017.727 3017.377</cell></row><row><cell>Lady</cell><cell cols="5">3251.062 3250.348 3250.525 3247.568 3250.688 3249.785</cell></row><row><cell cols="6">Elephant 5189.280 5189.015 5188.684 5185.998 5189.458 5189.006</cell></row><row><cell>Brush</cell><cell cols="5">4576.905 4576.600 4576.351 4572.838 4575.891 4575.471</cell></row><row><cell cols="6">Landscape 2359.946 2359.491 2358.665 2357.103 2359.777 2359.653</cell></row><row><cell>Bird</cell><cell cols="5">1753.080 1752.125 1753.479 1751.868 1752.608 1752.796</cell></row><row><cell cols="6">Firemen 4553.857 4553.386 4553.613 4550.674 4553.800 4553.056</cell></row><row><cell>Girl</cell><cell cols="5">3101.822 3100.803 3100.399 3099.833 3101.215 3100.671</cell></row><row><cell>Goat</cell><cell cols="5">3426.891 3426.070 3426.822 3424.814 3426.254 3425.829</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 5 :</head><label>5</label><figDesc><div><p><s>Mean Fitness Value obtained by algorithms at 12 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">3677.419 3677.535 3678.227 3676.296 3677.794 3677.911</cell></row><row><cell>Shoe</cell><cell cols="5">3025.501 3023.523 3025.375 3023.265 3024.737 3024.334</cell></row><row><cell>Lady</cell><cell cols="5">3260.727 3260.010 3260.256 3257.405 3260.677 3260.130</cell></row><row><cell cols="6">Elephant 5200.054 5199.348 5200.213 5195.563 5199.675 5199.300</cell></row><row><cell>Brush</cell><cell cols="5">4584.858 4584.067 4583.803 4581.164 4583.836 4584.337</cell></row><row><cell cols="6">Landscape 2368.057 2367.627 2369.013 2364.601 2368.613 2368.292</cell></row><row><cell>Bird</cell><cell cols="5">1759.343 1758.319 1759.211 1757.351 1759.059 1759.067</cell></row><row><cell cols="6">Firemen 4564.522 4563.907 4564.440 4560.942 4564.683 4563.418</cell></row><row><cell>Girl</cell><cell cols="5">3111.452 3110.325 3111.315 3108.368 3111.314 3110.719</cell></row><row><cell>Goat</cell><cell cols="5">3434.117 3432.756 3433.719 3431.682 3433.608 3433.010</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 6 :</head><label>6</label><figDesc><div><p><s>Best Fitness Value obtained by algorithms at various distinct thresholds</s></p></div></figDesc><table><row><cell>IMAGES th GROM</cell><cell>PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 7 :</head><label>7</label><figDesc><div><p><s>MEAN FSIM Value obtained by algorithms at 5 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">0.804704 0.431778 0.804550 0.804479 0.805228 0.805419</cell></row><row><cell>Shoe</cell><cell cols="5">0.830113 0.430863 0.830114 0.830084 0.828760 0.830034</cell></row><row><cell>Lady</cell><cell cols="5">0.849712 0.315552 0.849682 0.849916 0.849039 0.849154</cell></row><row><cell cols="6">Elephant 0.924972 0.243775 0.924380 0.924144 0.924736 0.923841</cell></row><row><cell>Brush</cell><cell cols="5">0.862581 0.353668 0.860048 0.860114 0.862362 0.862428</cell></row><row><cell cols="6">Landscape 0.856148 0.297568 0.856112 0.855472 0.855574 0.855490</cell></row><row><cell>Bird</cell><cell cols="5">0.837993 0.408544 0.837906 0.837541 0.835825 0.837001</cell></row><row><cell cols="6">Firemen 0.850254 0.457092 0.850287 0.850196 0.849686 0.850143</cell></row><row><cell>Girl</cell><cell cols="5">0.779508 0.467600 0.779094 0.778985 0.778353 0.779452</cell></row><row><cell>Goat</cell><cell cols="5">0.868863 0.369695 0.86420 0.869240 0.863855 0.868111</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 8 :</head><label>8</label><figDesc><div><p><s>MEAN FSIM Value obtained by algorithms at 8 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">0.847575 0.431778 0.842482 0.836170 0.850927 0.852436</cell></row><row><cell>Shoe</cell><cell cols="5">0.894891 0.430863 0.894478 0.893028 0.893155 0.892579</cell></row><row><cell>Lady</cell><cell cols="5">0.901384 0.315555 0.901211 0.901268 0.900432 0.900115</cell></row><row><cell cols="6">Elephant 0.960703 0.243775 0.960543 0.961002 0.961066 0.958907</cell></row><row><cell>Brush</cell><cell cols="5">0.868069 0.353668 0.865530 0.867873 0.872543 0.871258</cell></row><row><cell cols="6">Landscape 0.916492 0.297568 0.915328 0.915150 0.916495 0.914402</cell></row><row><cell>Bird</cell><cell cols="5">0.897478 0.408544 0.897049 0.896393 0.893362 0.895100</cell></row><row><cell cols="6">Firemen 0.896325 0.457092 0.895932 0.895204 0.895253 0.893924</cell></row><row><cell>Girl</cell><cell cols="5">0.844027 0.467600 0.843855 0.842280 0.843461 0.843234</cell></row><row><cell>Goat</cell><cell cols="5">0.919852 0.369695 0.919778 0.919849 0.917774 0.916114</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 9 :</head><label>9</label><figDesc><div><p><s>MEAN FSIM Value obtained by algorithms at 10 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">0.842185 0.431778 0.842311 0.849211 0.862694 0.855219</cell></row><row><cell>Shoe</cell><cell cols="5">0.920112 0.430863 0.919221 0.917873 0.918513 0.917660</cell></row><row><cell>Lady</cell><cell cols="5">0.92439 0.315552 0.924315 0.923489 0.921980 0.919913</cell></row><row><cell cols="6">Elephant 0.97167 0.243775 0.971530 0.970948 0.971409 0.969682</cell></row><row><cell>Brush</cell><cell cols="5">0.884620 0.353668 0.885962 0.893847 0.88566 0.885287</cell></row><row><cell cols="6">Landscape 0.936564 0.297568 0.935845 0.932623 0.936499 0.934934</cell></row><row><cell>Bird</cell><cell cols="5">0.926801 0.408544 0.923924 0.925783 0.920266 0.920727</cell></row><row><cell cols="6">Firemen 0.917462 0.457092 0.917108 0.916051 0.915414 0.915526</cell></row><row><cell>Girl</cell><cell cols="5">0.879861 0.467600 0.878733 0.874346 0.876933 0.878318</cell></row><row><cell>Goat</cell><cell cols="5">0.938584 0.369695 0.936165 0.936328 0.934886 0.933953</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 10 :</head><label>10</label><figDesc><div><p><s>MEAN FSIM Value obtained by algorithms at 12 threshold</s></p></div></figDesc><table><row><cell cols="2">IMAGES GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell>Plant</cell><cell cols="5">0.868022 0.431778 0.862073 0.882201 0.868303 0.859738</cell></row><row><cell>Shoe</cell><cell cols="5">0.938167 0.430863 0.934883 0.936039 0.933206 0.933357</cell></row><row><cell>Lady</cell><cell cols="5">0.939178 0.315552 0.939046 0.938802 0.936758 0.934513</cell></row><row><cell cols="6">Elephant 0.977970 0.243775 0.977658 0.976751 0.974253 0.975924</cell></row><row><cell>Brush</cell><cell cols="5">0.903352 0.353668 0.902789 0.921078 0.903655 0.903212</cell></row><row><cell cols="6">Landscape 0.947791 0.297568 0.944157 0.946733 0.947694 0.945883</cell></row><row><cell>Bird</cell><cell cols="5">0.941653 0.408544 0.939185 0.941566 0.937831 0.935293</cell></row><row><cell cols="6">Firemen 0.931370 0.457092 0.931064 0.929837 0.930028 0.927883</cell></row><row><cell>Girl</cell><cell cols="5">0.903275 0.467600 0.902262 0.896813 0.901135 0.901943</cell></row><row><cell>Goat</cell><cell cols="5">0.949685 0.369695 0.949052 0.947020 0.947045 0.945783</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head>Table 11 :</head><label>11</label><figDesc><div><p><s>Best FSIM Value obtained by algorithms at various distinct thresholds</s></p></div></figDesc><table><row><cell cols="2">IMAGES th GROM PSO</cell><cell>AOA</cell><cell>GWO</cell><cell>GOA</cell><cell>WOA</cell></row><row><cell></cell><cell cols="5">0.804704 0.431778 0.804550 0.804479 0.805228 0.805419</cell></row><row><cell>Plant</cell><cell cols="5">0.847575 0.431778 0.842484 0.836170 0.850927 0.852434 0.842185 0.431778 0.842311 0.849211 0.862694 0.855219</cell></row><row><cell></cell><cell cols="5">0.868022 0.431778 0.862073 0.882201 0.868303 0.859738</cell></row><row><cell></cell><cell cols="5">0.830113 0.430863 0.830114 0.830084 0.828760 0.830034</cell></row><row><cell>Shoe</cell><cell cols="5">0.894891 0.430863 0.894478 0.893028 0.893153 0.892579 0.920112 0.430863 0.919221 0.917873 0.918513 0.917660</cell></row><row><cell></cell><cell cols="5">0.938167 0.430863 0.934883 0.936039 0.933206 0.933357</cell></row><row><cell></cell><cell cols="5">0.849712 0.315552 0.849682 0.849916 0.849033 0.849154</cell></row><row><cell>Lady</cell><cell cols="5">0.901384 0.315552 0.901211 0.901268 0.900432 0.900115 0.924392 0.315552 0.924315 0.923489 0.921980 0.919912</cell></row><row><cell></cell><cell cols="5">0.939178 0.315552 0.939046 0.938802 0.936758 0.934513</cell></row><row><cell></cell><cell cols="5">0.924972 0.243775 0.924380 0.924144 0.924736 0.923841</cell></row><row><cell>Elephant</cell><cell cols="5">0.960703 0.243775 0.960543 0.961004 0.961062 0.958907 0.971672 0.243775 0.971530 0.970948 0.971409 0.969682</cell></row><row><cell></cell><cell cols="5">0.977970 0.243775 0.977658 0.976751 0.974253 0.975923</cell></row><row><cell></cell><cell cols="5">0.862581 0.353668 0.860048 0.860114 0.862361 0.862428</cell></row><row><cell>Brush</cell><cell cols="5">0.868064 0.353668 0.865530 0.867871 0.872548 0.871258 0.884620 0.353668 0.885962 0.893847 0.885662 0.885287</cell></row><row><cell></cell><cell cols="5">0.903352 0.353668 0.902789 0.921078 0.903655 0.903212</cell></row><row><cell></cell><cell cols="5">0.856148 0.297568 0.856112 0.855472 0.855574 0.855490</cell></row><row><cell>Landscape</cell><cell cols="5">0.916492 0.297568 0.915328 0.915150 0.91649 0.914402 0.936564 0.297568 0.935845 0.932623 0.936499 0.934934</cell></row><row><cell></cell><cell cols="5">0.947791 0.297561 0.944157 0.946733 0.947694 0.945883</cell></row><row><cell></cell><cell cols="5">0.837993 0.408544 0.837906 0.837541 0.835825 0.837001</cell></row><row><cell>Bird</cell><cell cols="5">0.897478 0.408544 0.897049 0.896393 0.893362 0.895100 0.926801 0.408544 0.923924 0.925783 0.920266 0.920727</cell></row><row><cell></cell><cell cols="5">0.941653 0.408549 0.939185 0.941566 0.937831 0.935293</cell></row><row><cell></cell><cell cols="5">0.850254 0.457092 0.850287 0.850196 0.849686 0.850143</cell></row><row><cell>Firemen</cell><cell cols="5">0.896325 0.457092 0.895932 0.895204 0.895256 0.893924 0.917462 0.457092 0.917108 0.916051 0.915414 0.915526</cell></row><row><cell></cell><cell cols="5">0.931370 0.457092 0.931064 0.929837 0.930028 0.927883</cell></row><row><cell></cell><cell cols="5">0.779508 0.467600 0.779094 0.778985 0.778353 0.779456</cell></row><row><cell>Girl</cell><cell cols="5">0.844027 0.467600 0.843855 0.842280 0.843461 0.843234 0.879861 0.467600 0.878733 0.874346 0.876933 0.878312</cell></row><row><cell></cell><cell cols="5">0.903275 0.467600 0.902262 0.896813 0.901135 0.901943</cell></row><row><cell></cell><cell cols="5">0.868863 0.369695 0.864208 0.869240 0.863855 0.868112</cell></row><row><cell>Goat</cell><cell cols="5">0.919852 0.369695 0.919778 0.919849 0.917774 0.916114 0.938584 0.369695 0.936165 0.936328 0.934886 0.933953</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_11"><head>Table 12 :</head><label>12</label><figDesc><div><p><s>Wilcoxon Test Result at 5 thresholdIMAGES GROM vs PSO GROM vs AOA GROM vs GWO GROM vs GOA GROM vs WOA h value p value h value p value h value p value h value p value h value p value</s></p></div></figDesc><table><row><cell>Plant</cell><cell>1+ 6.12E-08 1-2.59E-06 1+ 0.000124 1+ 2.04E-06 1+ 2.27E-08</cell></row><row><cell>Shoe</cell><cell>1+ 2.71E-11 1+ 3.97E-08 1+ 1.36E-09 1+ 1.98E-10 1+ 2.23E-05</cell></row><row><cell>Lady</cell><cell>1+ 3.23E-11 1+ 5.08E-10 1+ 5.81E-11 1+ 1.91E-10 1+ 1.59E-10</cell></row><row><cell cols="2">Elephant 1+ 1.08E-11 1+ 4.09E-11 1+ 9.52E-12 1+ 1.39E-11 1+ 1.07E-11</cell></row><row><cell>Brush</cell><cell>1+ 1.01E-10 1+ 7.04E-10 1+ 9.29E-10 1+ 0.000323 1+ 1.49E-06</cell></row><row><cell cols="2">Landscape 1+ 2.08E-11 1+ 3.35E-11 1+ 2.21E-11 1+ 2.31E-11 1+ 3.72E-11</cell></row><row><cell>Bird</cell><cell>1+ 1.07E-11 1+ 2.90E-11 1+ 2.42E-11 1+ 1.07E-11 1+ 3.00E-11</cell></row><row><cell>Firemen</cell><cell>1+ 3.15E-12 1+ 2.23E-12 1+ 4.67E-12 1+ 5.23E-12 1+ 9.93E-12</cell></row><row><cell>Girl</cell><cell>1+ 1.</cell></row></table><note><p><s>50E-11 1+ 4.01E-11 1+ 2.18E-11 1+ 2.01E-11 1+ 9.03E-11 Goat 1+ 1.86E-11 1+ 1.74E-11 1+ 1.23E-11 1+ 2.28E-11 1+ 8.55E-11</s></p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_12"><head>Table 13 :</head><label>13</label><figDesc><div><p><s>Wilcoxon Test Result at 8 thresholdIMAGES GROM vs PSO GROM vs AOA GROM vs GWO GROM vs GOA GROM vs WOA h value p value h value p value h value p value h value p value h value p value</s></p></div></figDesc><table><row><cell>Plant</cell><cell cols="3">1+ 8.45E-10 1-1.15E-08 1+ 8.92E-11 1+ 4.29E-07 1+ 2.25E-08</cell></row><row><cell>Shoe</cell><cell cols="3">1+ 4.78E-11 1+ 1.95E-05 1+ 3.91E-11 1+ 2.77E-10 1+ 4.32E-11</cell></row><row><cell>Lady</cell><cell cols="3">1+ 2.95E-11 1+ 1.53E-08 1+ 2.95E-11 1+ 4.96E-10 1+ 7.23E-11</cell></row><row><cell cols="4">Elephant 1+ 2.34E-10 1+ 4.63E-08 1+ 9.78E-11 1+ 2.63E-09 1+ 4.55E-10</cell></row><row><cell>Brush</cell><cell>1-4.61E-05 1+ 1.85E-06 1+ 2.94E-05 0</cell><cell>NaN</cell><cell>1+ 4.92E-05</cell></row><row><cell cols="4">Landscape 1+ 8.95E-11 1+ 1.01E-08 1+ 3.46E-10 1+ 2.14E-06 1+ 5.51E-08</cell></row><row><cell>Bird</cell><cell cols="3">1+ 3.61E-11 1+ 5.44E-08 1+ 3.99E-11 1+ 1.18E-10 1+ 2.82E-10</cell></row><row><cell>Firemen</cell><cell cols="3">1+ 2.83E-11 1+ 1.36E-08 1+ 2.83E-11 1+ 1.67E-10 1+ 1.13E-10</cell></row><row><cell>Girl</cell><cell cols="3">1+ 3.63E-11 1-5.39E-08 1+ 4.01E-11 1+ 3.28E-11 1+ 5.97E-11</cell></row><row><cell>Goat</cell><cell cols="3">1+ 2.91E-11 1+ 7.05E-06 1+ 4.80E-11 1+ 4.79E-11 1+ 7.86E-11</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_13"><head>Table 14 :</head><label>14</label><figDesc><div><p><s>Wilcoxon Test Result at 10 threshold</s></p></div></figDesc><table><row><cell cols="6">IMAGES GROM vs PSO GROM vs AOA GROM vs GWO GROM vs GOA GROM vs WOA</cell></row><row><cell></cell><cell cols="5">h value p value h value p value h value p value h value p value h value p value</cell></row><row><cell>Plant</cell><cell>1+ 3.52E-07 0</cell><cell>NaN</cell><cell cols="3">1+ 1.47E-07 1+ 3.99E-04 1-</cell><cell>3.77E-04</cell></row><row><cell>Shoe</cell><cell cols="5">1+ 3.01E-11 1+ 1.25E-07 1+ 4.06E-11 1+ 8.12E-11 1+</cell><cell>7.36E-11</cell></row><row><cell>Lady</cell><cell cols="5">1+ 1.09E-10 1+ 3.47E-10 1+ 4.07E-11 1+ 2.15E-10 1+</cell><cell>7.38E-11</cell></row><row><cell cols="6">Elephant 1+ 4.47E-11 1+ 1.30E-08 1+ 2.99E-11 1-2.02E-09 1+</cell><cell>1.76E-10</cell></row><row><cell>Brush</cell><cell cols="3">1-1.43E-05 1+ 3.83E-06 1+ 1.43E-08 0</cell><cell>NaN</cell><cell>1+ 0.002499392</cell></row><row><cell cols="6">Landscape 1+ 4.48E-11 1+ 3.67E-11 1+ 3.67E-11 1+ 4.48E-11 1+</cell><cell>8.11E-11</cell></row><row><cell>Bird</cell><cell cols="5">1+ 3.01E-11 1-1.07E-09 1+ 3.01E-11 1+ 3.01E-11 1+</cell><cell>6.05E-11</cell></row><row><cell>Firemen</cell><cell cols="5">1+ 2.96E-11 1+ 1.30E-10 1+ 2.96E-11 1+ 2.96E-11 1+</cell><cell>3.27E-11</cell></row><row><cell>Girl</cell><cell cols="5">1+ 3.01E-11 1-6.10E-10 1+ 3.01E-11 1+ 3.01E-11 1+</cell><cell>3.33E-11</cell></row><row><cell>Goat</cell><cell cols="5">1+ 3.02E-11 1+ 4.50E-11 1+ 3.02E-11 1+ 3.02E-11 1+</cell><cell>3.02E-11</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head>Table 15 :</head><label>15</label><figDesc><div><p><s>Wilcoxon Test Result at 12 threshold IMAGES GROM vs PSO GROM vs AOA GROM vs GWO GROM vs GOA GROM vs WOA h value p value h value p value h value p value h value p value h value p value NaN Landscape 1+ 3.33E-11 1+ 3.33E-11 1+ 3.01E-11 1+ 8.13E-11 1+ 2.22E-09 Bird 1+ 3.01E-11 1-2.60E-10 1+ 3.01E-11 1+ 1.20E-10 1+ 9.87E-11 Firemen 1+ 3.00E-11 1+ 2.99E-11 1+ 3.00E-11 1+ 2.99E-11 1+ 3.00E-11 Girl 1+ 3.02E-11 1-3.02E-11 1+ 3.02E-11 1+ 3.02E-11 1+ 3.02E-11 Goat 1+ 3.02E-11 1+ 3.02E-11 1+ 3.02E-11 1+ 3.02E-11 1+ 3.02E-11</s></p></div></figDesc><table><row><cell>Plant</cell><cell>0</cell><cell>NaN</cell><cell>0</cell><cell>NaN</cell><cell cols="3">1+ 2.16E-03 1+ 4.51E-02 0</cell><cell>NaN</cell></row><row><cell>Shoe</cell><cell cols="8">1+ 3.02E-11 1+ 1.77E-10 1+ 3.69E-11 1+ 4.50E-11 1+ 1.95E-10</cell></row><row><cell>Lady</cell><cell cols="8">1+ 6.02E-11 1+ 6.08E-10 1+ 3.00E-11 1+ 5.53E-10 1+ 1.40E-09</cell></row><row><cell cols="9">Elephant 1+ 3.33E-11 1+ 6.68E-11 1+ 3.01E-11 1-2.87E-10 1+ 1.28E-09</cell></row><row><cell>Brush</cell><cell>0</cell><cell>NaN</cell><cell>0</cell><cell>NaN</cell><cell>1+ 2.96E-05 0</cell><cell>NaN</cell><cell>0</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Efficient solution of Otsu multilevel image thresholding: A comparative study</title>
+		<author>
+			<persName><forename type="first">Mohamed</forename><forename type="middle">H</forename><surname>Merzban</surname></persName>
+			<idno type="ORCID">0000-0002-9010-5337</idno>
+		</author>
+		<author>
+			<persName><forename type="first">Mahmoud</forename><surname>Elbayoumi</surname></persName>
+			<idno type="ORCID">0000-0002-9380-3763</idno>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2018.09.008</idno>
+		<ptr target="https://doi.org/10.1016/j.eswa.2018.09.008" />
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<title level="j" type="abbrev">Expert Systems with Applications</title>
+		<idno type="ISSN">0957-4174</idno>
+		<imprint>
+			<biblScope unit="volume">116</biblScope>
+			<biblScope unit="page" from="299" to="309" />
+			<date type="published" when="2019-02">2019</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">A survey of thresholding techniques</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">K</forename><surname>Sahoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Soltani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K C</forename><surname>Wong</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0734-189x(88)90022-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Vision, Graphics, and Image Processing</title>
+		<title level="j" type="abbrev">Computer Vision, Graphics, and Image Processing</title>
+		<idno type="ISSN">0734-189X</idno>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="233" to="260" />
+			<date type="published" when="1988-02">1988</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Tsallis entropy based optimal multilevel thresholding using cuckoo search algorithm</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Panda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bhuyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Panigrahi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.swevo.2013.02.001</idno>
+		<ptr target="https://doi.org/10.1016/j.swevo.2013.02.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Swarm and Evolutionary Computation</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="16" to="30" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Fuzzy model-based clustering and its application in image segmentation</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Choy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Leung</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patcog.2017.03.009</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern Recognition</title>
+		<imprint>
+			<biblScope unit="volume">68</biblScope>
+			<biblScope unit="page" from="141" to="157" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Segmentation of Ischemic Stroke Lesion in Brain MRI Based on Social Group Optimization and Fuzzy-Tsallis Entropy</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Rajinikanth</surname></persName>
+			<idno type="ORCID">0000-0003-3897-4460</idno>
+		</author>
+		<author>
+			<persName><forename type="first">Suresh</forename><forename type="middle">Chandra</forename><surname>Satapathy</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s13369-017-3053-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Arabian Journal for Science and Engineering</title>
+		<title level="j" type="abbrev">Arab J Sci Eng</title>
+		<idno type="ISSN">2193-567X</idno>
+		<idno type="ISSNe">2191-4281</idno>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="4365" to="4378" />
+			<date type="published" when="2018-01-12">2018</date>
+			<publisher>Springer Science and Business Media LLC</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Cuttlefish algorithm-based multilevel 3-d otsu function for color image segmentation</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Bhandari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">V</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Srinivas</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TIM.2019.2922516</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Instrumentation and Measurement</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1871" to="1880" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A novel graph-based optimization framework for salient object detection</title>
+		<author>
+			<persName><forename type="first">Jinxia</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krista</forename><forename type="middle">A</forename><surname>Ehinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haikun</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kanjian</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jingyu</forename><surname>Yang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patcog.2016.10.025</idno>
+		<ptr target="https://doi.org/10.1016/j.patcog.2016.10.025" />
+	</analytic>
+	<monogr>
+		<title level="j">Pattern Recognition</title>
+		<title level="j" type="abbrev">Pattern Recognition</title>
+		<idno type="ISSN">0031-3203</idno>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="39" to="50" />
+			<date type="published" when="2017-04">2017</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">A novel gravitational search algorithm for multilevel image segmentation and its application on semiconductor packages vision inspection</title>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Chao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ping</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhisheng</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijleo.2016.03.059</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<title level="j" type="abbrev">Optik</title>
+		<idno type="ISSN">0030-4026</idno>
+		<imprint>
+			<biblScope unit="volume">127</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="5770" to="5782" />
+			<date type="published" when="2019">2019</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A study on particle swarm optimization and artificial bee colony algorithms for multilevel thresholding</title>
+		<author>
+			<persName><forename type="first">Bahriye</forename><surname>Akay</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2012.03.072</idno>
+		<ptr target="https://doi.org/10.1016/j.asoc.2012.03.072" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<title level="j" type="abbrev">Applied Soft Computing</title>
+		<idno type="ISSN">1568-4946</idno>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="3066" to="3091" />
+			<date type="published" when="2013-06">2013</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Multilevel thresholding segmentation based on harmony search optimization</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cuevas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pajares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Zaldivar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cisneros</surname></persName>
+		</author>
+		<idno type="DOI">10.1155/2013/575414</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Applied Mathematics</title>
+		<imprint>
+			<biblScope unit="page">24</biblScope>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">A Threshold Selection Method from Gray-Level Histograms</title>
+		<author>
+			<persName><forename type="first">Nobuyuki</forename><surname>Otsu</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/tsmc.1979.4310076</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Systems, Man, and Cybernetics</title>
+		<title level="j" type="abbrev">IEEE Trans. Syst., Man, Cybern.</title>
+		<idno type="ISSN">0018-9472</idno>
+		<idno type="ISSNe">2168-2909</idno>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="62" to="66" />
+			<date type="published" when="1979-01">1979</date>
+			<publisher>Institute of Electrical and Electronics Engineers (IEEE)</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">A cooperative honey bee mating algorithm and its application in multi-threshold image segmentation</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W.-C</forename><surname>Yeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ins.2016.06.020</idno>
+		<ptr target="https://doi.org/10.1016/j.ins.2016.06.020" />
+	</analytic>
+	<monogr>
+		<title level="j">Information Sciences</title>
+		<imprint>
+			<biblScope unit="volume">369</biblScope>
+			<biblScope unit="page" from="171" to="183" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Comparison of evolutionary and swarm based computational techniques for multilevel color image thresholding</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kurban</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Civicioglu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kurban</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Besdok</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2014.05.037</idno>
+		<ptr target="https://doi.org/10.1016/j.asoc.2014.05.037" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="128" to="143" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">A hybrid differential evolution for optimal multilevel image thresholding</title>
+		<author>
+			<persName><forename type="first">Uroš</forename><surname>Mlakar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Božidar</forename><surname>Potočnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janez</forename><surname>Brest</surname></persName>
+			<idno type="ORCID">0000-0001-5864-3533</idno>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2016.08.046</idno>
+		<ptr target="https://doi.org/10.1016/j.eswa.2016.08.046" />
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<title level="j" type="abbrev">Expert Systems with Applications</title>
+		<idno type="ISSN">0957-4174</idno>
+		<imprint>
+			<biblScope unit="volume">65</biblScope>
+			<biblScope unit="page" from="221" to="232" />
+			<date type="published" when="2016-12">2016</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Computer based diagnosis of malaria in thin blood smears using thresholding based approach</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bhuvan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bansal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bhan</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SPIN48934.2020.9071220</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1132" to="1135" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Performance analysis of image thresholding: Otsu technique</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">Y</forename><surname>Goh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">N</forename><surname>Basah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yazid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Aziz Safar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">S Ahmad</forename><surname>Saad</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.measurement.2017.09.052</idno>
+		<ptr target="https://doi.org/10.1016/j.measurement.2017.09.052" />
+	</analytic>
+	<monogr>
+		<title level="j">Measurement</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="298" to="307" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A Survey on Edge Detection based recent Marine Horizon Line Detection Methods and their Applications</title>
+		<author>
+			<persName><forename type="first">Manzoor</forename><forename type="middle">Ahmed</forename><surname>Hashmani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muhammad</forename><surname>Umair</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Syed</forename><forename type="middle">Sajjad</forename><surname>Hussain Rizvi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdul</forename><surname>Rehman Gilal</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/icomet48670.2020.9073895</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2020 3rd International Conference on Computing, Mathematics and Engineering Technologies (iCoMET)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020-01">2020</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A survey on optimization metaheuristics</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Boussaïd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lepagnot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Siarry</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ins.2013.02.041</idno>
+		<ptr target="https://doi.org/10.1016/j.ins.2013.02.041" />
+	</analytic>
+	<monogr>
+		<title level="j">Information Sciences</title>
+		<imprint>
+			<biblScope unit="volume">237</biblScope>
+			<biblScope unit="page" from="82" to="117" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A novel multi-objective optimization algorithm based on Lightning Attachment Procedure Optimization algorithm</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Foroughi Nematollahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rahiminejad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Vahidi</surname></persName>
+			<idno type="ORCID">0000-0002-9430-9468</idno>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2018.11.032</idno>
+		<ptr target="https://doi.org/10.1016/j.asoc.2018.11.032" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<title level="j" type="abbrev">Applied Soft Computing</title>
+		<idno type="ISSN">1568-4946</idno>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="404" to="427" />
+			<date type="published" when="2019-02">2019</date>
+			<publisher>Elsevier BV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">A particle swarm optimization-based heuristic for software module clustering problem</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Prajapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chhabra</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s13369-017-2989-x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Arabian Journal for Science and Engineering</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="7083" to="7094" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Particle swarm optimization for single objective continuous space problems: A review</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Bonyadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Michalewicz</surname></persName>
+		</author>
+		<idno type="DOI">10.1162/EVCO˙r˙00180</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Evolutionary Computation</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="54" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">A comprehensive survey on particle swarm optimization algorithm and its applications, Mathematical Problems in Engineering</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ji</surname></persName>
+		</author>
+		<idno type="DOI">10.1155/2015/931256</idno>
+		<ptr target="https://doi.org/10.1155/2015/931256" />
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="1" to="38" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Info: An efficient optimization algorithm based on weighted mean of vectors</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Ahmadianfar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Heidari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Noshadian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">H</forename><surname>Gandomi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2022.116516</idno>
+		<ptr target="https://doi.org/10.1016/j.eswa.2022.116516" />
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">195</biblScope>
+			<biblScope unit="page">116516</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">The arithmetic optimization algorithm</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Abualigah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Diabat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mirjalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Elaziz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">H</forename><surname>Gandomi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.cma.2020.113609</idno>
+		<ptr target="https://doi.org/10.1016/j.cma.2020.113609" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Methods in Applied Mechanics and Engineering</title>
+		<imprint>
+			<biblScope unit="volume">376</biblScope>
+			<biblScope unit="page">113609</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Grey wolf optimizer</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mirjalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Mirjalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lewis</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.advengsoft.2013.12.007</idno>
+		<ptr target="https://doi.org/10.1016/j.advengsoft.2013.12.007" />
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Engineering Software</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="page" from="46" to="61" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Differential evolution -a simple and efficient heuristic for global optimization over continuous spaces</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Storn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Price</surname></persName>
+		</author>
+		<idno type="DOI">10.1023/A:1008202821328</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Global Optimization</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="341" to="359" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Grasshopper optimisation algorithm: Theory and application</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Saremi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mirjalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lewis</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.advengsoft.2017.01.004</idno>
+		<ptr target="https://doi.org/10.1016/j.advengsoft.2017.01.004" />
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Engineering Software</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="page" from="30" to="47" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">A novel meta-heuristic optimization method based on golden ratio in nature</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Foroughi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rahiminejad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Vahidi</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00500-019-03949-w</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="1117" to="1151" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">On benchmarking functions for genetic algorithm</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Digalakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">G</forename><surname>Margaritis</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00207160108805080</idno>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer Mathematics</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="481" to="506" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">An artificial bee colony algorithm for image contrast enhancement</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Draa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bouziz</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.swevo.2014.01.003</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Swarm and Evolutionary Computation</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="69" to="84" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">E</forename><surname>Elfeky</surname></persName>
+		</author>
+		<idno type="DOI">10.13140/2.1.3215.3922</idno>
+		<title level="m">Evolutionary algorithms for constrained optimization</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="87" to="111" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">On evolutionary exploration and exploitation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Eiben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schippers</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/FI-1998-35123403</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Fundam. Inform</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="35" to="50" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Central force optimization: A new metaheuristic with applications in applied electromagnetics, Progress in Electromagnetics Research-pier -PROG</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Formato</surname></persName>
+		</author>
+		<idno type="DOI">10.2528/PIER07082403</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ELECTROMAGN RES</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="425" to="491" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">An analytical formula for multiple dgs allocations to reduce distribution system losses</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Abdelkader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Elshahed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Osman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.aej.2019.10.009</idno>
+		<ptr target="https://doi.org/10.1016/j.aej.2019.10.009" />
+	</analytic>
+	<monogr>
+		<title level="j">Alexandria Engineering Journal</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1265" to="1280" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">A new heuristic for multilevel thresholding of images, Expert Systems with Applications</title>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">K</forename><surname>Bohat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Arya</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2018.08.045</idno>
+		<ptr target="https://doi.org/10.1016/j.eswa.2018.08.045" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">117</biblScope>
+			<biblScope unit="page" from="176" to="203" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Lightning search algorithm-based contextually fused multilevel image segmentation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bhandari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Kumar</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2020.106243</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page" from="106" to="243" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Firefly Algorithm-Based Kapur&apos;s Thresholding and Hough Transform to Extract Leukocyte Section from Hematological Images</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Rajinikanth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kavallieratou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lin</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-981-15-0306-1˙10</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="221" to="235" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Kapur&apos;s entropy based optimal multilevel image segmentation using crow search algorithm</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Upadhyay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chhabra</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2019.105522</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">97</biblScope>
+			<biblScope unit="page" from="105" to="522" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Niching grey wolf optimizer for multimodal optimization problems</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nazir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mahadzir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shorfuzzaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Islam</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/app11114795</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Applied Sciences</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">11</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Otsu based optimal multilevel image thresholding using firefly algorithm</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Raja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Rajinikanth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Latha</surname></persName>
+		</author>
+		<idno type="DOI">10.1155/2014/794574</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Modelling and Simulation in Engineering</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">An efficient optimal multilevel image thresholding with electromagnetism-like mechanism</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bhandari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shubham</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11042-019-08195-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Multimedia Tools and Applications</title>
+		<imprint>
+			<biblScope unit="volume">78</biblScope>
+			<biblScope unit="page" from="35733" to="35788" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Survey over image thresholding techniques and quantitative performance evaluation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sezgin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Sankur</surname></persName>
+		</author>
+		<idno type="DOI">10.1117/1.1631315</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Electronic Imaging</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="146" to="168" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Gray-level threshold selection method based on maximum entropy principle, Systems, Man and Cybernetics</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Sahoo</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/21.35351</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="866" to="871" />
+			<date type="published" when="1989">1989</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Image quality assessment through fsim, ssim, mse and psnr-a comparative study</title>
+		<author>
+			<persName><forename type="first">U</forename><surname>Sara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Akter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Uddin</surname></persName>
+		</author>
+		<idno type="DOI">10.4236/jcc.2019.73002</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Computer and Communications</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="8" to="18" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

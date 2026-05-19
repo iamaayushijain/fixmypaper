@@ -14,12 +14,7 @@
       ],
       "enabled_checks": [
         "metadata_completeness",
-        "abstract_exists",
-        "abstract_word_count",
-        "index_terms",
-        "references_section",
         "roman_numeral_headings",
-        "introduction_section",
         "figure_label_format",
         "table_label_format",
         "equation_numbering",
@@ -29,7 +24,15 @@
         "caption_placement",
         "reference_format",
         "url_doi_validity",
-        "et_al_formatting"
+        "et_al_formatting",
+        "first_person_pronouns",
+        "space_before_punctuation_marks",
+        "double_punctuation",
+        "missing_space_after_punctuation_marks",
+        "comma_before_parenthesis",
+        "punctuation_inside_citation",
+        "multiple_spaces",
+        "space_inside_brackets"
       ]
     },
     {
@@ -47,15 +50,14 @@
       ],
       "enabled_checks": [
         "metadata_completeness",
-        "index_terms",
-        "references_section",
         "equation_numbering",
         "figure_sequential",
         "reference_sequential",
         "caption_placement",
         "reference_format",
         "url_doi_validity",
-        "et_al_formatting"
+        "et_al_formatting",
+        "first_person_pronouns"
       ]
     },
     {
@@ -74,12 +76,7 @@
       ],
       "enabled_checks": [
         "metadata_completeness",
-        "abstract_exists",
-        "abstract_word_count",
-        "index_terms",
-        "references_section",
         "roman_numeral_headings",
-        "introduction_section",
         "figure_label_format",
         "table_label_format",
         "equation_numbering",
@@ -88,7 +85,76 @@
         "caption_placement",
         "reference_format",
         "url_doi_validity",
-        "et_al_formatting"
+        "et_al_formatting",
+        "first_person_pronouns"
+      ]
+    },
+    {
+      "id": "08970bd0-1c47-4f35-9f0d-af19406de3b5",
+      "name": "BTP 4th Year Final NSUT",
+      "created_by": "Aayushi Jain",
+      "is_system": false,
+      "description": "Format to check student reports in mid term BTP in nsut",
+      "mandatory_sections": [
+        "Abstract",
+        "Conclusion",
+        "References",
+        "Background",
+        "System Design",
+        "Evaluation"
+      ],
+      "enabled_checks": [
+        "metadata_completeness",
+        "roman_numeral_headings",
+        "section_existence",
+        "figure_label_format",
+        "table_label_format",
+        "equation_numbering",
+        "figure_sequential",
+        "table_sequential",
+        "reference_sequential",
+        "caption_placement",
+        "caption_existence",
+        "reference_format",
+        "repeated_words"
+      ]
+    },
+    {
+      "id": "1d4aeeab-76f8-4491-b85c-24f6a6ec901d",
+      "name": "NSUT Template",
+      "created_by": "Alex",
+      "is_system": false,
+      "description": "",
+      "mandatory_sections": [
+        "Abstract",
+        "Introduction",
+        "Conclusion",
+        "References",
+        "Background",
+        "Methodology"
+      ],
+      "enabled_checks": [
+        "metadata_completeness",
+        "roman_numeral_headings",
+        "section_existence",
+        "equation_numbering",
+        "figure_sequential",
+        "table_sequential",
+        "reference_sequential",
+        "reference_format",
+        "url_doi_validity",
+        "et_al_formatting",
+        "first_person_pronouns",
+        "space_before_punctuation_marks",
+        "double_punctuation",
+        "missing_space_after_punctuation_marks",
+        "comma_before_parenthesis",
+        "punctuation_inside_citation",
+        "multiple_spaces",
+        "space_inside_brackets",
+        "table_label_format",
+        "figure_label_format",
+        "repeated_words"
       ]
     }
   ]

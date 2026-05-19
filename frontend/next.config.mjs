@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const backendUrl = (
-  "http://backend:7860"
+  "http://localhost:7860"
 ).replace(/\/$/, "");
 
 const nextConfig = {

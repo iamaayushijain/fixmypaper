@@ -8,6 +8,10 @@ services:
       - "5001:7860"
     environment:
       - PORT=7860
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_REF_MODEL=${OPENAI_REF_MODEL:-gpt-4.1-mini}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      - OPENAI_REF_TIMEOUT_SECONDS=${OPENAI_REF_TIMEOUT_SECONDS:-180}
     restart: always
 
   frontend:

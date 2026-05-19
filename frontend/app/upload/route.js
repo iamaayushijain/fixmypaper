@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 function getBackendUrl() {
-  return "http://backend:7860".replace(/\/$/, "");
+  return "http://localhost:7860".replace(/\/$/, "");
 }
 
 function getUploadTimeoutMs() {

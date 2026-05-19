@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main"></title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Kumar</forename><surname>Bohat</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aarushi</forename><surname>Jain</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aayushi</forename><surname>Jain</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aarushi</forename><surname>Kushwaha</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Dr</roleName><forename type="first">Vijay</forename><forename type="middle">Kumar</forename><surname>Bohat</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science and Engineering</orgName>
+								<orgName type="institution">Netaji Subhas University of Technology</orgName>
+								<address>
+									<settlement>New Delhi</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Department of Computer Science</orgName>
+								<orgName type="department" key="dep2">New Delhi</orgName>
+								<orgName type="department" key="dep3">Department of Computer Science and Engineering</orgName>
+								<orgName type="institution" key="instit1">Netaji Subhas University of Technology</orgName>
+								<orgName type="institution" key="instit2">Netaji Subhas University of Technology</orgName>
+								<address>
+									<settlement>Delhi</settlement>
+								</address>
+							</affiliation>
+						</author>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">61A72C6D4470FE8713A53E0C0AF28C0D</idno>
+					<note type="submission">, is a genuine account of our work carried out during the period from August 2025 to December 2025 under the guidance of Dr. Vijay</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2" ident="GROBID" when="2026-04-29T11:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">a91ee48</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=1, consolidateHeader=1, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[true], sentenceSegmentation=true, flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s>for his invaluable guidance and support throughout the brainstorming, theoretical framework, and partial implementation of this project.</s><s>His insights, encouragement, and constructive feedback greatly enhanced our understanding and helped shape the direction of this work.</s></p><p><s>We are also thankful for the environment of learning and collaboration provided by the department, which allowed us to explore ideas freely and translate them into practical outcomes.</s></p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="3" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="4" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="5" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="6" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="7" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="8" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="9" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="10" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="11" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="12" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="13" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="14" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="15" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="16" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="17" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="18" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="19" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="20" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="21" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="22" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="23" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="24" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="25" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="26" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="27" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="28" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="29" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="30" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="31" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="32" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="33" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="34" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="35" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="36" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="37" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+		<surface n="38" ulx="0.0" uly="0.0" lrx="595.276" lry="841.89"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s>Table Of Contents</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 1 Abstract</head><p><s>The process begins by ingesting the source document, typically a PDF, into a structural parser.</s></p><p><s>We will utilize GROBID, a machine learning library specifically designed for scholarly articles, to deconstruct the document into a structured format.</s><s>This initial step is critical as it identifies and tags the constituent parts of the paper, such as the abstract, introduction, methods, and results sections.</s><s>The output is the document's text enriched with sectional metadata, which is vital for later stages, as grammatical and stylistic conventions (e.g., tense usage) vary significantly across these sections.</s><s>The core of both models is the self-attention mechanism, which enables the network to compute contextual relationships across the entire sentence.</s><s>This is especially useful for scientific text where long-range dependencies frequently occur (e.g., subjects separated from verbs by complex noun phrases).</s><s>Using scaled dot-product attention, each token representation is updated by weighting its relevance with respect to all other tokens, while multi-head attention enables simultaneous extraction of syntactic and semantic features.</s><s>This ensures that corrections respect both domain terminology and sentence structure.</s><s>For complex grammatical rewriting, the system employs a transformer-based encoder-decoder model such as CoEdIT.</s><s>The model treats error correction as a conditional text generation task, producing corrected output token-by-token using learned linguistic patterns.</s><s>[?] Instruction tuning allows control over the style of edits such as grammatical fixing or formal language enhancement which is crucial for maintaining the scientific tone.</s><s>Relative positional embeddings further improve the model's ability to handle long sentences commonly found in academic manuscripts.</s><s>For faster, high-confidence adjustments, the system utilizes GECToR, an encoder-only architecture that predicts token-level edit tags instead of regenerating the entire sentence.</s><s>These tags (e.g., KEEP, DELETE, REPLACE) enable minimal, targeted corrections without risking loss of meaning.</s><s>The model iteratively refines its output, ensuring consistency across dependent grammatical fixes.</s><s>Due to linear inference complexity, this component runs efficiently in real-time environments such as Google Colab.</s><s>The final output is produced by intelligently combining the strengths of both models generative corrections from CoEdIT for complex grammatical restructuring and fast tagging-based modifications from GECToR for local edits.</s><s>This hybrid strategy balances accuracy and computational efficiency while maintaining the author's original scientific intent.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 2 Introduction</head><p><s>Grammatical Error Correction (GEC) in scientific domains is very different from general grammar correction.</s><s>Scientific and engineering papers contain many technical terms, detailed sentence structures, and elements like equations or LaTeX commands that are not part of normal language.</s><s>Scientific and engineering manuscripts exhibit a much higher concentration of domain-specific terminology, complex syntactic structures, and non-natural language tokens.</s><s>These include mathematical equations, chemical expressions, algorithmic pseudo-code, figure/table references, and structured citation formats (e.g., IEEE, ACM).</s><s>Such constructs carry high semantic load and must be preserved verbatim.</s><s>Any unintended modification risks altering experimental claims, mathematical correctness, or reproducibility.</s></p><p><s>General-purpose GEC models, typically trained on learner corpora or web text, optimize for fluency gains and penalize scientific writing characteristics such as passive voice, nominalizations, and discontinuous noun phrases.</s><s>These stylistic patterns, however, are core to scientific discourse and reflect pragmatic choices for objectivity and precision.</s><s>Consequently, generic models frequently introduce semantic drift, where well-formed scientific content is simplified or restructured in ways that compromise informational fidelity.</s><s>Examples include replacing technical jargon with vague synonyms or reordering clauses in a manner that changes causal or temporal relationships.</s><s>[?]</s></p><p><s>A further domain-specific obstacle arises from LaTeX markup, which functions as a contextsensitive typesetting language.</s><s>LaTeX commands commonly involve hierarchical nesting governed by grammar rules beyond the capability of traditional regular-expression tokenizers.</s><s>Neural tokenizers may fragment commands such as \frac{a}{b} into unrelated sub-tokens (, frac, {a}, /, {b}), leading to catastrophic "correction" behaviors including token deletion, brace mismatch, or operator substitution.</s><s>Such errors not only degrade semantic accuracy but also generate compilation failures, making the manuscript unusable.</s><s><ref type="bibr">[?]</ref> To address these constraints, scientific GEC requires a pipeline architecture that integrates linguistic conservatism with domain-aware structural protection.</s><s>The system proposed in this work introduces a dedicated LaTeX masking module that identifies mathematical environments (inline and display modes) using recursive pattern matching and replaces them with immutable placeholders during correction.</s><s>This ensures 100% preservation of mathematical content throughout the inference lifecycle.</s><s>[?]</s></p><p><s>The correction stage employs a hybrid neural strategy.</s><s>A minimal-edit sequence-labeling model (e.g., GECToR) performs deterministic local transformations to handle core grammatical violations (article usage, morphology, agreement) while remaining highly conservative toward sentence structure.</s><s>In parallel, a large instruction-tuned generative model (e.g., CoEdIT) is engaged only for clauses containing complex error patterns requiring structural rephrasing.</s><s>A weighted filtering mechanism governs its influence to prevent overcorrection.</s><s>[?] Finally, a semantic reranking module utilizing SciBERT-based perplexity scoring and cosine similarity to scientific embeddings evaluates multiple candidate outputs.</s><s>This component determines whether modifications introduce lexical deviation or meaning shift beyond threshold tolerance.</s><s>Candidate sentences with strong semantic alignment to the source and syntactic normalization are selected as final outputs.</s></p><p><s>[?] Through this integrated workflow LaTeX-aware masking, hybrid constrained correction, and semantic validation, the system maintains a balance between linguistic enhancement and scientific integrity.</s><s>The resulting corrections improve readability, coherence, and grammaticality without compromising the mathematical technical precision critical in engineering manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 3 Motivation</head><p><s>The motivation behind this project arises from the increasing demand for a domain-specific grammar correction system tailored to scientific and engineering manuscripts.</s><s>In research communication, every detail whether a technical term, mathematical expression, or specific sentence structure carries precise meaning.</s><s>Even minor grammatical errors or unclear phrasing can lead to misinterpretation of experimental results and negatively impact the credibility of the work.</s><s>Moreover, many scientific papers undergo rigorous editorial and peer-review processes, where clarity, correctness, and consistency in language are essential for successful publication.</s></p><p><s>However, existing AI-based writing assistants are primarily designed for general-purpose text improvement.</s><s>These tools often focus on making sentences sound more fluent or "natural," which can unintentionally modify the author's intended technical meaning.</s><s>They also struggle to correctly handle specialized content such as LaTeX equations, algorithmic pseudo-code, and field-specific terminology.</s><s>When such elements are mistakenly changed or removed, the document may become scientifically inaccurate or fail to compile entirely.</s><s>These limitations highlight the need for a grammar correction system that prioritizes accuracy over aggressive rewriting.</s><s>The intended tool should correct grammatical issues, punctuation errors, and stylistic inconsistencies while preserving the author's original scientific content and writing style.</s><s>A core objective is to avoid semantic drift and ensure that meaningful scientific details remain unchanged.</s><s>This project is motivated by the broader goal of supporting researchers, students, and technical professionals in producing well-structured and publication-ready scientific documents.</s></p><p><s>By delivering corrections that maintain mathematical fidelity and technical integrity, the sys-tem enables authors to focus on their research outcomes rather than struggling with linguistic challenges.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 4</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Literature Review</head><p><s>This complete literature review provides a comprehensive comparative analysis of twenty-four academic writing and grammar-assistance tools, that detail their origins, underlying technologies, functional capabilities, limitations and faults.</s><s>These tools include widely recognized platforms such as Grammarly, ProWritingAid, QuillBot, Ginger, and LanguageTool, along with academic-focused tools like Trinka, Paperpal, Writefull, and SciSpace.</s></p><p><s>Together, they illustrate the current technological landscape of writing support systems used by students, researchers, and professional writers.</s><s>The tools differ largely in their technical foundations as some rely on large language models and transformer-based architectures, while others use hybrid approaches that combine rule-based and machine-learning components, and a few operate almost entirely through classical rule-based NLP.</s><s>This diversity reflects an evolving field that is shifting from deterministic grammar checking to more context-aware and semantically sensitive AI-driven writing enhancement.</s><s>[?] Scientific and engineering texts present unique challenges for grammatical error correction (GEC).</s><s>Unlike general writing, these documents contain dense terminology, long syntactic structures, and non-natural language tokens such as equations, pseudo-code, algorithm descriptions, and citation formats.</s><s>[?] Across all tools researched, a broad range of error types is detected, including grammar, punctuation, spelling, readability, clarity, style, tone, and wordiness.</s><s>Many also offer advanced academic functions such as formal tone preservation, scholarly phrasing suggestions, vocabulary enhancement, and real-time structural feedback.</s><s>Some platforms provide domain-specific features tailored to academic writing, such as scientific terminology refinement, journal-style consistency checks, integration with LaTeX workflows, or access to discipline-specific corpora, such as published research articles.</s><s>However, despite these strengths, most tools consistently struggle with the complexities of scientific and technical writing.</s><s>They often misinterpret domain-specific vocabulary, mishandle mathematical expressions and citations, or fail to maintain semantic coherence in longer research paragraphs.</s><s>Several tools also cause issues such as over-correction, where technical precision is often not given priority or provide suggestions that dilute academic tone or alter meaning.</s><s>Premium features are frequently paywalled, and transparency regarding model decisions remains limited across many platforms.</s><s>This review identifies substantial research gaps that existing tools have not addressed appropriately.</s><s>A major gap is the lack of domain-aware editing tailored to STEM disciplines; most tools are not trained on scientific corpora, and therefore perform poorly on specialized terminology and context-heavy academic sentences.</s><s>Another issue is inadequate handling of long-form scholarly writing, where tools fail to preserve logical flow, argumentation, and paragraph-level coherence.</s><s>Tools also struggle with citation-intensive writing, often breaking references or misinterpreting structured academic syntax.</s><s>Additionally, almost all tools lack transparency and explainability, making it difficult for users, especially academic writers, to understand why specific suggestions are made or how corrections affect meaning.</s><s>Collectively, these limitations suggest that while many writing assistance systems exist, none fully meet the rigorous demands of scientific manuscript preparation.</s><s><ref type="bibr">[?]</ref> Overall, this highlights a clear opportunity for creating a new, domain-specific grammar correction and academic writing enhancement system.</s><s>A tool that would integrate scientific terminology awareness, maintain technical precision, support long-form reasoning structures, handle citations and mathematical expressions robustly, and provide transparent, well-justified suggestions.</s><s>The documented gaps strongly reinforce the motivation behind developing a specialized academic grammar correction project capable of addressing weaknesses that current commercial and research tools have not resolved.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Comparison of Existing Tools</head><p><s>Commercial grammar tools such as Grammarly, ProWritingAid, QuillBot, Trinka AI, and Paperpal dominate the market.</s><s>They offer useful features for readability and clarity, yet none provide a minimal-edit approach tailored for scientific writing.</s><s>Most tools are generative, risking authorship concerns and potential AI detection by academic publishers.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Key Insights</head><p><s>Three consistent findings emerge from the literature:</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">Generative AI Risks</head><p><s>Generative tools excel at paraphrasing, but this presents risks for researchers.</s><s>They may unintentionally trigger plagiarism detectors, rewrite technical concepts, or change authorial voice.</s></p><p><s>These issues are widely documented in academic discussions of AI writing tools.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Lack of Minimal-Edit Philosophy</head><p><s>No reviewed tool prioritizes grammatical correction without rewriting.</s><s>Literature emphasizes a gap for systems that maintain author intent with minimal changes [?].</s><s>Academic writing requires precision rather than stylistic fluency.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Technical Content Remains Unprotected</head><p><s>Existing solutions provide no guarantee for LaTeX equations, figures, tables, or structured scientific notation.</s><s>This absence is highlighted in work on LaTeX editing.</s><s>Preservation of mathematical structure is essential for engineering manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Conclusion</head><p><s>Current grammar correction tools are optimized for general writing and generative enhancements, not scientific integrity.</s><s>Literature consistently identifies the need for a correction-first methodology that preserves authorial ownership and mathematical structure.</s><s>This creates a clear research gap for solutions implementing minimal edits, LaTeX-aware masking, and semantic validation that ensures clarity without compromising correctness.</s></p><p><s>Chapter 5</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Problem Statement</head><p><s>Scientific and engineering documents frequently contain complex grammatical structures, domainspecific terminology, and mathematical expressions written in LaTeX.</s><s>Existing grammar correction systems often improve linguistic fluency but fail to preserve the integrity of embedded equations and symbolic notation.</s><s>Even minor corruption of mathematical expressions, such</s></p><p><s>as altering E = mc 2 to textual form, renders the output unusable for academic and scientific purposes.</s></p><p><s>Additionally, traditional correction approaches rely on single-model architectures that attempt to rewrite entire sentences.</s><s>These models are computationally expensive, prone to hallucinations, and unable to efficiently handle large documents containing section-specific writing styles and long-range dependencies.</s></p><p><s>There is therefore a need for a methodology that:</s></p><p><s>• Corrects grammatical and stylistic issues in scientific writing while</s></p><p><s>• Fully preserving LaTeX expressions and mathematical content, and</s></p><p><s>• Scales efficiently across long technical documents without altering meaning.</s></p><p><s>The problem addressed in this work is the design of a hybrid correction pipeline that combines recursive masking and tokenization to protect LaTeX regions, a dual-model architecture (Sequence-to-Sequence rewriting and Sequence Tagging) to perform high-quality correction, semantic reranking to prevent hallucination, and post-edit reconstruction to ensure exact restoration of mathematical notation.</s></p><p><s>The objective is to produce a correction system that improves grammatical accuracy and clarity without modifying the scientific intent, formatting, or mathematical equations present in the original text.</s></p><p><s>Chapter 6</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Objectives</head><p><s>The aim of this project is to develop a writing assistant that enhances the grammatical accuracy and lexical precision of scientific manuscripts while preserving the researcher's original style and ensuring compliance with academic integrity standards.</s><s>To achieve this, the project sets out the following specific objectives:</s></p><p><s>1. Develop a Hybrid Scientific Grammar Correction System Scientific writing often contains complex sentence structures, discipline-specific terminology, and long-range dependencies.</s><s>To handle these effectively, the project combines: This hybrid approach enables both accuracy and efficiency, ensuring the system corrects nuanced scientific language while remaining suitable for real-time deployment.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Preserve Scientific Meaning Through Semantic Verification</head><p><s>Any modification that alters scientific claims could misrepresent results or lead to misinformation.</s></p><p><s>To prevent this, the system implements:</s></p><p><s>• BERTScore-based semantic similarity evaluation</s></p><p><s>• Pseudo-perplexity scoring to detect unnatural, incoherent rewrites Corrections are only accepted if they remain faithful to the author's intended meaning.</s><s>If semantic shifts are detected, the system either falls back to safer corrections or keeps the original text unchanged.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Maintain the Integrity of LaTeX Structures and Research Formatting</head><p><s>Research manuscripts include mathematical expressions, references, section labels, fig-</s></p><p><s>ures, and tables.</s><s>Such components must remain untouched.</s><s>Therefore, the system:</s></p><p><s>• Extracts and masks LaTeX environments during processing</s></p><p><s>• Restores them accurately afterward</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Ensures zero loss of formatting or equation correctness</head><p><s>This allows text-only processing while safeguarding critical academic elements.</s><s>By incorporating structured metadata (e.g., through GROBID), the system applies corrections that maintain these discipline-specific writing rules, resulting in improved consistency and professionalism.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Follow a Precision-First Editing Policy</head><p><s>The system aims to build trust among researchers by focusing on correction accuracy instead of aggression.</s><s>Therefore:</s></p><p><s>• Only unambiguous grammatical errors are corrected</s></p><p><s>• Stylistic rewriting and paraphrasing are limited</s></p><p><s>• Authorial tone and sentence structure are respected This approach avoids "over-editing" and reinforces academic integrity standards.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Improve Readability, Coherence, and Terminology Accuracy</head><p><s>In addition to grammar correction, the system supports better communication by:</s></p><p><s>• Recommending clearer or more precise terminology</s></p><p><s>• Resolving punctuation, article usage, and agreement errors</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Promoting consistent vocabulary usage across the manuscript</head><p><s>The end result is a scientifically polished document that is easier to read and understand.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Chapter 7</head><p><s>Proposed Method</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">LaTeX Preservation Architecture</head><p><s>In the domain of scientific engineering, the preservation of mathematical notation is paramount.</s></p><p><s>A GEC system that corrects "the data is" to "the data are" but corrupts E = mc 2 to E equals mc squared is functionally useless.</s><s>We introduce a robust architecture for LaTeX preservation centered on a "Mask-Correct-Unmask" paradigm.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.1">The Regex-Based Masking Strategy</head><p><s>The first line of defense is identifying LaTeX segments.</s><s>While simple regexes (e.g., $.*?$) work for basic inline math, they fail on nested structures common in engineering papers, such as if x &gt; 0 .</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Recursive Pattern Matching</head><p><s>Standard Regular Grammars cannot parse nested structures.</s><s>However, the PCRE (Perl Compatible Regular Expressions) engine supports recursion.</s><s>In Python, the regex library (a superset of the standard re) enables this.</s><s>We define a recursive pattern to capture balanced LaTeX braces:</s></p><formula xml:id="formula_0">Python</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Deterministic Micro-Corrections</head><p><s>GECToR is responsible for:</s></p><p><s>• article and determiner corrections,</s></p><p><s>• subject-verb agreement repair,</s></p><p><s>• punctuation and capitalization fixes,</s></p><p><s>• minor phrase-level restructuring.</s></p><p><s>Because sequence tagging constrains the model to minimal edits, the risk of hallucination or semantic drift is negligible.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.2">Deep Lane: CoEdIT Sequence-to-Sequence Editor</head><p><s>For sentences requiring major structural improvements, a second, more expressive model is used.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instruction-Tuned Structural Rewriting</head><p><s>CoEdIT is a transformer-based seq2seq model specifically trained for controlled text improvement.</s><s>Unlike generic LLMs, which may introduce new information, CoEdIT is optimized for:</s></p><p><s>• formal tone enhancement,</s></p><p><s>• clause reordering,</s></p><p><s>• syntactic disambiguation,</s></p><p><s>• elimination of awkward or ambiguous phrasing.</s></p><p><s>This two-lane strategy ensures both efficiency and linguistic depth, while safeguarding against semantic alteration.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Stage 2: Hybrid Neural Correction Architecture</head><p><s>Once LaTeX content is safely masked, the remaining natural language is processed using a dual-lane hybrid correction approach.</s><s>This architecture combines the precision of sequence tagging with the expressive power of transformer-based editing, ensuring minimal hallucination while enabling structural improvements.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.1">Fast Lane: GECToR-Based Sequence Tagging</head><p><s>GECToR operates through token-level edit tags such as KEEP, REPLACE, and DELETE.</s><s>This enables highly localized, deterministic corrections.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Deterministic Micro-Corrections</head><p><s>GECToR is responsible for:</s></p><p><s>• article and determiner corrections,</s></p><p><s>• subject-verb agreement repair,</s></p><p><s>• punctuation and capitalization fixes,</s></p><p><s>• minor phrase-level restructuring.</s></p><p><s>Because sequence tagging constrains the model to minimal edits, the risk of hallucination or semantic drift is negligible.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.2">Deep Lane: CoEdIT Sequence-to-Sequence Editor</head><p><s>For sentences requiring major structural improvements, a second, more expressive model is used.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instruction-Tuned Structural Rewriting</head><p><s>CoEdIT is a transformer-based seq2seq model specifically trained for controlled text improvement.</s><s>Unlike generic LLMs, which may introduce new information, CoEdIT is optimized for:</s></p><p><s>• formal tone enhancement,</s></p><p><s>• clause reordering,</s></p><p><s>• syntactic disambiguation,</s></p><p><s>• elimination of awkward or ambiguous phrasing.</s></p><p><s>This two-lane strategy ensures both efficiency and linguistic depth, while safeguarding against semantic alteration.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">Stage 3: Semantic Reranking (Meaning Preservation Engine)</head><p><s>Neural correction models may generate multiple plausible rewrites.</s><s>However, the key constraint of scientific editing is that the meaning must remain unchanged.</s><s>To enforce this, we integrate a semantic fidelity module that filters and ranks candidates.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4.1">Candidate Generation and Evaluation</head><p><s>Both GECToR and CoEdIT produce candidate corrections.</s><s>These are then evaluated relative to the original sentence.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sentence-BERT Similarity Scoring</head><p><s>We compute pairwise semantic similarity scores using Sentence-BERT embeddings.</s><s>Candidates exhibiting strong semantic alignment are prioritized, while those deviating from the original meaning are penalized.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4.2">Semantic Drift Rejection</head><p><s>If a candidate falls below a similarity threshold, it is discarded outright.</s><s>The system then defaults to a more conservative correction (typically GECToR), ensuring that:</s></p><p><s>• no factual content is altered,</s></p><p><s>• no claims or numerical values are modified,</s></p><p><s>• no scientific statements are softened or strengthened unintentionally.</s><s>tegrity.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5">Stage 4: Reconstruction of Mathematical Structures</head><p><s>After linguistic corrections are validated, the system reintroduces all mathematical and LaTeX content previously masked.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5.1">Hash-Based Lookup Restoration</head><p><s>Each SHA-256 sentinel token is mapped back to its original LaTeX expression using a deterministic lookup table constructed during Stage 1.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5.2">Zero-Corruption Reintegration</head><p><s>Because the correction models never operated on LaTeX tokens directly, reconstruction is lossless.</s><s>All equations, environments, symbols, and macros are restored exactly as authored, ensuring:</s></p><p><s>• zero corruption of mathematical content,</s></p><p><s>• full compilability of LaTeX documents,</s></p><p><s>• complete separation between linguistic edits and technical notation.</s></p><p><s>The resulting text is grammatically improved while remaining mathematically pristine.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.2">Stage 1: Preprocessing and Segmentation</head><p><s>Input text is segmented into sentences and tokenized.</s><s>Domain-specific errors such as unit formatting or equation references are flagged early.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.3">Stage 2: Hybrid Neural Correction</head><p><s>A fast Sequence Tagging model performs deterministic error tagging while a Transformerbased Seq2Seq model handles more complex rewrites.</s><s>Outputs are combined using confidence scoring.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.4">Stage 3: Semantic Reranking</head><p><s>Multiple candidate outputs are generated.</s><s>A sentence-level encoder (e.g., Sentence-BERT) computes semantic similarity scores and ranks them based on grammatical confidence and semantic preservation.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.5">Stage 4: Reconstruction</head><p><s>The corrected text and preserved LaTeX tokens are recombined.</s><s>Formatting and whitespace consistency are validated to ensure publication-ready output.</s></p><p><s>Feature CoEdIT-Large (Selected) GPT-4 GECToR Standard T5 Architecture Seq2Seq (Encoder-Decoder) Decoder-Only Encoder-Only (Tagging) Seq2Seq Training Objective Instruction Tuning (Editfocused) Next-token Prediction Token Classification Span Corruption Scientific Fluency High (Trained on edits) High (But prone to over-editing) Low (Minimal edits only) Moderate Inference Speed Moderate Slow (API Latency) Fastest (Linear) Moderate Hallucination Risk Low (Constrained generation) High (Generative drift) Zero (Cannot generate new words) Moderate Memory (Colab) Fits (770M params) N/A (Cloud API) Fits (125M params) Fits (Base/Large)</s></p><p><s>Table 8.1: Comparative analysis of grammar correction models considered in the pipeline.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2.1">CoEdIT vs. GPT-4</head><p><s>GPT-4 performs well on general language tasks, but in scientific writing it often rewrites sentences unnecessarily, affecting tone and meaning.</s><s>CoEdIT is trained for minimal edits, making it more suitable for technical text.</s><s>Additionally, CoEdIT runs fully in Colab, providing privacy for unpublished or sensitive manuscripts.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2.2">CoEdIT vs. GECToR</head><p><s>GECToR is extremely fast but limited to small, predefined edits.</s><s>It cannot restructure sentences or generate new wording.</s><s>CoEdIT handles these fluency tasks, while GECToR can be used as a lightweight "Fast Mode".</s><s>Using both allows the pipeline to balance accuracy and efficiency.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.3">Frontend / Demo Interface</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion and Future Work</head><p><s>This section presents the preliminary results and functional analysis of our grammar correction tool.</s><s>The findings are organized sequentially, corresponding to the distinct stages of our proposed data processing pipeline.</s><s>These results serve as a proof-of-concept, demonstrating the successful implementation of the foundational components and validating the overall architectural design.</s><s>The aim is to create a comprehensive, reliable, and integrity-conscious writing assistant.</s></p><p><s>Evaluating grammar correction systems for scientific text is challenging because standard metrics do not reflect scientific correctness.</s><s>We therefore combine quantitative metrics with a domain-specific measure of LaTeX preservation.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.1">Dataset Metrics</head><p><s>To evaluate the grammar correction pipeline, a synthetic, domain-specific dataset was created to simulate academic and scientific writing errors.</s><s>The dataset was designed to cover a wide variety of edge cases, including:</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.2">Quantitative Metrics</head><p><s>We report two metrics commonly used in grammatical error correction (GEC):</s></p><p><s>• GLEU (Generalized LEU): Measures n-gram overlap between the system output and reference corrections.</s><s>It correlates better with human judgment than BLEU for editing tasks.</s></p><p><s>• ERRANT (Error Annotation Toolkit): Classifies edits made by the model, allowing us to inspect whether it mainly fixes punctuation and agreement (desired) or modifies nouns and verbs (undesirable).</s></p><p><s>These metrics provide a quantitative view of model behavior on scientific writing.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.3">Qualitative Metrics</head><p><s>Analysis: The results in Table <ref type="table" target="#tab_4">9</ref>.1 demonstrate that the implemented Stage 1 engine is functioning as intended, fulfilling our objective to develop a high-precision GEC engine for clear-cut errors [?].</s><s>The system successfully identifies and rectifies a range of foundational grammatical issues.</s><s>The processing times are well within acceptable limits for an interactive prototype.</s></p><p><s>The success of this deterministic stage, combined with the functional UI, provides a robust foundation for the more advanced machine learning stages of the project.</s><s>The reserch was conducted over six months.</s></p><p><s>The research was conducted over six months.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spelling 3.11</head><p><s>The samples is prepared in a sterile environment.</s></p><p><s>The samples are prepared in a sterile environment.</s></p><p><s>Subject-Verb Agreement</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.19</head><p><s>We used scanning electron microscope to observe the surface.</s></p><p><s>We used a scanning electron microscope to observe the surface.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Missing Article 2.90</head><p><s>The list of results show a clear correlation.</s></p><p><s>The list of results shows a clear correlation.</s></p><p><s>Subject-Verb Agreement</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.01</head><p><s>The findings are detailed on Chapter 4.</s></p><p><s>The findings are detailed in Chapter 4.</s></p><p><s>Preposition Error 3.24</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.4">LaTeX Integrity Score</head><p><s>To ensure that mathematical expressions remain unchanged, we introduce a domain-specific metric, the LaTeX Integrity Score:</s></p><formula xml:id="formula_1">S latex = N i=1 I(Unmasked i == Original i ) N</formula><p><s>where N is the number of LaTeX blocks in the text.</s></p><p><s>A score of S latex = 1.0 indicates that every LaTeX segment was perfectly preserved.</s><s>Any value below 1.0 signals a failure in the preservation pipeline.</s><s>Using recursive masking, our system consistently achieves:</s></p><p><s>S latex = 1.0 across all evaluated documents.</s><s>We use a beam width of k = 5.</s><s>While this increases inference time by about a factor of five, it substantially improves coherence and grammatical quality, which is acceptable for a batch-processing notebook.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.5">Beam Search Decoding</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.6">Quantization and Distillation</head><p><s>For limited-resource environments, the notebook supports:</s></p><p><s>• 8-bit Quantized Inference: Reduces model memory usage by approximately 50% with minimal accuracy loss.</s></p><p><s>• Model Distillation: Smaller variants such as CoEdIT-Small or GECToR-DistilBERT can be used for rapid experimentation, while the "Large" models remain preferred for final manuscript preparation.</s></p><p><s>Quantization enables the pipeline to run even in CPU-only settings, providing flexibility for users without GPU access.</s></p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><figDesc><div><p><s>CERTIFICATE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>DECLARATION . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>ACKNOWLEDGEMENT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 Abstract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 Literature Review . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>4.1 Comparison of Existing Tools . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>4.2 Key Insights . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>4.2.1 Generative AI Risks . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>4.2.2</s><s>Lack of Minimal-Edit Philosophy . . . . . . . . . . . . . . . . . . . .</s><s>4.2.3</s><s>Technical Content Remains Unprotected . . . . . . . . . . . . . . . . .</s><s>4.3 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>6 Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>7 Proposed Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>7.1 LaTeX Preservation Architecture . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>7.1.1</s><s>The Regex-Based Masking Strategy . . . . . . . . . . . . . . . . . . .</s><s>9.2 Quantitative Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>9.3 Qualitative Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>9.4 LaTeX Integrity Score . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>9.5 Beam Search Decoding . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>9.6 Quantization and Distillation . . . . . . . . . . . . . . . . . . . . . . . . . . .</s><s>BIBLIOGRAPHY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>•A</head><figDesc><div><p><s>Sequence-to-Sequence model (CoEdIT) to perform deeper grammatical restructuring and improve fluency • A Sequence-Tagging model (GECToR) to perform quick and conservative tokenlevel corrections</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>4 .</head><label>4</label><figDesc><div><p><s>Adapt Editing to Section-Specific Scientific Writing Norms Different sections of a research paper follow different linguistic conventions.</s><s>Examples: • Past tense in Methodology • Present tense for established knowledge in Introduction • Objective tone in Results and Discussion</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><figDesc><div><p><s>Code # Conceptual Recursive Pattern for LaTeX Environments pattern = r'\\begin\{([a-z]+)\}((?:[ˆ{}]|(?R)) * )\\end\{\1\}' Here, (?R) invokes the pattern recursively, allowing the parser to handle arbitrarily deep nesting of braces, ensuring that an environment like a b (7.1)</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>A minimal frontend was implemented to demonstrate: 1 .</head><label>1</label><figDesc><div><p><s>Input editor for academic text 2. Live preview of corrected output 3. Display of semantic scores 4. Option to compare candidates Chapter 9</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>1 .</head><label>1</label><figDesc><div><p><s>LaTeX expressions and math environments 2. Units and measurements (e.g., kg, m/s) 3. Abbreviations and citations 4. Tense, agreement, and plurals 5. Nested clauses and complex sentence structures 6. Dataset Creation Process Seed examples: 50 high-quality, manually curated examples were created to capture diverse error types.</s><s>Programmatic generation: Using a Python script, the seed templates were permuted to generate a total of 1,000 unique examples suitable for evaluation.</s><s>Validation: Each example was checked to ensure correctness, proper LaTeX formatting, and semantic consistency with scientific text.</s><s>Placeholder: Insert a small example table of 5-10 seed examples, showing Input → Corrected Output.</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><figDesc><div><p><s>To improve sentence fluency, we use Beam Search rather than Greedy decoding.</s><s>Beam Search keeps the top k likely sequences: Score(Y ) = |Y | t=1 log P (y t | y &lt;t , X)</s></p></div></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="31,89.56,443.18,451.27,191.93" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 4 .</head><label>4</label><figDesc><div><p><s>1: Comparison of Grammar Correction Tools and Approaches</s></p></div></figDesc><table><row><cell>Tool/Work</cell><cell cols="2">Features</cell><cell></cell><cell>Strengths</cell><cell></cell><cell cols="2">Limitations</cell><cell>Relevance</cell></row><row><cell>Grammarly</cell><cell>AI</cell><cell cols="2">rewriting,</cell><cell cols="2">Wide adoption,</cell><cell cols="2">Generates text,</cell><cell>Not suitable for</cell></row><row><cell></cell><cell cols="3">tone, grammar</cell><cell>easy UI</cell><cell></cell><cell cols="2">risk of plagia-</cell><cell>academic writ-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">rism detection</cell><cell>ing</cell></row><row><cell>LanguageTool</cell><cell cols="2">Rule-based,</cell><cell></cell><cell cols="2">Open-source,</cell><cell cols="2">Weak for scien-</cell><cell>Limited</cell><cell>aca-</cell></row><row><cell></cell><cell cols="2">multilingual</cell><cell></cell><cell>fast</cell><cell></cell><cell cols="2">tific language</cell><cell>demic value</cell></row><row><cell>Writefull</cell><cell cols="2">Academic-</cell><cell></cell><cell cols="2">Best for re-</cell><cell cols="2">Generates</cell><cell>Risk of AI au-</cell></row><row><cell></cell><cell cols="3">trained, para-</cell><cell cols="2">search papers</cell><cell cols="2">rewritten sen-</cell><cell>thorship flags</cell></row><row><cell></cell><cell cols="2">phrasing</cell><cell></cell><cell></cell><cell></cell><cell>tences</cell></row><row><cell>Ginger</cell><cell cols="3">Real-time gram-</cell><cell>Simple</cell><cell></cell><cell cols="2">Weak domain</cell><cell>General purpose</cell></row><row><cell></cell><cell>mar</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">knowledge</cell><cell>only</cell></row><row><cell>Scribens</cell><cell cols="2">Grammar</cell><cell>+</cell><cell cols="2">No login, un-</cell><cell>Not</cell><cell>context-</cell><cell>Casual writing</cell></row><row><cell></cell><cell>style</cell><cell></cell><cell></cell><cell cols="2">limited words</cell><cell>aware</cell><cell>only</cell></row><row><cell cols="3">CoEdIT (HuggingFace) Seq2Seq</cell><cell>edit</cell><cell cols="2">Minimal-edit</cell><cell cols="2">Requires techni-</cell><cell>Ideal for scien-</cell></row><row><cell></cell><cell>model</cell><cell></cell><cell></cell><cell cols="2">philosophy</cell><cell cols="2">cal setup</cell><cell>tific GEC</cell></row><row><cell>GECToR</cell><cell cols="4">Encoder tagging Fastest</cell><cell>infer-</cell><cell cols="2">Limited rewrite</cell><cell>Best as sec-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>ence</cell><cell></cell><cell>ability</cell><cell>ondary filter</cell></row><row><cell>SciBERT</cell><cell cols="3">Scientific em-</cell><cell cols="2">Highest seman-</cell><cell cols="2">Not a correction</cell><cell>Used for rerank-</cell></row><row><cell></cell><cell cols="2">beddings</cell><cell></cell><cell cols="2">tic accuracy</cell><cell>model</cell><cell>ing</cell></row><row><cell>Textidote</cell><cell cols="3">LaTeX gram-</cell><cell cols="2">Directly works</cell><cell cols="2">Limited gram-</cell><cell>Useful prepro-</cell></row><row><cell></cell><cell cols="2">mar checker</cell><cell></cell><cell>on TeX</cell><cell></cell><cell cols="2">mar depth</cell><cell>cessing</cell></row><row><cell>DeepL Write</cell><cell cols="2">Generative</cell><cell></cell><cell cols="2">High fluency</cell><cell cols="2">Alters sentence</cell><cell>Not safe for re-</cell></row><row><cell></cell><cell cols="2">rewriting</cell><cell></cell><cell></cell><cell></cell><cell cols="2">meaning</cell><cell>search integrity</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 9 .</head><label>9</label><figDesc><div><p><s>1: Performance of the Deterministic Grammar Correction Engine</s></p></div></figDesc><table><row><cell>Original Sentence</cell><cell>Corrected Output</cell><cell>Detected Error Type</cell><cell>Processing</cell></row><row><cell></cell><cell></cell><cell></cell><cell>Time (s)</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p><s>is captured as a single atomic unit.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.2">Sentinel Tokenization and Embedding</head><p><s>Once identified, LaTeX segments must be hidden from the GEC model.</s><s>We replace the identified segment with a placeholder.</s><s>The choice of placeholder is mathematically significant regarding the model's embedding space.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Soft-Masking Problem</head><p><s>If the mask token belongs to the model's vocabulary, the embedding layer may inject contextual bias.</s><s>This can distort nearby corrections or even modify the LaTeX itself.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Unique Alphanumeric Hash Strategy</head><p><s>To combat this, we hash each masked segment at inference time using a cryptographic hash such as SHA-256.</s><s>Because each placeholder is unique and out-of-vocabulary, the model treats it as an inert token, eliminating semantic drift.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.3">Post-Editing Reconstruction</head><p><s>After correction, hashes are replaced by their corresponding original LaTeX segments from a stored lookup table.</s><s>This ensures full restoration without corruption or hallucinated modifications.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Stage 2: Hybrid Neural Correction Architecture</head><p><s>Once LaTeX content is safely masked, the remaining natural language is processed using a dual-lane hybrid correction approach.</s><s>This architecture combines the precision of sequence tagging with the expressive power of transformer-based editing, ensuring minimal hallucination while enabling structural improvements.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.1">Fast Lane: GECToR-Based Sequence Tagging</head><p><s>GECToR operates through token-level edit tags such as KEEP, REPLACE, and DELETE.</s><s>This enables highly localized, deterministic corrections.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6">Multi-Stage Pipeline Design</head><p><s>The proposed solution for Google Colab is structured as a cascading pipeline.</s><s>This design optimizes the trade-off between the computational cost of LLMs and the speed of sequence taggers, while ensuring robustness via semantic reranking.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.6.1">Stage 0: Parsing and Section Identification</head><p><s>The input text provided by the user is first parsed to identify the structural sections of the research paper (e.g., Abstract, Introduction, Methods, Results, Discussion).</s><s>Section headers, LaTeX commands, tables, and figures are detected and tagged to ensure that downstream correction respects the document's structure.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2">Comparative Analysis of Model Components</head><p><s>We evaluate four models for scientific grammar correction: CoEdIT-Large, GPT-4, GECToR and standard T5.</s><s>CoEdIT-Large is chosen because it provides high fluency, low hallucination risk, and runs locally without external API calls.</s></p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Contextual Embedding Decomposition for Scalable Tokenization in Efficient Language Text Generation</title>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Wilson</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Ursula</forename><surname>Montague</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Vincent</forename><surname>Worthington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Winston</forename><surname>Harrington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Xanthe</forename><surname>Pennington</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Sentinel Tokenization and Embedding . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.31219/osf.io/avdmg</idno>
+		<imprint>
+			<date type="published" when="2024-12-13" />
+			<publisher>Center for Open Science</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Differentiating Editing, Post-Editing and Revision</title>
+		<author>
+			<persName><forename type="first">Félix</forename><surname>Do Carmo</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">1.3 Post-Editing Reconstruction . . . . . . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Joss</forename><surname>Moorkens</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">1.3 Post-Editing Reconstruction . . . . . . . . . . . . . . . . . . . . . .</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.4324/9781003096962-4</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Translation Revision and Post-Editing</title>
+		<imprint>
+			<publisher>Routledge</publisher>
+			<date type="published" when="2020-10-26" />
+			<biblScope unit="page" from="35" to="49" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Figure 3: (1) Deep neural network architecture. (2) Convolutional neural network architecture. (3) Long short-term memory architecture. (4) Hybrid model (CNN-LSTM) architecture.</title>
+		<author>
+			<orgName type="collaboration">2 Stage 2: Hybrid Neural Correction Architecture . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<idno type="DOI">10.7717/peerjcs.1052/fig-3</idno>
+		<imprint>
+			<date>null</date>
+			<publisher>PeerJ</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Fast Lane: GECToR-Based Sequence Tagging</title>
+		<author>
+			<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Deep Lane: CoEdIT Sequence-to</title>
+		<author>
+			<orgName type="collaboration">-Sequence Editor . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">3 Stage 2: Hybrid Neural Correction Architecture . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Fast Lane: GECToR-Based Sequence Tagging</title>
+		<author>
+			<orgName type="collaboration">. . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Deep Lane: CoEdIT Sequence-to</title>
+		<author>
+			<orgName type="collaboration">-Sequence Editor . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Meaning Preservation Engine) . . . . . . . . .</orgName>
+		</author>
+		<title level="m">4 Stage 3: Semantic Reranking</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 Candidate Generation and Evaluation . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Semantic Drift Rejection . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">5 Stage 4: Reconstruction of Mathematical Structures . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 Hash-Based Lookup Restoration . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Zero-Corruption Reintegration . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Multi-Stage Pipeline Design . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Section Identification . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 0: Parsing and</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Segmentation . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 1: Preprocessing and</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Stage 2: Hybrid</title>
+		<author>
+			<orgName type="collaboration">Neural Correction . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Semantic Reranking . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 3</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<orgName type="collaboration">Reconstruction . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<title level="m">Stage 4</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Implementation, Result, Discussion . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">1 System Architecture Overview . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2 Comparative Analysis of Model Components . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2.1 CoEdIT vs. GPT-4 . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">2.2 CoEdIT vs. GECToR . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Frontend / Demo Interface . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">9 Conclusion and Future Work . . . . . . . . . . . . . . . . . . . . . . . . . . . .</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">Dataset Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Bibliography</orgName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<ptr target="https://direct.mit.edu/coli/article/49/3/643/115846/Grammatical-Error-Correction-A-Survey-of-the-State" />
+		<title level="m">Grammatical Error Correction: A Survey of the State of the Art -MIT Press Direct</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<ptr target="https://huggingface.co/grammarly/coedit-large" />
+		<title level="m">grammarly/coedit-large -Hugging Face</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Gector -Kaggle</surname></persName>
+		</author>
+		<ptr target="https://www.kaggle.com/datasets/jasonheesanglee/gector" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<ptr target="https://github.com/allenai/scibert" />
+		<title level="m">BERT model for scientific text</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Adapting LLMs for Minimal-edit Grammatical Error Correction -arXiv</title>
+		<ptr target="https://arxiv.org/html/2506.13148v1" />
+		<imprint>
+			<date type="published" when="2025">cember 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">A Chain-of-Task Framework for Instruction Tuning of LLMs Based on Chinese Grammatical Error Correction -ACL Anthology</title>
+		<ptr target="https://aclanthology.org/2025.coling-main.577.pdf" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Debian -Details of package python3-pylatexenc in sid</title>
+		<ptr target="https://packages.debian.org/sid/python3-pylatexenc" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Regex to match LaTeX equations -Stack Overflow</title>
+		<ptr target="https://stackoverflow.com/questions/14182879/regex-to-match-latex-equations" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Grammarly CoEdIT Model -HuggingFace -GeeksforGeeks</title>
+		<ptr target="https://www.geeksforgeeks.org/artificial-intelligence/grammarly-coedi" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<ptr target="https://aclanthology.org/2023.nlposs-1.9.pdf" />
+		<title level="m">Beyond the Repo: A Case Study on Open Source Integration with GECToR -ACL Anthology</title>
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">LaTeX Formula Spacing Issue with do formula enrichment=True • Issue #2374 • docling-project/docling -GitHub</title>
+		<ptr target="https://github.com/docling-project/docling/issues/2374" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Bug Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">sylvainhalle/textidote: Spelling, grammar and style checking on LaTeX documents -GitHub</title>
+		<ptr target="https://github.com/sylvainhalle/textidote" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">A beam-search decoder for grammatical error correction -ResearchGate</title>
+		<ptr target="https://www.researchgate.net/publication/262282277_" />
+		<imprint>
+			<date type="published" when="2025">cember 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">A_beam-search_decoder_for_grammatical_error_correction</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">8.2 documentation -Lightning AI</title>
+		<ptr target="https://lightning.ai/docs/torchmetrics/stable/text/bert_score.html" />
+	</analytic>
+	<monogr>
+		<title level="s">BERT Score -PyTorch-Metrics 1.</title>
+		<imprint>
+			<date type="published" when="2025">ber 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Leveraging What&apos;s Overfixed: Post-Correction via LLM Grammatical Error Overcorrection</title>
+		<ptr target="https://arxiv.org/html/2509.20811v1" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Loading models -Hugging Face</title>
+		<ptr target="https://huggingface.co/docs/transformers/models" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">LLM-based Code-Switched Text Generation for Grammatical Error Correction -arXiv</title>
+		<ptr target="https://arxiv.org/html/2410.10349v1" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">The summary of AESW 2016 Shared Task participant systems. -ResearchGate</title>
+		<ptr target="https://www.researchgate.net/figure/The-summary-of-AESW-tbl" />
+		<imprint>
+			<date type="published" when="2025-12-04">December 4, 2025</date>
+			<biblScope unit="page">306094251</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

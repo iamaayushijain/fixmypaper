@@ -25,34 +25,9 @@ export const AVAILABLE_CHECKS = {
     error_types: ["metadata_incomplete"],
     default: true,
   },
-  abstract_exists: {
-    name: "Abstract Section Exists",
-    description: "Paper contains an Abstract section",
-    category: "Structure",
-    error_types: ["missing_abstract"],
-    default: true,
-  },
-  abstract_word_count: {
-    name: "Abstract Word Count (150–250 words)",
-    description: "Abstract must be between 150 and 250 words",
-    category: "Structure",
-    error_types: ["abstract_word_count"],
-    default: true,
-  },
-  index_terms: {
-    name: "Index Terms / Keywords",
-    description: "Paper contains an Index Terms or Keywords section",
-    category: "Structure",
-    error_types: ["missing_index_terms"],
-    default: true,
-  },
-  references_section: {
-    name: "References Section Exists",
-    description: "Paper contains a References section",
-    category: "Structure",
-    error_types: ["missing_references"],
-    default: true,
-  },
+  // Section-existence is handled by a single format-driven check that reports
+  // every required-but-missing section (error_type: "missing_required_section").
+  // Professors pick which sections are mandatory in the Format editor.
   roman_numeral_headings: {
     name: "Roman Numeral Section Headings",
     description: "Section headings use Roman numerals (e.g. I. INTRODUCTION)",
@@ -60,11 +35,12 @@ export const AVAILABLE_CHECKS = {
     error_types: ["non_roman_heading"],
     default: true,
   },
-  introduction_section: {
-    name: "Introduction Section (I. INTRODUCTION)",
-    description: "Paper has a correctly formatted Introduction section",
+
+  section_existence: {
+    name: "Section Existence",
+    description: "All required sections are present",
     category: "Structure",
-    error_types: ["missing_introduction"],
+    error_types: ["missing_required_section"],
     default: true,
   },
   figure_label_format: {
@@ -116,6 +92,13 @@ export const AVAILABLE_CHECKS = {
     error_types: ["caption_placement"],
     default: true,
   },
+  caption_existence: {
+    name: "Figure and Table Caption Existence",
+    description: "Figure captions below figures; table captions above tables",
+    category: "Formatting",
+    error_types: ["caption_placement"],
+    default: true,
+  },
   reference_format: {
     name: "Reference Format [n] Author, Title, ...",
     description: "References formatted as [1] Author, Title, ...",
@@ -149,7 +132,56 @@ export const AVAILABLE_CHECKS = {
     description: "Flags first-person pronouns in academic text",
     category: "Writing",
     error_types: ["writing_style"],
-    default: false,
+    default: true,
+  },
+  space_before_punctuation_marks: {
+    name: "Space Before Punctuation",
+    description: "Space immediately before , . ; : ! ? (e.g. 'hello , world')",
+    category: "Writing",
+    error_types: ["punctuation_spacing"],
+    default: true,
+  },
+  double_punctuation: {
+    name: "Double Punctuation",
+    description: "Repeated or mixed terminal punctuation (e.g. 'end..' or 'what?!')",
+    category: "Writing",
+    error_types: ["punctuation_error"],
+    default: true,
+  },
+  missing_space_after_punctuation_marks: {
+    name: "Missing Space After Punctuation",
+    description: "Punctuation not followed by a space, excluding decimals and abbreviations",
+    category: "Writing",
+    error_types: ["punctuation_spacing"],
+    default: true,
+  },
+  comma_before_parenthesis: {
+    name: "Comma Before Parenthesis",
+    description: "Comma placed directly before an opening parenthesis (e.g. 'result ,(see')",
+    category: "Writing",
+    error_types: ["punctuation_error"],
+    default: true,
+  },
+  punctuation_inside_citation: {
+    name: "Punctuation Inside Citation",
+    description: "Period placed after citation bracket mid-sentence (e.g. '[1]. shows')",
+    category: "Writing",
+    error_types: ["citation_format"],
+    default: true,
+  },
+  multiple_spaces: {
+    name: "Multiple Spaces Between Words",
+    description: "Two or more consecutive spaces between words",
+    category: "Writing",
+    error_types: ["spacing_error"],
+    default: true,
+  },
+  space_inside_brackets: {
+    name: "Space Inside Brackets",
+    description: "Space after opening or before closing parenthesis (e.g. '( value )')",
+    category: "Writing",
+    error_types: ["spacing_error"],
+    default: true,
   },
 };
 
@@ -229,27 +261,41 @@ export async function uploadPDF(file, formatId, startPage) {
       message = err.error || message;
     } catch (_) {
       const text = await res.text().catch(() => "");
-      // Avoid crashing on HTML error pages.
       if (text) message = text.slice(0, 300);
     }
     throw new Error(message);
   }
-  return res.json();
+  const data = await res.json();
+  // New async API returns {job_id, success:true} with 202.
+  // Legacy synchronous API returned the full result directly.
+  return data.job_id ? data.job_id : data;
 }
 
 export function downloadURL(jobId) {
   return `/download/${jobId}`;
 }
 
+/** Poll /api/progress/:jobId — returns {checks:[{key,name}], done:bool, error:str|null} */
+export async function pollProgress(jobId) {
+  const res = await fetch(`/api/progress/${jobId}`);
+  if (!res.ok) throw new Error("Progress check failed");
+  return res.json();
+}
+
+/** Fetch full result once done:true */
+export async function fetchJobResult(jobId) {
+  const res = await fetch(`/api/result/${jobId}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "Failed to fetch result");
+  }
+  return res.json();
+}
+
 export const ERROR_DESCRIPTIONS = {
   metadata_incomplete: "Missing title, author(s), or publication date",
-  abstract_word_count: "Abstract outside 150–250 word range",
   missing_required_section: "A mandatory section is missing from the document",
-  missing_abstract: "Missing Abstract section",
-  missing_index_terms: "Missing Index Terms section",
-  missing_references: "Missing References section",
   non_roman_heading: "Non-Roman numeral section heading",
-  missing_introduction: "Missing or misformatted Introduction",
   invalid_figure_label: "Incorrect figure label format",
   invalid_table_numbering: "Incorrect table numbering format",
   equation_numbering: "Equation numbering issues",
@@ -259,12 +305,12 @@ export const ERROR_DESCRIPTIONS = {
   caption_placement: "Incorrect caption placement",
   broken_url: "Broken or malformed URL",
   broken_doi: "Broken or malformed DOI",
-  spacing_error: "Multiple consecutive spaces",
-  punctuation_spacing: "Punctuation spacing issues",
+  spacing_error: "Multiple consecutive spaces / space inside brackets",
+  punctuation_spacing: "Space before/after punctuation marks",
   repeated_word: "Repeated consecutive words",
-  punctuation_error: "Multiple punctuation marks",
+  punctuation_error: "Punctuation placement errors",
   whitespace_error: "Trailing whitespace",
-  citation_format: "Incorrect et al. formatting",
+  citation_format: "Citation / et al. formatting",
   writing_style: "First-person pronouns",
   non_ieee_reference_format: "Reference format issues",
 };

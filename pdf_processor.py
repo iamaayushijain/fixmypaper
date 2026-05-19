@@ -18,6 +18,7 @@ GROBID migration notes:
 """
 import os
 import re
+import json
 import fitz  # PyMuPDF — retained for open/image-count/annotate only
 import camelot
 import requests
@@ -41,46 +42,14 @@ AVAILABLE_CHECKS: "OrderedDict[str, Dict]" = OrderedDict([
         "default": True,
     }),
     # ── Structure ────────────────────────────────────────────────────────
-    ("abstract_exists", {
-        "name": "Abstract Section Exists",
-        "description": "Paper contains an Abstract section",
-        "category": "Structure",
-        "error_types": ["missing_abstract"],
-        "default": True,
-    }),
-    ("abstract_word_count", {
-        "name": "Abstract Word Count (150–250 words)",
-        "description": "Abstract must be between 150 and 250 words",
-        "category": "Structure",
-        "error_types": ["abstract_word_count"],
-        "default": True,
-    }),
-    ("index_terms", {
-        "name": "Index Terms / Keywords",
-        "description": "Paper contains an Index Terms or Keywords section",
-        "category": "Structure",
-        "error_types": ["missing_index_terms"],
-        "default": True,
-    }),
-    ("references_section", {
-        "name": "References Section Exists",
-        "description": "Paper contains a References section",
-        "category": "Structure",
-        "error_types": ["missing_references"],
-        "default": True,
-    }),
+    # Section-existence is handled by a single format-driven check that runs
+    # whenever a format specifies `mandatory_sections`. See the
+    # `missing_required_section` error type and `_check_required_sections`.
     ("roman_numeral_headings", {
         "name": "Roman Numeral Section Headings",
         "description": "Section headings use Roman numerals (e.g. I. INTRODUCTION)",
         "category": "Structure",
         "error_types": ["non_roman_heading"],
-        "default": True,
-    }),
-    ("introduction_section", {
-        "name": "Introduction Section (I. INTRODUCTION)",
-        "description": "Paper has a correctly formatted Introduction section",
-        "category": "Structure",
-        "error_types": ["missing_introduction"],
         "default": True,
     }),
     # ── Numbering ────────────────────────────────────────────────────────
@@ -169,7 +138,56 @@ AVAILABLE_CHECKS: "OrderedDict[str, Dict]" = OrderedDict([
         "description": "Flags first-person pronouns in academic text",
         "category": "Writing",
         "error_types": ["writing_style"],
-        "default": False,
+        "default": True,
+    }),
+    ("space_before_punctuation_marks", {
+        "name": "Space Before Punctuation",
+        "description": "Space immediately before , . ; : ! ? (e.g. 'hello , world')",
+        "category": "Writing",
+        "error_types": ["punctuation_spacing"],
+        "default": True,
+    }),
+    ("double_punctuation", {
+        "name": "Double Punctuation",
+        "description": "Repeated or mixed terminal punctuation (e.g. 'end..' or 'what?!')",
+        "category": "Writing",
+        "error_types": ["punctuation_error"],
+        "default": True,
+    }),
+    ("missing_space_after_punctuation_marks", {
+        "name": "Missing Space After Punctuation",
+        "description": "Punctuation not followed by a space, excluding decimals and abbreviations",
+        "category": "Writing",
+        "error_types": ["punctuation_spacing"],
+        "default": True,
+    }),
+    ("comma_before_parenthesis", {
+        "name": "Comma Before Parenthesis",
+        "description": "Comma placed directly before an opening parenthesis (e.g. 'result ,(see')",
+        "category": "Writing",
+        "error_types": ["punctuation_error"],
+        "default": True,
+    }),
+    ("punctuation_inside_citation", {
+        "name": "Punctuation Inside Citation",
+        "description": "Period placed after citation bracket mid-sentence (e.g. '[1]. shows')",
+        "category": "Writing",
+        "error_types": ["citation_format"],
+        "default": True,
+    }),
+    ("multiple_spaces", {
+        "name": "Multiple Spaces Between Words",
+        "description": "Two or more consecutive spaces between words",
+        "category": "Writing",
+        "error_types": ["spacing_error"],
+        "default": True,
+    }),
+    ("space_inside_brackets", {
+        "name": "Space Inside Brackets",
+        "description": "Space after opening or before closing parenthesis (e.g. '( value )')",
+        "category": "Writing",
+        "error_types": ["spacing_error"],
+        "default": True,
     }),
 ])
 
@@ -207,7 +225,7 @@ SECTION_DETECTION_KEYWORDS: Dict[str, List[str]] = {
     "Discussion":     ["discussion", "analysis"],
     "Conclusion":     ["conclusion", "concluding remarks", "summary"],
     "Future Work":    ["future work", "future directions"],
-    "Acknowledgments":["acknowledgment", "acknowledgement", "acknowledgments"],
+    "Acknowledgments":["acknowledgment", "acknowledgement", "acknowledgments", "ACKNOWLEDGEMENT", "Gratitude"],
     "References":     ["references", "bibliography"],
 }
 
@@ -227,7 +245,7 @@ class ErrorInstance:
 class PDFErrorDetector:
     """Detects IEEE formatting compliance issues in research papers."""
 
-    GROBID_URL = "https://ashjin-grobid-local-2.hf.space/"
+    GROBID_URL = "http://localhost:8070"
 
     def __init__(self, start_page: int = 1):
         self.start_page_0 = max(0, start_page - 1)  # convert 1-indexed to 0-indexed
@@ -255,20 +273,24 @@ class PDFErrorDetector:
         # Populated by _extract_with_grobid(); used by multiple checks.
         self._grobid_section_heads: List[Dict] = []
         # Each entry: {"text": str, "page": int, "bbox": tuple-or-None}
-        # Used by _check_roman_numeral_headings() and _check_introduction_exists().
+        # Used by _check_roman_numeral_headings() and _detect_all_sections().
 
         self._grobid_has_abstract: bool = False
         self._grobid_abstract_text: str = ""
         self._grobid_has_keywords: bool = False
-        # Used by _check_abstract_exists() / _check_index_terms_exists() /
-        # _check_abstract_word_count().
+        # Used by the unified section-detection pipeline.
+
+        # Populated by _detect_all_sections() — canonical section → presence info.
+        # Shape: {section_name: {"found": bool, "matched_heading": str|None, "page": int|None}}
+        self.section_detection: "OrderedDict[str, Dict]" = OrderedDict()
 
         self._grobid_figure_entries: List[Dict] = []
-        # Full figure list with page + coords, used by _check_figure_caption_placement().
-        # (grobid_figures is the same list — kept for backward compat with export_extracted_data.)
+        # Full figure list with page + coords (kept for statistics only;
+        # caption-placement no longer depends on GROBID — see _check_caption_placement).
+        # (grobid_figures is the same list — kept foƒr backward compat with export_extracted_data.)
 
         self._grobid_table_entries: List[Dict] = []
-        # Full table list with page + coords, used by _check_table_caption_placement().
+        # Full table list with page + coords (kept for statistics only).
 
         self._grobid_metadata: Dict = {}
         # Populated by _extract_with_grobid(); holds parsed header fields:
@@ -305,77 +327,235 @@ class PDFErrorDetector:
 
     def _extract_text_via_grobid(self, doc: fitz.Document):
         """
-        Use the already-parsed TEI root (stored during _extract_with_grobid)
-        to rebuild line_info from <s>/<w> tokens with GROBID coords.
+        Rebuild line_info from GROBID <s> sentence elements.
 
-        This is called AFTER _extract_with_grobid() has run and stored
-        self._tei_root.  If the attribute is absent (GROBID call failed),
-        raises AttributeError so the caller can fall back.
+        GROBID coords format: coords="page,x,y,w,h[;page,x,y,w,h…]"
+        A sentence that wraps across N physical lines has N semicolon-separated
+        fragments.  Storing the UNION bbox causes _calculate_match_bbox to
+        interpolate within a tall multi-line rectangle, placing annotations on
+        the wrong line.
+
+        Fix: each fragment becomes its own line_info entry.  Text is
+        proportionally split across fragments by their relative widths so
+        character-interpolation in _calculate_match_bbox stays accurate within
+        each single-line bbox.
+
+        Path A — coords on <s>: split per fragment (main path after API fix).
+        Path B — no coords: fall back to PyMuPDF page-text search.
         """
-        root = self._tei_root  # set by _extract_with_grobid(); AttributeError if absent
+        root = self._tei_root  # AttributeError if absent → caller catches
         ns = {"tei": "http://www.tei-c.org/ns/1.0"}
 
-        # Collect per-page plain text for page_texts
         num_pages = len(doc)
         page_text_lists: List[List[str]] = [[] for _ in range(num_pages)]
-
         current_offset = 0
 
-        # Walk every <s> (sentence) element — they span multiple <w> tokens.
-        # We reconstruct logical "lines" by grouping tokens whose GROBID
-        # page+y coords are within a small tolerance of each other.
+        # ── Collect sentence elements ────────────────────────────────────────
         sentences = root.findall(".//tei:s", ns)
 
         if not sentences:
-            print("[GROBID] No <s> tags — falling back to paragraphs")
-            
-            paragraphs = root.findall(".//tei:p", ns)
-            sentences = []
+            print("[GROBID] No <s> tags — synthesising from <p> elements")
+            sentences = root.findall(".//tei:body//tei:p", ns) or root.findall(".//tei:p", ns)
+            if not sentences:
+                raise ValueError("No usable sentence or paragraph elements in GROBID TEI")
 
-            for p in paragraphs:
-                text = "".join(p.itertext()).strip()
-                if text:
-                    sentences.extend(
-                        re.split(r'(?<=[.!?])\s+', text)
-                    )
+        # ── Detect whether coords are present ────────────────────────────────
+        sample = sentences[:min(20, len(sentences))]
+        has_coords = any(s.get("coords") for s in sample)
 
-        for sent in sentence_elements:
-            # Each sentence becomes one logical "line" in line_info.
-            words = []
-            coords_list = []
+        if not has_coords:
+            print("[GROBID] No coords on <s> elements — matching text to PyMuPDF pages")
+            pymupdf_pages: List[str] = [doc[pg].get_text() for pg in range(num_pages)]
 
+        last_page = max(0, self.start_page_0)
+
+        # ── Main extraction loop ─────────────────────────────────────────────
+        for sent in sentences:
+            # Collect all visible text (child elements like <ref> contribute too)
+            words: List[str] = []
             for token in sent.iter():
-                text = (token.text or "").strip()
-                if not text:
-                    continue
-                coords_str = token.get("coords", "")
-                if coords_str:
-                    coords_list.append(coords_str)
-                words.append(text)
-
+                t = (token.text or "").strip()
+                if t:
+                    words.append(t)
             if not words:
                 continue
 
             line_text = " ".join(words)
+            s_coords_raw = sent.get("coords", "")
 
-            # Parse GROBID coords: "page,x0,y0,x1,y1" — take the first token's
-            # coords for the representative bbox and page number.
-            page_num, bbox = self._parse_grobid_coords(coords_list, fallback_page=0)
-            page_num = min(page_num, num_pages - 1)  # clamp
+            if s_coords_raw:
+                # ── Path A: coords on <s> ────────────────────────────────────
+                fragments = self._parse_grobid_fragments(s_coords_raw)
+                if not fragments:
+                    continue
 
-            if page_num < self.start_page_0:
-                continue
+                if len(fragments) == 1:
+                    pg, x, y, w, h = fragments[0]
+                    entries = [(line_text, pg, x, y, w, h)]
+                else:
+                    # Split text proportionally across line fragments
+                    chunks = self._split_text_by_fragment_widths(line_text, fragments)
+                    entries = [
+                        (chunk, pg, x, y, w, h)
+                        for chunk, (pg, x, y, w, h) in zip(chunks, fragments)
+                        if chunk.strip()
+                    ]
 
-            self.line_info.append((line_text, bbox, page_num))
-            self.line_offsets.append(current_offset)
-            self.full_text += line_text + "\n"
-            current_offset += len(line_text) + 1
+                for frag_text, pg, x, y, w, h in entries:
+                    pg = min(pg, num_pages - 1)
+                    last_page = pg
+                    if pg < self.start_page_0:
+                        continue
+                    pw, ph = self._grobid_page_dims.get(pg, (595.276, 841.890))
+                    bbox = (
+                        max(0.0, x),
+                        max(0.0, y),
+                        min(pw, x + w),
+                        min(ph, y + h),
+                    )
+                    self.line_info.append((frag_text, bbox, pg))
+                    self.line_offsets.append(current_offset)
+                    self.full_text += frag_text + "\n"
+                    current_offset += len(frag_text) + 1
+                    page_text_lists[pg].append(frag_text)
 
-            page_text_lists[page_num].append(line_text)
+            else:
+                # ── Path B: no coords — locate via PyMuPDF ───────────────────
+                page_num, bbox = self._find_sentence_page(
+                    line_text, pymupdf_pages, doc, search_from=last_page
+                )
+                page_num = min(page_num, num_pages - 1)
+                last_page = page_num
+                if page_num < self.start_page_0:
+                    continue
+                self.line_info.append((line_text, bbox, page_num))
+                self.line_offsets.append(current_offset)
+                self.full_text += line_text + "\n"
+                current_offset += len(line_text) + 1
+                page_text_lists[page_num].append(line_text)
 
         self.page_texts = ["\n".join(lines) for lines in page_text_lists]
-        print(f"[TEXT EXTRACT] GROBID: {len(self.line_info)} logical lines across "
-              f"{num_pages} pages.")
+        print(
+            f"[TEXT EXTRACT] GROBID: {len(self.line_info)} line-fragments across "
+            f"{num_pages} pages (coords={'yes' if has_coords else 'no'})."
+        )
+
+    # ── GROBID coord helpers ──────────────────────────────────────────────────
+
+    def _parse_grobid_fragments(
+        self, coords_raw: str
+    ) -> List[Tuple[int, float, float, float, float]]:
+        """
+        Parse a GROBID coords string into a list of (page_0idx, x, y, w, h).
+
+        Format: "page,x,y,w,h[;page,x,y,w,h…]"  (page is 1-indexed in GROBID)
+        """
+        result = []
+        for frag in coords_raw.split(";"):
+            parts = frag.strip().split(",")
+            if len(parts) < 5:
+                continue
+            try:
+                pg = int(parts[0]) - 1                  # convert to 0-indexed
+                x, y, w, h = (float(p) for p in parts[1:5])
+                result.append((pg, x, y, w, h))
+            except ValueError:
+                continue
+        return result
+
+    def _split_text_by_fragment_widths(
+        self,
+        text: str,
+        fragments: List[Tuple[int, float, float, float, float]],
+    ) -> List[str]:
+        """
+        Distribute *text* across *fragments* proportionally to each fragment's
+        width (parts[3]).  Splits are made at the nearest word boundary so that
+        each chunk is a coherent sub-phrase and _calculate_match_bbox can
+        interpolate character positions correctly within a single-line bbox.
+        """
+        if len(fragments) <= 1:
+            return [text]
+
+        total_w = sum(f[3] for f in fragments)
+        if total_w == 0:
+            return [text] + [""] * (len(fragments) - 1)
+
+        words = text.split()
+        total_words = len(words)
+        chunks: List[str] = []
+        word_idx = 0
+
+        for i, (_, _, _, w, _) in enumerate(fragments):
+            if i == len(fragments) - 1:
+                # Last fragment gets whatever remains
+                chunks.append(" ".join(words[word_idx:]))
+                break
+
+            # Target word count for this fragment
+            target = max(1, round(total_words * w / total_w))
+            end = min(word_idx + target, total_words)
+            # Don't overshoot — leave at least 1 word for remaining fragments
+            end = min(end, total_words - (len(fragments) - i - 1))
+            end = max(end, word_idx + 1)
+
+            chunks.append(" ".join(words[word_idx:end]))
+            word_idx = end
+
+        # Pad if fragments outnumber available chunks (very short sentences)
+        while len(chunks) < len(fragments):
+            chunks.append("")
+
+        return chunks
+
+    def _find_sentence_page(
+        self,
+        line_text: str,
+        pymupdf_pages: List[str],
+        doc: fitz.Document,
+        search_from: int = 0,
+    ) -> Tuple[int, Tuple[float, float, float, float]]:
+        """
+        Locate *line_text* in the PyMuPDF page texts and return (page_num, bbox).
+
+        We build a 4–6 word search key from the middle of the sentence to
+        avoid edge-word hyphenation artefacts.  The search proceeds forward
+        from *search_from* (preserving document order) and wraps around if
+        needed.
+        """
+        words = line_text.split()
+        if not words:
+            return search_from, (0.0, 0.0, 100.0, 14.0)
+
+        # Build a distinctive substring (middle 4-6 words, min 15 chars)
+        mid = max(0, len(words) // 2 - 2)
+        key_words = words[mid: mid + 6]
+        search_key = " ".join(key_words)
+        if len(search_key) < 10 and words:
+            search_key = " ".join(words[:min(6, len(words))])
+
+        # Normalise whitespace for matching
+        search_key_norm = re.sub(r"\s+", " ", search_key).strip()
+
+        num_pages = len(pymupdf_pages)
+        page_order = list(range(search_from, num_pages)) + list(range(0, search_from))
+
+        for pg in page_order:
+            page_text = pymupdf_pages[pg]
+            page_norm = re.sub(r"\s+", " ", page_text)
+            if search_key_norm.lower() in page_norm.lower():
+                # Try to get an actual bbox via PyMuPDF text search
+                try:
+                    rects = doc[pg].search_for(search_key_norm)
+                    if rects:
+                        r = rects[0]
+                        return pg, (r.x0, r.y0, r.x1, r.y1)
+                except Exception:
+                    pass
+                return pg, (0.0, 0.0, 595.0, 14.0)
+
+        # Not found anywhere — keep last known page
+        return search_from, (0.0, 0.0, 595.0, 14.0)
 
     def _parse_grobid_coords(
         self,
@@ -386,11 +566,16 @@ class PDFErrorDetector:
         Parse a list of GROBID coords strings and return
         (page_num, union_bbox) covering all tokens.
 
-        GROBID emits coordinates in two forms:
-          • Simple:  "page,x0,y0,x1,y1"
-          • Multi:   "page,x0,y0,x1,y1;page,x0,y0,x1,y1;…"
-        Both are handled.  Page numbers are 1-indexed in GROBID;
-        we convert to 0-indexed.
+        GROBID coord format: "page,x,y,w,h"  (may be multi-fragment:
+        "page,x,y,w,h;page,x,y,w,h;…")
+
+          • page  — 1-indexed; we convert to 0-indexed
+          • x, y  — top-left corner in PDF points, origin = top-left of page
+            (same as PyMuPDF — no Y-axis flip needed)
+          • w, h  — width and height in PDF points
+
+        The union bbox (min x0, min y0, max x1, max y1) across all fragments
+        is returned so the entire token span is highlighted.
         """
         if not coords_list:
             return fallback_page, (0.0, 0.0, 100.0, 14.0)
@@ -399,18 +584,22 @@ class PDFErrorDetector:
         x0s, y0s, x1s, y1s = [], [], [], []
 
         for raw in coords_list:
-            # Split on ';' to handle multi-fragment coords strings
             fragments = raw.split(";") if ";" in raw else [raw]
             for frag in fragments:
                 parts = frag.strip().split(",")
                 if len(parts) < 5:
                     continue
                 try:
-                    pages.append(int(parts[0]) - 1)
-                    x0s.append(float(parts[1]))
-                    y0s.append(float(parts[2]))
-                    x1s.append(float(parts[3]))
-                    y1s.append(float(parts[4]))
+                    pg   = int(parts[0]) - 1        # 0-indexed
+                    x    = float(parts[1])
+                    y    = float(parts[2])
+                    w    = float(parts[3])           # width  (NOT x1)
+                    h    = float(parts[4])           # height (NOT y1)
+                    pages.append(pg)
+                    x0s.append(x)
+                    y0s.append(y)
+                    x1s.append(x + w)               # derive x1
+                    y1s.append(y + h)               # derive y1
                 except ValueError:
                     continue
 
@@ -418,7 +607,15 @@ class PDFErrorDetector:
             return fallback_page, (0.0, 0.0, 100.0, 14.0)
 
         page_num = pages[0]
-        bbox = (min(x0s), min(y0s), max(x1s), max(y1s))
+        # Clamp to page bounds if we have the page dimensions
+        dims = getattr(self, "_grobid_page_dims", {})
+        pw, ph = dims.get(page_num, (595.276, 841.890))
+        bbox = (
+            max(0.0, min(x0s)),
+            max(0.0, min(y0s)),
+            min(pw,  max(x1s)),
+            min(ph,  max(y1s)),
+        )
         return page_num, bbox
 
     # ------------------------------------------------------------------
@@ -510,6 +707,15 @@ class PDFErrorDetector:
             for idx, table in enumerate(tables):
                 if table.page <= self.start_page_0:
                     continue
+                # Camelot reports bbox as (x1, y1_bottom, x2, y2_top) in
+                # PDF-native bottom-left coords.  We also stash the page
+                # height so callers (caption-placement check) can convert
+                # to PyMuPDF's top-left origin.
+                cam_bbox = getattr(table, "_bbox", None)
+                try:
+                    page_h = float(table.page_height) if hasattr(table, "page_height") else None
+                except Exception:
+                    page_h = None
                 table_data = {
                     "index": idx,
                     "page": table.page,
@@ -517,6 +723,8 @@ class PDFErrorDetector:
                     "headers": table.df.iloc[0].tolist() if len(table.df) > 0 else [],
                     "accuracy": table.accuracy,
                     "whitespace": table.whitespace,
+                    "bbox_pdf": tuple(cam_bbox) if cam_bbox else None,  # bottom-left origin
+                    "page_height": page_h,
                 }
                 raw_tables.append(table_data)
                 print(f"[TABLE EXTRACTION] Table {idx+1} on page {table.page}: "
@@ -616,13 +824,20 @@ class PDFErrorDetector:
                 response = requests.post(
                     f"{self.GROBID_URL}/api/processFulltextDocument",
                     files={"input": pdf_file},
-                    timeout=60,
-                    data={
-                        "teiCoordinates": "true",
-                        "segmentSentences": "true",
-                        "consolidateHeader": "1",
-                        "consolidateCitations": "1",
-                    },
+                    timeout=180,
+                    # teiCoordinates must be a repeated form field — one entry per
+                    # element type.  A dict collapses duplicates, so use a list of
+                    # tuples.  "s" gives sentence-level bounding boxes which are the
+                    # primary input for text-extraction and PDF annotation.
+                    data=[
+                        ("teiCoordinates", "s"),
+                        ("teiCoordinates", "ref"),
+                        ("teiCoordinates", "figure"),
+                        ("teiCoordinates", "formula"),
+                        ("segmentSentences", "1"),
+                        ("consolidateHeader", "1"),
+                        ("consolidateCitations", "1"),
+                    ],
                 )
 
             if response.status_code != 200:
@@ -652,6 +867,22 @@ class PDFErrorDetector:
             self._tei_root = root  # stored for _extract_text_via_grobid()
 
             ns = {"tei": "http://www.tei-c.org/ns/1.0"}
+
+            # ── Page dimensions from <facsimile> ─────────────────────────────
+            # GROBID coords are (page, x, y, w, h) in a top-left origin system
+            # whose unit is PDF points.  The <facsimile><surface> elements give
+            # us the precise page height for each page so we can convert to
+            # PyMuPDF rects correctly.  Keyed 0-indexed to match self.line_info.
+            self._grobid_page_dims: Dict[int, Tuple[float, float]] = {}
+            for surface in root.findall(".//tei:facsimile/tei:surface", ns):
+                try:
+                    n = int(surface.get("n", 0)) - 1       # 0-indexed
+                    w = float(surface.get("lrx", 595.276))
+                    h = float(surface.get("lry", 841.890))
+                    self._grobid_page_dims[n] = (w, h)
+                except (ValueError, TypeError):
+                    continue
+            print(f"[GROBID] Loaded page dims for {len(self._grobid_page_dims)} pages")
 
             # ── Header metadata (title / authors / date) ────────────────────
             # GROBID's header model populates these via processFulltextDocument.
@@ -815,7 +1046,7 @@ class PDFErrorDetector:
 
             # ── Tables: extracted by Camelot (not GROBID) ──────────────────
             # grobid_tables / _grobid_table_entries are left empty so that
-            # _check_table_caption_placement() uses its page-height fallback.
+            # Caption placement is handled by _check_caption_placement (PyMuPDF).
             self.grobid_tables = []
             self._grobid_table_entries = []
 
@@ -894,21 +1125,121 @@ class PDFErrorDetector:
             import traceback; traceback.print_exc()
             self._tei_root = None
 
-    def _extract_citations_grobid(self, pdf_path: str) -> List[Dict]:
+    # ── Reference entry patterns ─────────────────────────────────────────────
+    _REF_HEADING_RE = re.compile(
+        r"^\s*(?:[IVXivxlcdm]+[\.\)]\s*)?(?:REFERENCES?|BIBLIOGRAPHY|WORKS?\s+CITED)\s*$",
+        re.IGNORECASE,
+    )
+    _REF_ENTRY_PATTERNS = [
+        re.compile(r"^\s*\[(\d+)\]\s+\S"),     # IEEE: [1] text
+        re.compile(r"^\s*(\d+)\.\s+\S"),        # APA/MLA: 1. text
+        re.compile(r"^\s*\((\d+)\)\s+\S"),      # Vancouver: (1) text
+        re.compile(r"^\s*(\d+)\)\s+\S"),        # 1) text
+    ]
+
+    def _extract_citations_from_pdf(self, doc: "fitz.Document") -> List[Dict]:
         """
-        Use GROBID /api/processReferences to extract the reference list.
-        Returns a list of raw reference dicts.  Unchanged from original.
+        Extract references directly from PDF text using PyMuPDF.
+
+        Finds the References/Bibliography section heading, then groups
+        multi-line reference entries using the numbering pattern detected
+        from the first few entries.  Returns raw text exactly as it appears
+        in the paper — no field reconstruction.
+
+        Falls back to _extract_citations_grobid_fallback() if no reference
+        section or no entries are found.
         """
-        citations = []
+        # Gather all lines with their page numbers
+        all_lines: List[Tuple[int, str]] = []
+        for pg in range(len(doc)):
+            for line in doc[pg].get_text().splitlines():
+                all_lines.append((pg, line))
+
+        # Locate the references section heading
+        ref_start_idx: Optional[int] = None
+        for idx, (_, line) in enumerate(all_lines):
+            if self._REF_HEADING_RE.match(line.strip()):
+                ref_start_idx = idx
+                break
+
+        if ref_start_idx is None:
+            print("[CITATIONS] No references heading found; trying GROBID fallback")
+            return self._extract_citations_grobid_fallback(
+                doc.name if hasattr(doc, "name") else ""
+            )
+
+        ref_lines = all_lines[ref_start_idx + 1:]
+
+        # Detect which numbering style is used from the first non-empty lines
+        entry_re: Optional[re.Pattern] = None
+        for _, line in ref_lines[:30]:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            for pat in self._REF_ENTRY_PATTERNS:
+                if pat.match(stripped):
+                    entry_re = pat
+                    break
+            if entry_re:
+                break
+
+        if entry_re is None:
+            print("[CITATIONS] Could not detect reference numbering style; trying GROBID fallback")
+            return self._extract_citations_grobid_fallback(
+                doc.name if hasattr(doc, "name") else ""
+            )
+
+        # Group continuation lines into single reference entries
+        citations: List[Dict] = []
+        current_parts: List[str] = []
+        current_page: Optional[int] = None
+
+        for page_num, line in ref_lines:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            if entry_re.match(stripped):
+                if current_parts:
+                    raw = " ".join(current_parts)
+                    if len(raw) > 10:
+                        citations.append({"raw_text": raw, "page": current_page})
+                current_parts = [stripped]
+                current_page = page_num
+            elif current_parts:
+                current_parts.append(stripped)
+
+        if current_parts:
+            raw = " ".join(current_parts)
+            if len(raw) > 10:
+                citations.append({"raw_text": raw, "page": current_page})
+
+        print(f"[CITATIONS] Extracted {len(citations)} references from PDF text")
+
+        if not citations:
+            print("[CITATIONS] No entries found; trying GROBID fallback")
+            return self._extract_citations_grobid_fallback(
+                doc.name if hasattr(doc, "name") else ""
+            )
+
+        return citations
+
+    def _extract_citations_grobid_fallback(self, pdf_path: str) -> List[Dict]:
+        """
+        Fallback: call GROBID /api/processReferences and return raw_text
+        built from itertext() on each <biblStruct> — preserves more original
+        text than the previous field-reconstruction approach.
+        """
+        citations: List[Dict] = []
+        if not pdf_path or not os.path.exists(pdf_path):
+            return citations
         try:
-            print("[GROBID CITATIONS] Extracting references...")
+            print("[GROBID CITATIONS] Fallback: extracting references via GROBID...")
             with open(pdf_path, "rb") as f:
                 response = requests.post(
                     f"{self.GROBID_URL}/api/processReferences",
                     files={"input": f},
                     timeout=60,
                 )
-
             if response.status_code != 200:
                 print(f"[GROBID CITATIONS] Error: status {response.status_code}")
                 return citations
@@ -917,49 +1248,12 @@ class PDFErrorDetector:
             ns = {"tei": "http://www.tei-c.org/ns/1.0"}
 
             for ref in root.findall(".//tei:biblStruct", ns):
-                parts = []
-
-                for author in ref.findall(".//tei:author", ns):
-                    surname = author.findtext(".//tei:surname", default="", namespaces=ns)
-                    forename = author.findtext(".//tei:forename", default="", namespaces=ns)
-                    if surname:
-                        parts.append(f"{forename} {surname}".strip())
-
-                title = ref.findtext(".//tei:title[@level='a']", default="", namespaces=ns)
-                if not title:
-                    title = ref.findtext(".//tei:title", default="", namespaces=ns)
-                if title:
-                    parts.append(title)
-
-                journal = ref.findtext(".//tei:title[@level='j']", default="", namespaces=ns)
-                if not journal:
-                    journal = ref.findtext(".//tei:title[@level='m']", default="", namespaces=ns)
-                if journal:
-                    parts.append(journal)
-
-                date = ref.findtext(".//tei:date[@type='published']", default="", namespaces=ns)
-                if not date:
-                    date_el = ref.find(".//tei:date", ns)
-                    date = date_el.get("when", "") if date_el is not None else ""
-                if date:
-                    parts.append(date[:4])
-
-                vol  = ref.findtext(".//tei:biblScope[@unit='volume']", default="", namespaces=ns)
-                iss  = ref.findtext(".//tei:biblScope[@unit='issue']",  default="", namespaces=ns)
-                page = ref.findtext(".//tei:biblScope[@unit='page']",   default="", namespaces=ns)
-                if vol:  parts.append(f"vol. {vol}")
-                if iss:  parts.append(f"no. {iss}")
-                if page: parts.append(f"pp. {page}")
-
-                doi = ref.findtext(".//tei:idno[@type='DOI']", default="", namespaces=ns)
-                if doi:
-                    parts.append(f"doi:{doi}")
-
-                raw_text = " ".join(p for p in parts if p).strip()
-                if raw_text:
+                # Use itertext() to get all text content without field reconstruction
+                raw_text = " ".join(" ".join(ref.itertext()).split())
+                if raw_text and len(raw_text) > 10:
                     citations.append({"raw_text": raw_text})
 
-            print(f"[GROBID CITATIONS] Extracted {len(citations)} references")
+            print(f"[GROBID CITATIONS] Fallback extracted {len(citations)} references")
 
         except requests.exceptions.Timeout:
             print("[GROBID CITATIONS] Timeout — GROBID service took too long")
@@ -972,46 +1266,137 @@ class PDFErrorDetector:
         return citations
 
     @staticmethod
-    def analyze_references(citations: List[Dict]) -> Dict:
-        """Send citations to reference-api.onrender.com/analyze."""
-        if not citations:
-            return {}
+    def _analyze_references_via_openai(citations: List[Dict]) -> Dict:
+        """
+        Fallback reference analysis using OpenAI Responses API.
+        Returns the same high-level shape as reference-api for UI compatibility.
+        """
+        api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+        if not api_key:
+            return {"error": "OpenAI fallback unavailable: OPENAI_API_KEY not set"}
 
-        REFERENCE_API = os.environ.get(
-            "REFERENCE_API_URL", "https://reference-api.onrender.com/analyze"
+        model = os.environ.get("OPENAI_REF_MODEL", "gpt-4.1-mini").strip() or "gpt-4.1-mini"
+        base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+        endpoint = f"{base_url}/responses"
+        timeout_s = int(os.environ.get("OPENAI_REF_TIMEOUT_SECONDS", "60") or "60")
+
+        refs = [str(c.get("raw_text", "")).strip() for c in citations if str(c.get("raw_text", "")).strip()]
+        if not refs:
+            return {"error": "No reference text available for OpenAI fallback"}
+
+        input_json = json.dumps(refs, ensure_ascii=False)
+        prompt = (
+            "You are a research reference parser and quality checker. "
+            "Your input is an array of reference strings extracted from a PDF by GROBID, an imperfect parser. "
+            "The strings are often garbled: author names may be embedded mid-string after the title, "
+            "punctuation and delimiters may be missing, and fields may be out of order.\n\n"
+
+            "PARSING RULES — use common sense:\n"
+            "- Any 4-digit number between 1900 and 2026 is a YEAR. Always. Even if it appears at the end without parentheses.\n"
+            "- Clusters of 'Lastname Initials' tokens (e.g. 'Arnoldi W E', 'Athenstaedt H') are AUTHORS, "
+            "even if they appear after the title or mid-string.\n"
+            "- The longest descriptive noun phrase is the TITLE.\n"
+            "- A short recognizable word cluster (e.g. 'Science', 'Quart. Appl. Math', 'J. Biomech') is the JOURNAL.\n"
+            "- Small numbers at the end (e.g. '9', '216', '13-15') are VOLUME or PAGES — not years, not IDs.\n"
+            "- If a string contains 'doi:' or 'https://doi.org/', extract it as the DOI.\n\n"
+
+            "LENIENCY RULES — only flag genuinely missing fields:\n"
+            "- Do NOT flag 'authors missing' if any human-name-like token exists anywhere in the string.\n"
+            "- Do NOT flag 'year missing' if any 4-digit number between 1900 and 2026 exists anywhere.\n"
+            "- Do NOT flag 'DOI missing' as an error — it is optional. Only mention it as a soft suggestion.\n"
+            "- Only raise a COMPLETENESS issue if a field is completely and unambiguously absent.\n\n"
+
+            "OUTPUT: Produce ONLY valid JSON matching this exact schema — no markdown, no explanation:\n"
+            "{\n"
+            "  \"summary\": {\n"
+            "    \"total\": number,\n"
+            "    \"parsed_ok\": number,\n"
+            "    \"total_issues\": number,\n"
+            "    \"style\": string,\n"
+            "    \"checks_passed\": string[],\n"
+            "    \"checks_failed\": string[]\n"
+            "  },\n"
+            "  \"list_level_issues\": [\n"
+            "    {\"position\": string, \"check\": string, \"detail\": string, \"expected\": string|null}\n"
+            "  ],\n"
+            "  \"entries\": [\n"
+            "    {\n"
+            "      \"id\": string,\n"
+            "      \"raw_text\": string,\n"
+            "      \"parsed\": {\n"
+            "        \"title\": string|null,\n"
+            "        \"authors\": string[],\n"
+            "        \"pub_date\": string|null,\n"
+            "        \"doi\": string|null\n"
+            "      },\n"
+            "      \"issues\": [\n"
+            "        {\"check\": string, \"field\": string|null, \"detail\": string, \"suggestion\": string|null}\n"
+            "      ]\n"
+            "    }\n"
+            "  ]\n"
+            "}\n\n"
+
+            "Keep ids as [1], [2], ... matching input order. "
+            "If you are unsure about a field, make your best guess rather than leaving it null. "
+            "Guessing is better than false 'missing field' errors.\n\n"
+
+            f"Reference entries JSON array:\n{input_json}"
         )
         payload = {
-            "entries": citations,
-            "dry_run": False,
-            "deep_doi": False,
-            "crossref_email": None,
+            "model": model,
+            "input": prompt,
+            "text": {"format": {"type": "json_object"}},
+        }
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
         }
 
         try:
-            print(f"[REF API] Sending {len(citations)} references for analysis...")
-            resp = requests.post(
-                REFERENCE_API,
-                json=payload,
-                timeout=60,
-                headers={"Content-Type": "application/json"},
-            )
+            print(f"[OPENAI REF FALLBACK] Sending {len(refs)} references using model={model}")
+            resp = requests.post(endpoint, json=payload, headers=headers, timeout=timeout_s)
             resp.raise_for_status()
-            result = resp.json()
-            print(f"[REF API] Response: {result.get('summary', {})}")
-            return result
-        except requests.exceptions.Timeout:
-            print("[REF API] Timeout")
-            return {"error": "Reference API timed out"}
-        except requests.exceptions.ConnectionError as e:
-            print(f"[REF API] Connection error: {e}")
-            return {"error": "Could not connect to reference API"}
-        except Exception as e:
-            print(f"[REF API] Error: {e}")
-            return {"error": str(e)}
+            body = resp.json()
 
-    # =========================================================================
-    # STATISTICS  — figure count now from GROBID
-    # =========================================================================
+            output_text = body.get("output_text")
+            if not output_text:
+                chunks = []
+                for item in body.get("output", []):
+                    for content in item.get("content", []):
+                        if content.get("type") == "output_text":
+                            chunks.append(content.get("text", ""))
+                output_text = "\n".join(chunks).strip()
+
+            if not output_text:
+                return {"error": "OpenAI fallback returned empty output"}
+
+            parsed = json.loads(output_text)
+            if not isinstance(parsed, dict):
+                return {"error": "OpenAI fallback returned non-object JSON"}
+
+            parsed.setdefault("summary", {})
+            parsed.setdefault("entries", [])
+            parsed.setdefault("list_level_issues", [])
+            print(f"[OPENAI REF FALLBACK] Success: {parsed.get('summary', {})}")
+            return parsed
+        except requests.exceptions.Timeout:
+            print("[OPENAI REF FALLBACK] Timeout")
+            return {"error": "OpenAI fallback timed out"}
+        except requests.exceptions.ConnectionError as e:
+            print(f"[OPENAI REF FALLBACK] Connection error: {e}")
+            return {"error": "OpenAI fallback connection error"}
+        except Exception as e:
+            print(f"[OPENAI REF FALLBACK] Error: {e}")
+            return {"error": f"OpenAI fallback failed: {e}"}
+
+    @staticmethod
+    def analyze_references(citations: List[Dict]) -> Dict:
+        """Analyze references via OpenAI."""
+        if not citations:
+            return {}
+
+        print(f"[OpenAI] Analyzing {len(citations)} references...")
+        return PDFErrorDetector._analyze_references_via_openai(citations)
 
     @staticmethod
     def _bbox_overlap_ratio(a: Dict, b: Dict) -> float:
@@ -1169,6 +1554,20 @@ class PDFErrorDetector:
             ],
             "merge_summary": self.merge_summary,
             "pipeline_status": self.pipeline_status,
+            # Unified section-detection results (single source of truth for
+            # which sections are present in the paper).
+            "detected_sections": [
+                s for s, info in self.section_detection.items() if info.get("found")
+            ],
+            "section_detection": [
+                {
+                    "section":          s,
+                    "found":            bool(info.get("found")),
+                    "matched_heading":  info.get("matched_heading"),
+                    "page":             info.get("page"),
+                }
+                for s, info in self.section_detection.items()
+            ],
         }
 
     # =========================================================================
@@ -1179,6 +1578,7 @@ class PDFErrorDetector:
         self,
         pdf_path: str,
         required_sections: Optional[List[str]] = None,
+        progress_callback=None,
     ) -> Tuple[List[ErrorInstance], fitz.Document, Dict]:
         """Open PDF, extract text and tables, run all checks, return errors + doc + stats."""
         doc = fitz.open(pdf_path)
@@ -1207,6 +1607,8 @@ class PDFErrorDetector:
                 }
 
         _run_current_layer()
+        if progress_callback:
+            progress_callback("grobid_parsing", "Parsing Document")
         self.pipeline_status["pix2text"] = {
             "enabled": False,
             "success": False,
@@ -1214,9 +1616,11 @@ class PDFErrorDetector:
             "count": 0,
         }
 
-        citations = self._extract_citations_grobid(pdf_path)
+        citations = self._extract_citations_from_pdf(doc)
         self.reference_analysis = self.analyze_references(citations)
         self.raw_citations = citations
+        if progress_callback:
+            progress_callback("reference_analysis", "Reference Analysis")
 
         try:
             self._build_merged_blocks()
@@ -1227,16 +1631,30 @@ class PDFErrorDetector:
             self.merge_summary = {}
             self.pipeline_status["merge"] = {"success": False, "message": f"Merge failed: {exc}"}
 
+        # Unified section detection (runs once, used by required-sections check
+        # and surfaced in statistics for the UI).
+        self._detect_all_sections(doc)
+
         statistics = self._collect_statistics(doc)
-        errors = self._run_document_checks(doc)
+        errors = self._run_document_checks(doc, progress_callback=progress_callback)
 
         # Format-driven required-sections check (optional, caller-supplied list)
         if required_sections:
             errors.extend(self._check_required_sections(required_sections))
+            if progress_callback:
+                progress_callback("section_check", "Section Existence")
 
-        # Filter out errors from pages before start_page
+        # Filter out errors from pages before start_page — BUT preserve
+        # document-level errors (missing sections, missing metadata) that are
+        # not tied to a specific page.  Without this exemption, selecting
+        # start_page > 1 would silently hide "Index Terms missing" etc.
         if self.start_page_0 > 0:
-            errors = [e for e in errors if e.page_num >= self.start_page_0]
+            DOCUMENT_LEVEL_TYPES = {"missing_required_section", "metadata_incomplete"}
+            errors = [
+                e for e in errors
+                if e.error_type in DOCUMENT_LEVEL_TYPES
+                or e.page_num >= self.start_page_0
+            ]
 
         return errors, doc, statistics
 
@@ -1266,43 +1684,58 @@ class PDFErrorDetector:
     # ORCHESTRATOR
     # =========================================================================
 
-    def _run_document_checks(self, doc: fitz.Document) -> List[ErrorInstance]:
-        """Run all compliance and formatting checks."""
+    def _run_document_checks(self, doc: fitz.Document, progress_callback=None) -> List[ErrorInstance]:
+        """Run all compliance and formatting checks, optionally firing progress_callback."""
         errors = []
+
+        def emit(key: str, name: str) -> None:
+            if progress_callback:
+                progress_callback(key, name)
 
         # Metadata Completeness (25) — GROBID header model
         errors.extend(self._check_metadata_completeness())
+        emit("metadata_completeness", "Metadata Completeness")
 
-        # Structure & Content Checks (1–5)
-        errors.extend(self._check_abstract_exists())
-        # errors.extend(self._check_abstract_word_count())
-        errors.extend(self._check_index_terms_exists())
-        errors.extend(self._check_references_section_exists())
+        # Structure — Roman numeral headings
         errors.extend(self._check_roman_numeral_headings())
-        errors.extend(self._check_introduction_exists())
+        emit("roman_numeral_headings", "Roman Numeral Headings")
 
-        # Format Checks (6–8): label format
+        # Numbering — label formats (6–8)
         errors.extend(self._check_figure_numbering())
         errors.extend(self._check_table_numbering())
         errors.extend(self._check_equation_numbering())
+        emit("label_formats", "Figure & Table Labels")
 
-        # Sequential Numbering Checks (21–23)
-        errors.extend(self._check_figure_sequential_numbering())
-        errors.extend(self._check_table_sequential_numbering())
+        # Numbering — sequential checks (21–23)
+        # errors.extend(self._check_figure_sequential_numbering())
+        # errors.extend(self._check_table_sequential_numbering())
         errors.extend(self._check_reference_sequential_numbering())
+        emit("sequential_numbering", "Sequential Numbering")
 
-        # Figure/Table Caption Placement (19–20)
-        errors.extend(self._check_figure_caption_placement())
-        errors.extend(self._check_table_caption_placement())
+        # Formatting — caption placement (19–20)
+        errors.extend(self._check_caption_placement(doc))
+        emit("caption_placement", "Caption Placement")
 
-        # URL & DOI Validity (24)
+        # References — URL & DOI validity (24)
         errors.extend(self._check_url_doi_validity())
+        emit("url_doi_validity", "URL & DOI Validity")
 
-        # Typography & Formatting Checks (12, 15–17)
+        # Writing — style checks (12, 15–17)
         errors.extend(self._check_repeated_words())
         errors.extend(self._check_et_al_formatting())
         errors.extend(self._check_first_person_pronouns())
         errors.extend(self._check_references_numbered())
+        emit("writing_style", "Writing Style")
+
+        # Writing — punctuation & spacing (26, 28–33)
+        errors.extend(self._check_space_before_punctuation_marks())
+        errors.extend(self._check_double_punctuation())
+        errors.extend(self._check_missing_space_after_punctuation_marks())
+        errors.extend(self._check_comma_before_parenthesis())
+        errors.extend(self._check_punctuation_inside_citation())
+        errors.extend(self._check_multiple_spaces_between_words())
+        errors.extend(self._check_space_inside_brackets())
+        emit("punctuation_checks", "Punctuation & Spacing")
 
         return errors
 
@@ -1428,186 +1861,246 @@ class PDFErrorDetector:
         return errors
 
     # =========================================================================
-    # CHECK #1 — ABSTRACT EXISTS
+    # UNIFIED SECTION DETECTION
+    # ─────────────────────────────────────────────────────────────────────────
+    # A single, high-accuracy pass that decides whether each canonical section
+    # in ALL_SECTIONS is present in the document.  Used by:
+    #   • _check_required_sections() – the only section-existence check
+    #   • statistics["detected_sections"] / ["section_detection"] for the UI
     # =========================================================================
 
-    def _check_abstract_exists(self) -> List[ErrorInstance]:
-        """
-        Verify the paper contains an Abstract.
-
-        Primary:  GROBID's <abstract> element (structural, avoids false positives
-                  from the word "abstract" appearing inside body sentences).
-        Fallback: regex on full_text (when GROBID was unavailable).
-        """
-        # Primary: GROBID structural signal
-        if self._grobid_has_abstract:
-            return []
-
-        # Fallback: regex
-        if re.search(r"\bAbstract\b", self.full_text, re.IGNORECASE):
-            return []
-
-        first_text, first_bbox, first_page = (
-            self.line_info[0] if self.line_info else ("", (0, 0, 200, 20), 0)
-        )
-        return [ErrorInstance(
-            check_id=1,
-            check_name="Abstract Missing",
-            description="No Abstract section found. IEEE papers must include an Abstract at the beginning.",
-            page_num=first_page,
-            text="[Abstract section not found]",
-            bbox=first_bbox,
-            error_type="missing_abstract",
-        )]
-
-    # =========================================================================
-    # CHECK #26 — ABSTRACT WORD COUNT (150–250 words)
-    # =========================================================================
-
-    ABSTRACT_MIN_WORDS = 150
-    ABSTRACT_MAX_WORDS = 250
-
-    _HEADING_RE = re.compile(r"^#{1,6}\s+", re.MULTILINE)
-    _ABSTRACT_HEADING_RE = re.compile(
-        r"^#{1,6}\s+Abstract\s*$", re.MULTILINE | re.IGNORECASE
+    # Strip leading Roman/Arabic numbering + optional letter prefix (e.g. "A.")
+    # so that "III. RELATED WORK" normalises to "related work".
+    _HEADING_PREFIX_RE = re.compile(
+        r"^\s*(?:(?:[IVXLCDMivxlcdm]+|\d+|[A-Za-z])[\.\)\-:]\s+)+"
     )
 
-    def _extract_abstract_from_markdown(self) -> str:
+    @staticmethod
+    def _normalize_heading(text: str) -> str:
+        t = (text or "").strip().lower()
+        t = PDFErrorDetector._HEADING_PREFIX_RE.sub("", t)
+        # Collapse whitespace
+        t = re.sub(r"\s+", " ", t).strip()
+        # Strip trailing punctuation that sometimes hangs off headings
+        t = re.sub(r"[\.\:\;\,\s]+$", "", t)
+        return t
+
+    # --- PyMuPDF heading extraction helpers ---------------------------------
+
+    # Lines longer than this are almost never a heading — skip early.
+    _HEADING_MAX_CHARS = 120
+    # Minimum characters to consider a heading (filters out noise like "1.").
+    _HEADING_MIN_CHARS = 3
+
+    def _extract_pymupdf_headings(
+        self, doc: "fitz.Document"
+    ) -> List[Dict]:
         """
-        Extract the abstract body from the pymupdf4llm markdown text.
+        Extract heading-like lines from the PDF using PyMuPDF font information.
 
-        Finds the first heading matching "Abstract" (any level) and returns
-        everything between it and the next markdown heading.  Returns an
-        empty string when the markdown is unavailable or contains no
-        recognisable Abstract heading.
+        A line is considered a heading candidate when TWO of these hold:
+          • All of its non-trivial spans are bold, OR
+          • Its dominant font size is materially larger than the body
+            font size (>= body_size * 1.08), OR
+          • It is ALL-CAPS, short, and stands alone (no sentence-ending
+            punctuation).
+
+        Returns a list of dicts: {text, normalized, page, bbox, size, bold}.
         """
-        if not self.markdown_text:
-            return ""
+        # ── Pass 1: collect every line's dominant size/bold to infer body size.
+        line_records: List[Dict] = []
+        size_hist: "Dict[float, int]" = {}
 
-        m = self._ABSTRACT_HEADING_RE.search(self.markdown_text)
-        if not m:
-            return ""
+        for page_num in range(len(doc)):
+            if page_num < self.start_page_0:
+                continue
+            page = doc[page_num]
+            try:
+                blocks = page.get_text("dict").get("blocks", [])
+            except Exception:
+                continue
 
-        body_start = m.end()
-        next_heading = self._HEADING_RE.search(self.markdown_text, body_start)
-        body_end = next_heading.start() if next_heading else len(self.markdown_text)
+            for block in blocks:
+                if block.get("type") != 0:
+                    continue
+                for line in block.get("lines", []):
+                    spans = [
+                        s for s in line.get("spans", [])
+                        if s.get("text", "").strip()
+                    ]
+                    if not spans:
+                        continue
 
-        return self.markdown_text[body_start:body_end].strip()
+                    text = "".join(s["text"] for s in spans).strip()
+                    text = re.sub(r"\s+", " ", text)
+                    if not text:
+                        continue
 
-    # def _check_abstract_word_count(self) -> List[ErrorInstance]:
-    #     """
-    #     Verify the abstract contains between 150 and 250 words.
+                    # Dominant size = size of the longest span (in chars).
+                    dominant = max(spans, key=lambda s: len(s.get("text", "")))
+                    size = round(float(dominant.get("size", 0.0)), 1)
 
-    #     Uses the pymupdf4llm markdown extraction to isolate the abstract:
-    #     everything after the "Abstract" heading up to the next heading.
-    #     Falls back to GROBID abstract text when markdown is unavailable.
-    #     """
-    #     abstract_text = self._extract_abstract_from_markdown()
-    #     if not abstract_text:
-    #         abstract_text = self._grobid_abstract_text
-    #     if not abstract_text:
-    #         return []
+                    # Bold if ALL non-trivial spans are bold (by flag or name).
+                    def _is_bold(span):
+                        flags = int(span.get("flags", 0) or 0)
+                        name = (span.get("font", "") or "").lower()
+                        return bool(flags & 16) or "bold" in name or "black" in name
+                    bold = all(_is_bold(s) for s in spans)
 
-    #     words = abstract_text.split()
-    #     count = len(words)
+                    bbox = line.get("bbox") or (0, 0, 0, 0)
 
-    #     if self.ABSTRACT_MIN_WORDS <= count <= self.ABSTRACT_MAX_WORDS:
-    #         return []
+                    line_records.append({
+                        "text": text,
+                        "page": page_num,
+                        "bbox": bbox,
+                        "size": size,
+                        "bold": bold,
+                    })
+                    # Only count body-ish line sizes (>= 6pt, < 30pt).
+                    if 6.0 <= size < 30.0:
+                        size_hist[size] = size_hist.get(size, 0) + 1
 
-    #     anchor_text, anchor_bbox, anchor_page = (
-    #         self.line_info[0] if self.line_info else ("", (0, 0, 200, 20), 0)
-    #     )
-
-    #     if count < self.ABSTRACT_MIN_WORDS:
-    #         description = (
-    #             f"Abstract is too short: {count} word{'s' if count != 1 else ''}. "
-    #             f"IEEE abstracts should be between {self.ABSTRACT_MIN_WORDS} and "
-    #             f"{self.ABSTRACT_MAX_WORDS} words."
-    #         )
-    #     else:
-    #         description = (
-    #             f"Abstract is too long: {count} words. "
-    #             f"IEEE abstracts should be between {self.ABSTRACT_MIN_WORDS} and "
-    #             f"{self.ABSTRACT_MAX_WORDS} words."
-    #         )
-
-    #     return [ErrorInstance(
-    #         check_id=26,
-    #         check_name="Abstract Word Count Out of Range",
-    #         description=description,
-    #         page_num=anchor_page,
-    #         text=f"[Abstract: {count} words — expected {self.ABSTRACT_MIN_WORDS}–{self.ABSTRACT_MAX_WORDS}]",
-    #         bbox=anchor_bbox,
-    #         error_type="abstract_word_count",
-    #     )]
-
-    # =========================================================================
-    # CHECK #2 — INDEX TERMS EXISTS
-    # =========================================================================
-
-    def _check_index_terms_exists(self) -> List[ErrorInstance]:
-        """
-        Verify the paper contains Index Terms / Keywords.
-
-        Primary:  GROBID's <textClass><keywords> element.
-        Fallback: regex on full_text.
-        """
-        if self._grobid_has_keywords:
+        if not line_records:
             return []
 
-        if re.search(r"Index\s+Terms", self.full_text, re.IGNORECASE):
-            return []
+        # ── Infer body size: the MOST COMMON size across the document.
+        body_size = max(size_hist.items(), key=lambda kv: kv[1])[0] if size_hist else 10.0
+        heading_size_cutoff = body_size * 1.15
 
-        first_text, first_bbox, first_page = (
-            self.line_info[0] if self.line_info else ("", (0, 0, 200, 20), 0)
+        # ── Pass 2: filter to heading candidates.
+        headings: List[Dict] = []
+        for rec in line_records:
+            text = rec["text"]
+            n = len(text)
+            if n < self._HEADING_MIN_CHARS or n > self._HEADING_MAX_CHARS:
+                continue
+            # Skip obvious running-text: ends with sentence punctuation and
+            # is not a numbered heading.
+            if re.search(r"[\.\?!]\s*$", text) and not re.match(
+                r"^\s*(?:[IVXLCDM]+|\d+|[A-Z])[\.\)]\s", text
+            ):
+                continue
+            # Strip leading/trailing quotes that sometimes appear in captions.
+            if text.startswith(("Figure", "Fig.", "Table")):
+                continue
+
+            is_large = rec["size"] >= heading_size_cutoff
+            is_all_caps = text == text.upper() and any(c.isalpha() for c in text) and n <= 80
+
+            if  is_large or is_all_caps:
+                rec["normalized"] = self._normalize_heading(text)
+                headings.append(rec)
+
+        print(
+            f"[PYMUPDF HEADINGS] body_size={body_size}pt, "
+            f"cutoff={heading_size_cutoff:.2f}pt, "
+            f"found {len(headings)} heading candidates"
         )
-        return [ErrorInstance(
-            check_id=2,
-            check_name="Index Terms Missing",
-            description="No Index Terms section found. IEEE papers require Index Terms following the Abstract.",
-            page_num=first_page,
-            text="[Index Terms section not found]",
-            bbox=first_bbox,
-            error_type="missing_index_terms",
-        )]
+        return headings
 
-    # =========================================================================
-    # CHECK #3 — REFERENCES SECTION EXISTS
-    # =========================================================================
-
-    def _check_references_section_exists(self) -> List[ErrorInstance]:
+    def _detect_all_sections(self, doc: Optional["fitz.Document"] = None) -> None:
         """
-        Verify the paper contains a References section.
+        Detect which canonical sections (ALL_SECTIONS) are present in the paper.
 
-        Primary:  Non-empty raw_citations list from GROBID — if GROBID extracted
-                  any references, a reference section must exist.
-        Secondary: A heading in _grobid_section_heads named "references".
-        Fallback:  regex on full_text.
+        Accuracy strategy (highest-confidence signal wins):
+          1. GROBID structural tags:
+               • <abstract>   → Abstract
+               • <keywords>   → Index Terms
+               • <listBibl>   → References (via self.raw_citations being non-empty)
+          2. GROBID <div><head> elements matched against
+             SECTION_DETECTION_KEYWORDS with word-boundary matching on a
+             normalised heading string (numbers/letters stripped).
+          3. PyMuPDF-based heading extraction (bold / larger-than-body /
+             ALL-CAPS lines). Used whenever we have a doc handle — this is
+             the robust fallback when GROBID fails or returns nothing.
+
+        Crucially, we NEVER fall back to full-text regex matching: words
+        like "performance" or "preliminary" appear routinely in body text
+        and would produce false positives.
+
+        Populates self.section_detection keyed by canonical section name.
         """
-        if self.raw_citations:
-            return []
+        detection: "OrderedDict[str, Dict]" = OrderedDict()
 
-        if any(
-            re.search(r"\breferences?\b", h["text"], re.IGNORECASE)
+        # Pre-normalize GROBID headings once.
+        grobid_heads: List[Tuple[str, str, Dict]] = [
+            (self._normalize_heading(h["text"]), h["text"], h)
             for h in self._grobid_section_heads
-        ):
-            return []
+        ]
 
-        if re.search(r"\bReferences\b", self.full_text, re.IGNORECASE):
-            return []
+        # If GROBID gave us few/no headings, enrich with PyMuPDF headings.
+        # Threshold: <3 GROBID heads is a strong signal GROBID struggled.
+        pymupdf_heads: List[Dict] = []
+        if doc is not None and len(grobid_heads) < 3:
+            try:
+                pymupdf_heads = self._extract_pymupdf_headings(doc)
+            except Exception as exc:
+                print(f"[PYMUPDF HEADINGS] Error: {exc}")
+                pymupdf_heads = []
 
-        last_text, last_bbox, last_page = (
-            self.line_info[-1] if self.line_info else ("", (0, 0, 200, 20), 0)
-        )
-        return [ErrorInstance(
-            check_id=3,
-            check_name="References Section Missing",
-            description="No References section found. IEEE papers must include a References section at the end.",
-            page_num=last_page,
-            text="[References section not found]",
-            bbox=last_bbox,
-            error_type="missing_references",
-        )]
+        def match_in_grobid(keywords: List[str]):
+            for kw in sorted(keywords, key=len, reverse=True):
+                kw_re = re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
+                for norm, original, head in grobid_heads:
+                    if kw_re.search(norm):
+                        return original, head.get("page")
+            return None, None
+
+        def match_in_pymupdf(keywords: List[str]):
+            for kw in sorted(keywords, key=len, reverse=True):
+                kw_re = re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
+                for h in pymupdf_heads:
+                    if kw_re.search(h["normalized"]):
+                        return h["text"], h["page"]
+            return None, None
+
+        for section in ALL_SECTIONS:
+            keywords = SECTION_DETECTION_KEYWORDS.get(section, [section.lower()])
+            found = False
+            matched_heading: Optional[str] = None
+            page: Optional[int] = None
+
+            # ── (1) Structural GROBID signals ───────────────────────────────
+            if section == "Abstract" and self._grobid_has_abstract:
+                found = True
+                matched_heading = "Abstract (GROBID <abstract>)"
+            elif section == "Index Terms" and self._grobid_has_keywords:
+                found = True
+                matched_heading = "Index Terms (GROBID <keywords>)"
+            elif section == "References" and self.raw_citations:
+                found = True
+                matched_heading = f"References ({len(self.raw_citations)} parsed)"
+
+            # ── (2) GROBID headings ─────────────────────────────────────────
+            if not found and grobid_heads:
+                matched_heading, page = match_in_grobid(keywords)
+                found = matched_heading is not None
+
+            # ── (3) PyMuPDF headings (bold / larger / all-caps) ─────────────
+            if not found and pymupdf_heads:
+                matched_heading, page = match_in_pymupdf(keywords)
+                if matched_heading is not None:
+                    found = True
+                    matched_heading = f"{matched_heading} (PyMuPDF heading)"
+
+            detection[section] = {
+                "found": found,
+                "matched_heading": matched_heading,
+                "page": page,
+            }
+
+        self.section_detection = detection
+
+        print("\n[DEBUG] Full Section Detection:")
+        for section, info in detection.items():
+            print(
+                f"{section}: found={info['found']}, "
+                f"matched='{info['matched_heading']}', "
+                f"page={info['page']}"
+            )
+
+        present = [s for s, info in detection.items() if info["found"]]
+        print(f"[SECTIONS] Detected ({len(present)}): {', '.join(present) or 'none'}")
 
     # =========================================================================
     # CHECK #4 — ROMAN NUMERAL SECTION HEADINGS
@@ -1663,96 +2156,6 @@ class PDFErrorDetector:
                     ))
 
         return errors
-
-    # =========================================================================
-    # CHECK #5 — INTRODUCTION SECTION EXISTS
-    # =========================================================================
-
-    def _check_introduction_exists(self) -> List[ErrorInstance]:
-        """
-        Verify the paper contains 'I. INTRODUCTION'.
-
-        Primary:  Check _grobid_section_heads for a heading whose text matches
-                  the expected IEEE format.  Also detect mis-formatted
-                  "Introduction" headings among GROBID heads.
-        Fallback: Original regex on full_text.
-        """
-        ieee_intro_re = re.compile(r"\bI\.\s+INTRODUCTION\b")
-        generic_intro_re = re.compile(r"\bIntroduction\b", re.IGNORECASE)
-
-        if self._grobid_section_heads:
-            # ── GROBID path ──────────────────────────────────────────────────
-            # Check for correctly-formatted heading
-            if any(ieee_intro_re.search(h["text"]) for h in self._grobid_section_heads):
-                return []
-
-            # Check for mis-formatted introduction headings
-            bad_intro_heads = [
-                h for h in self._grobid_section_heads
-                if generic_intro_re.search(h["text"]) and not ieee_intro_re.search(h["text"])
-            ]
-
-            if bad_intro_heads:
-                errors = []
-                for head in bad_intro_heads:
-                    errors.append(ErrorInstance(
-                        check_id=5,
-                        check_name="Introduction Section Misformatted",
-                        description=(
-                            f"Heading '{head['text']}' found but not in IEEE format. "
-                            "It should be labelled 'I. INTRODUCTION' — Roman numeral, fully uppercase."
-                        ),
-                        page_num=head["page"],
-                        text=head["text"],
-                        bbox=head["bbox"],
-                        error_type="missing_introduction",
-                    ))
-                return errors
-
-            # No introduction heading at all
-            first_text, first_bbox, first_page = (
-                self.line_info[0] if self.line_info else ("", (0, 0, 200, 20), 0)
-            )
-            return [ErrorInstance(
-                check_id=5,
-                check_name="Introduction Section Missing",
-                description="No 'I. INTRODUCTION' section found. IEEE papers require an introduction labelled 'I. INTRODUCTION'.",
-                page_num=first_page,
-                text="[I. INTRODUCTION not found]",
-                bbox=first_bbox,
-                error_type="missing_introduction",
-            )]
-
-        else:
-            # ── Fallback: original regex logic ───────────────────────────────
-            if re.search(r"\bI\.\s+INTRODUCTION\b", self.full_text):
-                return []
-
-            has_generic = bool(re.search(r"\bIntroduction\b", self.full_text, re.IGNORECASE))
-            if has_generic:
-                return self._find_all_occurrences(
-                    pattern=re.compile(r"\bIntroduction\b", re.IGNORECASE),
-                    check_id=5,
-                    check_name="Introduction Section Misformatted",
-                    error_type="missing_introduction",
-                    description_fn=lambda m, line: (
-                        "'Introduction' found but not in IEEE format. "
-                        "It should be labelled 'I. INTRODUCTION' — Roman numeral, fully uppercase."
-                    ),
-                )
-
-            first_text, first_bbox, first_page = (
-                self.line_info[0] if self.line_info else ("", (0, 0, 200, 20), 0)
-            )
-            return [ErrorInstance(
-                check_id=5,
-                check_name="Introduction Section Missing",
-                description="No 'I. INTRODUCTION' section found. IEEE papers require an introduction labelled 'I. INTRODUCTION'.",
-                page_num=first_page,
-                text="[I. INTRODUCTION not found]",
-                bbox=first_bbox,
-                error_type="missing_introduction",
-            )]
 
     # =========================================================================
     # CHECK #6 — IN-TEXT CITATION FORMAT [n]  (unchanged)
@@ -2344,23 +2747,34 @@ class PDFErrorDetector:
             description_fn=lambda m, _: "Should be 'et al.' (with period after 'al', not after 'et')",
         )
 
+    # First-person pronouns. Capital "I" is matched on its own (lowercase "i"
+    # is never a pronoun); everything else is case-insensitive so "We", "we",
+    # "WE", "Our", "OUR" etc. all trigger.
+    #
+    # Reference-list author initials like "I. Smith" are suppressed via a
+    # negative lookahead: \bI\b not followed by ". X..." (period + spaces +
+    # capital letter), which is the canonical IEEE initial pattern.
+    _FIRST_PERSON_RE = re.compile(
+        r"(?-i:\bI\b)(?!\.\s*[A-Z])"                             # capital I only, not an author initial
+        r"|\b(?:we|our|ours|ourselves|us|my|mine|myself|me)\b",  # others, case-insensitive
+        re.IGNORECASE,
+    )
+
     def _check_first_person_pronouns(self) -> List[ErrorInstance]:
-        errors = []
-        pattern = re.compile(r"\b(I|we|our|my|us|We|Our|My|Us)\b")
+        errors: List[ErrorInstance] = []
         for line_text, line_bbox, page_num in self.line_info:
-            if "acknowledgment" in line_text.lower() or "acknowledge" in line_text.lower():
-                continue
-            for match in pattern.finditer(line_text):
-                word = match.group()
-                idx = match.start()
-                if idx > 0 and line_text[idx - 1].isupper():
-                    continue
-                if match.end() < len(line_text) and line_text[match.end()].isupper():
+            for match in self._FIRST_PERSON_RE.finditer(line_text):
+                word = match.group(0)
+                # Defensive: regex-flag fallback — reject a lowercase "i".
+                if word == "i":
                     continue
                 errors.append(ErrorInstance(
                     check_id=16,
                     check_name="First-Person Pronoun",
-                    description=f"IEEE-style papers prefer impersonal tone over first-person pronouns like '{word}'",
+                    description=(
+                        f"IEEE-style papers prefer impersonal tone over "
+                        f"first-person pronouns like '{word}'"
+                    ),
                     page_num=page_num,
                     text=word,
                     bbox=self._calculate_match_bbox(line_text, match, line_bbox),
@@ -2369,205 +2783,539 @@ class PDFErrorDetector:
         return errors
 
     # =========================================================================
-    # CHECK #19 — FIGURE CAPTION PLACEMENT
+    # PUNCTUATION & SPACING CHECKS (26, 28–33) — Writing section
     # =========================================================================
 
-    def _check_figure_caption_placement(self) -> List[ErrorInstance]:
-        """
-        Figure captions must be placed BELOW the figure.
+    _PUNCT_NAMES: Dict[str, str] = {
+        ',': 'comma', '.': 'period', ';': 'semicolon',
+        ':': 'colon', '!': 'exclamation mark', '?': 'question mark',
+    }
 
-        Primary:  Use GROBID-detected figure bounding boxes (_grobid_figure_entries).
-                  GROBID provides the actual page-coordinate bbox of each figure
-                  (the image area) from the coords attribute.  We then look for a
-                  caption line whose y0 is ABOVE the figure's y0 — that's a
-                  misplaced caption.
+    # Known abbreviation stems whose trailing period must not trigger a
+    # "missing space after punctuation" alert.
+    _ABBREV_STEMS_RE = re.compile(
+        r'\b(?:et|al|vs|etc|fig|eq|no|vol|pp|ed|eds|dr|mr|mrs|ms|prof|'
+        r'st|ave|blvd|rd|jr|sr|dept|univ|approx|est|ref|sec|ch|p)\.',
+        re.IGNORECASE,
+    )
 
-        Fallback: Original page-height threshold heuristic (when GROBID returned
-                  no figure data or coords were absent).
-        """
-        errors = []
+    def _check_space_before_punctuation_marks(self) -> List[ErrorInstance]:
+        """Flag a space immediately before , . ; : ! ? — e.g. 'hello , world'."""
+        errors: List[ErrorInstance] = []
+        pattern = re.compile(r'\s([,\.;:!?])')
+        for line_text, line_bbox, page_num in self.line_info:
+            for match in pattern.finditer(line_text):
+                punct = match.group(1)
+                pre = match.start()
+                # Skip numeric context: "3 .14" or "page 5 ."  only when digit is right before space
+                if pre > 0 and line_text[pre - 1].isdigit():
+                    continue
+                errors.append(ErrorInstance(
+                    check_id=26,
+                    check_name="Space Before Punctuation",
+                    description=(
+                        f"Unexpected space before "
+                        f"{self._PUNCT_NAMES.get(punct, 'punctuation')} '{punct}' — remove the space"
+                    ),
+                    page_num=page_num,
+                    text=match.group(),
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="punctuation_spacing",
+                ))
+        return errors
 
-        if self._grobid_figure_entries and any(
-            e.get("xml_coords") for e in self._grobid_figure_entries
-        ):
-            # ── GROBID path ──────────────────────────────────────────────────
-            fig_pattern = re.compile(
-                r"(Fig\.|Figure)\s+(\d+)[:\.]?\s+([^\n]{10,200})", re.IGNORECASE
-            )
-            for fig_entry in self._grobid_figure_entries:
-                fig_page = fig_entry["page"]
-                _, fig_y0, _, fig_y1 = fig_entry["bbox"]  # GROBID PDF coords
+    def _check_double_punctuation(self) -> List[ErrorInstance]:
+        """Flag repeated or mixed terminal punctuation — e.g. 'end..' or 'what?!'."""
+        errors: List[ErrorInstance] = []
+        pattern = re.compile(r'[.!?]{2,}')
+        for line_text, line_bbox, page_num in self.line_info:
+            for match in pattern.finditer(line_text):
+                # Ellipsis (exactly three dots) is an accepted typographic convention
+                if match.group() == '...':
+                    continue
+                errors.append(ErrorInstance(
+                    check_id=28,
+                    check_name="Double Punctuation",
+                    description=(
+                        f"Repeated or mixed punctuation '{match.group()}' is "
+                        f"inappropriate in academic writing"
+                    ),
+                    page_num=page_num,
+                    text=match.group(),
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="punctuation_error",
+                ))
+        return errors
 
-                # Find caption lines on the same page
-                for line_text, line_bbox, page_num in self.line_info:
-                    if page_num != fig_page:
+    def _check_missing_space_after_punctuation_marks(self) -> List[ErrorInstance]:
+        """Flag punctuation immediately followed by a letter, skipping decimals,
+        single-char initials, common abbreviations, and URLs."""
+        errors: List[ErrorInstance] = []
+        # (?<![A-Z]) — skips abbreviation initials like U.S., I.E.
+        # (?<!\d)    — skips decimals like 3.14 or version numbers 2.0
+        pattern = re.compile(r'(?<![A-Z])(?<!\d)([.!?;:,])(?=[a-zA-Z])')
+        for line_text, line_bbox, page_num in self.line_info:
+            # Blank out URLs so they don't produce false positives
+            clean = re.sub(r'https?://\S+', ' ' * len(re.search(r'https?://\S+', line_text).group())
+                           if re.search(r'https?://\S+', line_text) else '', line_text)
+            for match in pattern.finditer(clean):
+                pos = match.start()
+                punct = match.group(1)
+                if punct == '.':
+                    # Skip single-letter initials: "A." "B." etc.
+                    if pos >= 1 and clean[pos - 1].isalpha() and (pos < 2 or not clean[pos - 2].isalpha()):
                         continue
-                    match = fig_pattern.search(line_text)
-                    if not match:
+                    # Skip known abbreviation stems
+                    window = clean[max(0, pos - 12): pos + 2]
+                    if self._ABBREV_STEMS_RE.search(window):
                         continue
+                errors.append(ErrorInstance(
+                    check_id=29,
+                    check_name="Missing Space After Punctuation",
+                    description=(
+                        f"Add a space after "
+                        f"{self._PUNCT_NAMES.get(punct, 'punctuation')} '{punct}'"
+                    ),
+                    page_num=page_num,
+                    text=clean[max(0, pos - 2): pos + 4],
+                    bbox=self._calculate_match_bbox(clean, match, line_bbox),
+                    error_type="punctuation_spacing",
+                ))
+        return errors
 
-                    caption_y0 = line_bbox[1]
-                    # Caption is above the figure's top edge → misplaced
-                    if caption_y0 < fig_y0:
-                        errors.append(ErrorInstance(
-                            check_id=19,
-                            check_name="Figure Caption Placement",
-                            description="Figure captions should be placed BELOW the figure, not above",
-                            page_num=page_num,
-                            text=match.group(0)[:100],
-                            bbox=line_bbox,
-                            error_type="caption_placement",
-                        ))
-        else:
-            # ── Fallback: page-height heuristic ──────────────────────────────
-            print("Fallback: page-height heuristic for figure caption placement")
-            fig_pattern = re.compile(
-                r"(Fig\.|Figure)\s+(\d+)[:\.]?\s+([^\n]{10,200})", re.IGNORECASE
-            )
-            for line_text, line_bbox, page_num in self.line_info:
-                match = fig_pattern.search(line_text)
-                if match and line_bbox[1] < 842 / 3:
-                    errors.append(ErrorInstance(
-                        check_id=19,
-                        check_name="Figure Caption Placement",
-                        description="Figure captions should be placed BELOW the figure, not above",
-                        page_num=page_num,
-                        text=match.group(0)[:100],
-                        bbox=line_bbox,
-                        error_type="caption_placement",
-                    ))
+    def _check_comma_before_parenthesis(self) -> List[ErrorInstance]:
+        """Flag a comma placed directly before an opening parenthesis: 'result ,(see'."""
+        return self._find_all_occurrences(
+            pattern=re.compile(r',\s*\('),
+            check_id=30,
+            check_name="Comma Before Parenthesis",
+            error_type="punctuation_error",
+            description_fn=lambda m, _: (
+                "Comma should not appear directly before an opening parenthesis"
+            ),
+        )
 
+    def _check_punctuation_inside_citation(self) -> List[ErrorInstance]:
+        """Flag a period placed right after a citation bracket mid-sentence:
+        '[1]. shows' should be '[1] shows.'"""
+        errors: List[ErrorInstance] = []
+        # Match [N]. followed by a space and then a letter (sentence continues)
+        pattern = re.compile(r'(\[\d+\])\.\s+[a-zA-Z]')
+        for line_text, line_bbox, page_num in self.line_info:
+            for match in pattern.finditer(line_text):
+                citation = match.group(1)
+                errors.append(ErrorInstance(
+                    check_id=31,
+                    check_name="Punctuation Inside Citation",
+                    description=(
+                        f"Period placed after citation '{citation}' mid-sentence; "
+                        f"move the period to the end of the sentence"
+                    ),
+                    page_num=page_num,
+                    text=f"{citation}.",
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="citation_format",
+                ))
+        return errors
+
+    def _check_multiple_spaces_between_words(self) -> List[ErrorInstance]:
+        """Flag two or more consecutive horizontal spaces between words."""
+        errors: List[ErrorInstance] = []
+        pattern = re.compile(r'[^\S\n]{2,}')
+        for line_text, line_bbox, page_num in self.line_info:
+            for match in pattern.finditer(line_text):
+                n = len(match.group())
+                errors.append(ErrorInstance(
+                    check_id=32,
+                    check_name="Multiple Spaces Between Words",
+                    description=f"Found {n} consecutive spaces — should be a single space",
+                    page_num=page_num,
+                    text=repr(match.group()),
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="spacing_error",
+                ))
+        return errors
+
+    def _check_space_inside_brackets(self) -> List[ErrorInstance]:
+        """Flag spaces immediately after '(' or before ')': '( value )' or '(value )'."""
+        errors: List[ErrorInstance] = []
+        open_pat  = re.compile(r'\(\s+(?=\S)')   # space after '(' before non-space
+        close_pat = re.compile(r'(?<=\S)\s+\)')  # space before ')' after non-space
+        for line_text, line_bbox, page_num in self.line_info:
+            for match in open_pat.finditer(line_text):
+                errors.append(ErrorInstance(
+                    check_id=33,
+                    check_name="Space Inside Brackets",
+                    description="Remove space after opening parenthesis",
+                    page_num=page_num,
+                    text=match.group() + (line_text[match.end()] if match.end() < len(line_text) else ''),
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="spacing_error",
+                ))
+            for match in close_pat.finditer(line_text):
+                errors.append(ErrorInstance(
+                    check_id=33,
+                    check_name="Space Inside Brackets",
+                    description="Remove space before closing parenthesis",
+                    page_num=page_num,
+                    text=(line_text[match.start() - 1] if match.start() > 0 else '') + match.group(),
+                    bbox=self._calculate_match_bbox(line_text, match, line_bbox),
+                    error_type="spacing_error",
+                ))
         return errors
 
     # =========================================================================
-    # CHECK #20 — TABLE CAPTION PLACEMENT
+    # CHECKS #19 & #20 — CAPTION PLACEMENT (PyMuPDF + Camelot)
+    # ─────────────────────────────────────────────────────────────────────────
+    # Expectations:
+    #   • Figure captions must appear BELOW the figure (image).
+    #   • Table captions must appear ABOVE the table.
+    #
+    # Data sources (NO GROBID):
+    #   • Figures → PyMuPDF image blocks from page.get_text("dict") (type==1)
+    #   • Tables  → Camelot-detected tables (self.extracted_tables) which
+    #               reliably identify tabular regions.  Camelot gives us
+    #               bboxes in PDF-native (bottom-left-origin) coords + page
+    #               height, so we convert to PyMuPDF's top-left origin.
+    #   • Captions → PyMuPDF text lines matching STRICT regexes:
+    #       Figure: ^(Figure|Fig\.)\s+\d+\.   (period after number mandatory)
+    #       Table:  ^Table\s+\d+\.
+    #
+    # Error conditions (one ErrorInstance per problem):
+    #   1. Figure caption ABOVE its image                → misplaced
+    #   2. Table caption BELOW its table                 → misplaced
+    #   3. Caption with no matching figure/table nearby  → orphan caption
+    #   4. Image with no caption nearby                  → uncaptioned figure
+    #   5. Camelot table with no caption nearby          → uncaptioned table
     # =========================================================================
 
-    def _check_table_caption_placement(self) -> List[ErrorInstance]:
+    # Strict caption regexes — the trailing period after the number is mandatory.
+    _FIG_CAPTION_PREFIX_RE = re.compile(
+            r"^\s*(Figure|Fig\.)\s+(\d+)[\.:]",
+            re.IGNORECASE
+        )
+
+    _TBL_CAPTION_PREFIX_RE = re.compile(
+            r"^\s*Table\s+(\d+)[\.:]",
+            re.IGNORECASE
+        )
+
+
+    # Proximity window (in PDF points) for "nearest neighbour" decisions.
+    _CAPTION_PROX_PT = 800.0
+
+    # Ignore tiny inline images (icons, logos, inline math bitmaps) — they
+    # rarely carry captions and pollute orphan-figure detection.
+    _MIN_FIGURE_AREA_PT2 = 5000.0  # ≈ 70×70 pt, well below a real figure
+
+    @staticmethod
+    def _bbox_y_range(bbox) -> Tuple[float, float]:
+        return float(bbox[1]), float(bbox[3])
+
+    @staticmethod
+    def _bbox_overlap_y(a, b) -> bool:
+        """Return True when two bboxes overlap vertically."""
+        return not (a[3] < b[1] or b[3] < a[1])
+
+    def _camelot_tables_for_page(self, page_num_0: int, page_height: float) -> List[Dict]:
         """
-        Table captions must be placed ABOVE the table.
+        Return Camelot-detected tables on page `page_num_0` (0-indexed) with
+        bboxes converted to PyMuPDF top-left origin.
 
-        Primary:  Use GROBID-detected table bounding boxes (_grobid_table_entries).
-                  A caption line whose y0 is BELOW the table's y1 is misplaced.
-
-        Fallback: Original page-height threshold heuristic.
+        Camelot bbox is (x1, y1_bottom, x2, y2_top) with origin at bottom-left.
+        PyMuPDF bbox is (x0, y0_top, x1, y1_bottom) with origin at top-left.
         """
-        errors = []
+        out = []
+        target_page_1 = page_num_0 + 1
+        for t in self.extracted_tables:
+            if int(t.get("page") or 0) != target_page_1:
+                continue
+            cam_bbox = t.get("bbox_pdf")
+            if not cam_bbox or len(cam_bbox) != 4:
+                continue
+            cam_ph = t.get("page_height") or page_height
+            x0, y1_bot, x1, y2_top = cam_bbox
+            # Convert y: PyMuPDF y0 = page_height - camelot_y2_top
+            y0_top    = cam_ph - y2_top
+            y1_bottom = cam_ph - y1_bot
+            out.append({
+                "index": t.get("index"),
+                "bbox":  (float(x0), float(y0_top), float(x1), float(y1_bottom)),
+            })
+        return out
 
-        if self._grobid_table_entries and any(
-            e.get("xml_coords") for e in self._grobid_table_entries
-        ):
-            # ── GROBID path ──────────────────────────────────────────────────
-            table_pattern = re.compile(
-                r"TABLE\s+([IVXLCDM]+|\d+)[:\.]?\s+([^\n]{10,200})", re.IGNORECASE
-            )
-            for tbl_entry in self._grobid_table_entries:
-                tbl_page = tbl_entry["page"]
-                _, tbl_y0, _, tbl_y1 = tbl_entry["bbox"]
+    def _extract_page_layout(self, page) -> Dict:
+        """
+        Extract per-page image blocks and text lines (with strict caption
+        match flags) using PyMuPDF's structured `dict` output.
+        """
+        raw = page.get_text("dict")
+        blocks = raw.get("blocks") or []
 
-                for line_text, line_bbox, page_num in self.line_info:
-                    if page_num != tbl_page:
-                        continue
-                    match = table_pattern.search(line_text)
-                    if not match:
-                        continue
+        images: List[Dict] = []
+        text_lines: List[Dict] = []
+        font_sizes: List[float] = []
 
-                    caption_y0 = line_bbox[1]
-                    # Caption is below the table's bottom edge → misplaced
-                    if caption_y0 > tbl_y1:
-                        errors.append(ErrorInstance(
-                            check_id=20,
-                            check_name="Table Caption Placement",
-                            description="Table captions should be placed ABOVE the table, not below",
-                            page_num=page_num,
-                            text=match.group(0)[:100],
-                            bbox=line_bbox,
-                            error_type="caption_placement",
-                        ))
-        else:
-            # ── Fallback: page-height heuristic ──────────────────────────────
-            table_pattern = re.compile(
-                r"TABLE\s+([IVXLCDM]+|\d+)[:\.]?\s+([^\n]{10,200})", re.IGNORECASE
-            )
-            for line_text, line_bbox, page_num in self.line_info:
-                match = table_pattern.search(line_text)
-                if match and line_bbox[1] > (2 * 842 / 3):
+        for b in blocks:
+            btype = b.get("type")
+            if btype == 1:
+                bbox = tuple(b.get("bbox") or (0, 0, 0, 0))
+                area = max(0.0, bbox[2] - bbox[0]) * max(0.0, bbox[3] - bbox[1])
+                if area < self._MIN_FIGURE_AREA_PT2:
+                    continue
+                images.append({"bbox": bbox, "area": area})
+                continue
+
+            if btype != 0:
+                continue
+
+            for ln in b.get("lines") or []:
+                spans = ln.get("spans") or []
+                if not spans:
+                    continue
+                text = "".join(s.get("text", "") for s in spans)
+                stripped = text.strip()
+                if not stripped:
+                    continue
+                size = float(spans[0].get("size") or 0.0)
+                if size > 0:
+                    font_sizes.append(size)
+
+                fig_m = self._FIG_CAPTION_PREFIX_RE.match(stripped)
+                tbl_m = self._TBL_CAPTION_PREFIX_RE.match(stripped)
+                caption_kind = None
+                caption_number = None
+                if fig_m:
+                    caption_kind = "figure"
+                    caption_number = int(fig_m.group(2))
+                elif tbl_m:
+                    caption_kind = "table"
+                    caption_number = int(tbl_m.group(1))
+
+                text_lines.append({
+                    "text": stripped,
+                    "bbox": tuple(ln.get("bbox") or (0, 0, 0, 0)),
+                    "size": size,
+                    "caption_kind":   caption_kind,
+                    "caption_number": caption_number,
+                })
+
+        body_font = 0.0
+        if font_sizes:
+            sorted_sizes = sorted(font_sizes)
+            body_font = sorted_sizes[len(sorted_sizes) // 2]
+
+        return {
+            "images":     images,
+            "text_lines": text_lines,
+            "body_font":  body_font,
+        }
+
+    def _check_caption_placement(self, doc: "fitz.Document") -> List[ErrorInstance]:
+        """Unified figure + table caption-placement check."""
+        errors: List[ErrorInstance] = []
+        prox = self._CAPTION_PROX_PT
+
+        for page_num in range(len(doc)):
+            if page_num < self.start_page_0:
+                continue
+            page = doc[page_num]
+            page_h = float(page.rect.height)
+            layout = self._extract_page_layout(page)
+            images     = layout["images"]
+            text_lines = layout["text_lines"]
+            tables     = self._camelot_tables_for_page(page_num, page_h)
+
+            fig_captions = [
+                ln for ln in text_lines if ln["caption_kind"] == "figure"
+            ]
+            tbl_captions = [
+                ln for ln in text_lines if ln["caption_kind"] == "table"
+            ]
+
+            used_image_ids: Set[int] = set()
+            used_table_ids: Set[int] = set()
+
+            # ── 1. Figure captions → nearest image ──────────────────────────
+            for cap in fig_captions:
+                cap_y0, cap_y1 = self._bbox_y_range(cap["bbox"])
+
+                candidates = []
+                for idx, img in enumerate(images):
+                    img_y0, img_y1 = self._bbox_y_range(img["bbox"])
+                    dy = min(abs(cap_y0 - img_y1), abs(img_y0 - cap_y1))
+                    if dy <= prox:
+                        candidates.append((dy, idx, img_y0, img_y1))
+
+                if not candidates:
+                    errors.append(ErrorInstance(
+                        check_id=19,
+                        check_name="Figure Caption Placement",
+                        description=(
+                            f"Figure caption '{cap['text'][:80]}' has no "
+                            "associated image on the page."
+                        ),
+                        page_num=page_num,
+                        text=cap["text"][:100],
+                        bbox=cap["bbox"],
+                        error_type="caption_placement",
+                    ))
+                    continue
+
+                candidates.sort(key=lambda t: t[0])
+                _, img_idx, img_y0, img_y1 = candidates[0]
+                used_image_ids.add(img_idx)
+
+                # Caption BELOW the image → correct (cap_y0 >= img_y1).
+                if cap_y0 < img_y0:
+                    errors.append(ErrorInstance(
+                        check_id=19,
+                        check_name="Figure Caption Placement",
+                        description=(
+                            "Figure caption is placed ABOVE its image; "
+                            "IEEE requires the caption BELOW the figure."
+                        ),
+                        page_num=page_num,
+                        text=cap["text"][:100],
+                        bbox=cap["bbox"],
+                        error_type="caption_placement",
+                    ))
+
+            # ── 2. Table captions → nearest Camelot table ───────────────────
+            for cap in tbl_captions:
+                cap_y0, cap_y1 = self._bbox_y_range(cap["bbox"])
+
+                candidates = []
+                for t in tables:
+                    t_y0, t_y1 = self._bbox_y_range(t["bbox"])
+                    dy = min(abs(cap_y0 - t_y1), abs(t_y0 - cap_y1))
+                    if dy <= prox:
+                        candidates.append((dy, t, t_y0, t_y1))
+
+                if not candidates:
                     errors.append(ErrorInstance(
                         check_id=20,
                         check_name="Table Caption Placement",
-                        description="Table captions should be placed ABOVE the table, not below",
+                        description=(
+                            f"Table caption '{cap['text'][:80]}' has no "
+                            "associated table on the page."
+                        ),
                         page_num=page_num,
-                        text=match.group(0)[:100],
-                        bbox=line_bbox,
+                        text=cap["text"][:100],
+                        bbox=cap["bbox"],
                         error_type="caption_placement",
                     ))
+                    continue
+
+                candidates.sort(key=lambda c: c[0])
+                _, tbl, t_y0, t_y1 = candidates[0]
+                used_table_ids.add(int(tbl["index"]))
+
+                # Caption ABOVE the table → correct (cap_y1 <= t_y0).
+                # If the caption sits BELOW the table's bottom edge → misplaced.
+                if cap_y0 > t_y1:
+                    errors.append(ErrorInstance(
+                        check_id=20,
+                        check_name="Table Caption Placement",
+                        description=(
+                            "Table caption is placed BELOW its table; "
+                            "IEEE requires the caption ABOVE the table."
+                        ),
+                        page_num=page_num,
+                        text=cap["text"][:100],
+                        bbox=cap["bbox"],
+                        error_type="caption_placement",
+                    ))
+
+            # ── 3. Orphan images (no caption claimed them) ──────────────────
+            for idx, img in enumerate(images):
+                if idx in used_image_ids:
+                    continue
+                img_y0, img_y1 = self._bbox_y_range(img["bbox"])
+                has_nearby_caption = any(
+                    min(abs(self._bbox_y_range(c["bbox"])[0] - img_y1),
+                        abs(img_y0 - self._bbox_y_range(c["bbox"])[1])) <= prox
+                    for c in fig_captions
+                )
+                if has_nearby_caption:
+                    continue
+                errors.append(ErrorInstance(
+                    check_id=19,
+                    check_name="Missing Figure Caption",
+                    description=(
+                        "A figure/image has no caption nearby. Every figure "
+                        "must have a caption in the form 'Fig. N.' or "
+                        "'Figure N.' placed BELOW the image."
+                    ),
+                    page_num=page_num,
+                    text="[Uncaptioned figure on this page]",
+                    bbox=img["bbox"],
+                    error_type="caption_placement",
+                ))
+
+            # ── 4. Orphan Camelot tables (no caption claimed them) ─────────
+            for tbl in tables:
+                if int(tbl["index"]) in used_table_ids:
+                    continue
+                t_y0, t_y1 = self._bbox_y_range(tbl["bbox"])
+                has_nearby_caption = any(
+                    min(abs(self._bbox_y_range(c["bbox"])[0] - t_y1),
+                        abs(t_y0 - self._bbox_y_range(c["bbox"])[1])) <= prox
+                    for c in tbl_captions
+                )
+                if has_nearby_caption:
+                    continue
+                errors.append(ErrorInstance(
+                    check_id=20,
+                    check_name="Missing Table Caption",
+                    description=(
+                        "A table has no caption nearby. Every table must "
+                        "have a caption in the form 'Table N.' placed "
+                        "ABOVE the table."
+                    ),
+                    page_num=page_num,
+                    text="[Uncaptioned table on this page]",
+                    bbox=tbl["bbox"],
+                    error_type="caption_placement",
+                ))
 
         return errors
 
     # =========================================================================
     # CHECK #27 — REQUIRED SECTIONS (format-driven, called externally)
+    # ─────────────────────────────────────────────────────────────────────────
+    # The single streamlined section-existence check. Reads
+    # self.section_detection (populated by _detect_all_sections) and emits one
+    # ErrorInstance per required-but-missing section.
     # =========================================================================
 
     def _check_required_sections(self, required: List[str]) -> List[ErrorInstance]:
-        """
-        Verify that every section in `required` is present in the document.
-
-        Uses GROBID structural signals for Abstract / Index Terms / References,
-        and keyword matching on _grobid_section_heads for all other sections.
-        Falls back to full-text regex when GROBID returned no headings.
-        """
         if not required:
             return []
 
+        # Safety: detect sections on demand if something skipped the main call.
+        if not self.section_detection:
+            self._detect_all_sections()
+
         errors = []
-        heading_texts = [h["text"].lower() for h in self._grobid_section_heads]
-
         for section in required:
-            found = False
-            keywords = SECTION_DETECTION_KEYWORDS.get(section, [section.lower()])
-
-            # Dedicated GROBID signals for the three sections with their own checks
-            if section == "Abstract":
-                found = self._grobid_has_abstract or bool(
-                    re.search(r"\bAbstract\b", self.full_text, re.IGNORECASE)
-                )
-            elif section == "Index Terms":
-                found = self._grobid_has_keywords or bool(
-                    re.search(r"Index\s+Terms", self.full_text, re.IGNORECASE)
-                )
-            elif section == "References":
-                found = bool(self.raw_citations) or bool(
-                    re.search(r"\bReferences\b", self.full_text, re.IGNORECASE)
-                )
-            else:
-                # Keyword scan against GROBID-extracted headings
-                for kw in keywords:
-                    if any(kw in heading for heading in heading_texts):
-                        found = True
-                        break
-
-                # Full-text regex fallback (when GROBID found no headings at all)
-                if not found and not self._grobid_section_heads:
-                    for kw in keywords:
-                        if re.search(r'\b' + re.escape(kw) + r'\b',
-                                     self.full_text, re.IGNORECASE):
-                            found = True
-                            break
-
-            if not found:
-                errors.append(ErrorInstance(
-                    check_id=27,
-                    check_name=f"Required Section Missing: {section}",
-                    description=(
-                        f"The required section '{section}' was not found in the document. "
-                        "Ensure this section is present and clearly labelled."
-                    ),
-                    page_num=0,
-                    text=f"[Section '{section}' not found]",
-                    bbox=(0.0, 0.0, 200.0, 20.0),
-                    error_type="missing_required_section",
-                ))
-
+            info = self.section_detection.get(section) or {
+                "found": False, "matched_heading": None, "page": None,
+            }
+            if info["found"]:
+                continue
+            errors.append(ErrorInstance(
+                check_id=27,
+                check_name=f"Required Section Missing: {section}",
+                description=(
+                    f"The required section '{section}' was not found in the document. "
+                    "Ensure this section is present and clearly labelled."
+                ),
+                page_num=0,
+                text=section,  # Plain section name — used by the frontend UI.
+                bbox=(0.0, 0.0, 200.0, 20.0),
+                error_type="missing_required_section",
+            ))
         return errors
 
     # =========================================================================
@@ -2641,37 +3389,121 @@ class PDFErrorDetector:
         errors: List[ErrorInstance],
         output_path: str,
     ):
-        """Write highlight annotations for every ErrorInstance and save to output_path."""
+        """Write highlight annotations + visible margin notes for every ErrorInstance."""
         color_map = {
-            "missing_abstract":          (1.00, 0.70, 0.70),
-            "missing_index_terms":       (1.00, 0.80, 0.60),
-            "missing_references":        (1.00, 0.85, 0.60),
-            "non_roman_heading":         (0.90, 0.90, 0.50),
-            "missing_introduction":      (1.00, 0.70, 0.70),
-            "non_ieee_citation":         (1.00, 0.75, 0.75),
-            "non_ieee_reference_format":    (0.85, 0.95, 1.00),
-            "invalid_figure_label":        (0.95, 0.85, 1.00),
-            "invalid_table_numbering":     (0.80, 0.95, 0.85),
-            "equation_numbering":          (1.00, 0.90, 0.70),
-            "figure_numbering_sequence":   (0.95, 0.80, 0.95),
-            "table_numbering_sequence":    (0.80, 0.95, 0.90),
-            "reference_numbering_sequence":(0.85, 0.85, 1.00),
-            "broken_url":                  (1.00, 0.85, 0.85),
-            "broken_doi":                  (1.00, 0.85, 0.85),
-            "metadata_incomplete":         (1.00, 0.75, 0.55),
-            "abstract_word_count":         (0.90, 0.75, 1.00),
-            "missing_required_section":    (1.00, 0.65, 0.65),
+            "non_roman_heading":             (0.90, 0.90, 0.50),
+            "non_ieee_citation":             (1.00, 0.75, 0.75),
+            "non_ieee_reference_format":     (0.85, 0.95, 1.00),
+            "invalid_figure_label":          (0.95, 0.85, 1.00),
+            "invalid_table_numbering":       (0.80, 0.95, 0.85),
+            "equation_numbering":            (1.00, 0.90, 0.70),
+            "figure_numbering_sequence":     (0.95, 0.80, 0.95),
+            "table_numbering_sequence":      (0.80, 0.95, 0.90),
+            "reference_numbering_sequence":  (0.85, 0.85, 1.00),
+            "broken_url":                    (1.00, 0.85, 0.85),
+            "broken_doi":                    (1.00, 0.85, 0.85),
+            "metadata_incomplete":           (1.00, 0.75, 0.55),
+            "missing_required_section":      (1.00, 0.65, 0.65),
         }
+
+        # One-line labels used in the visible margin note
+        short_labels: Dict[str, str] = {
+            "non_roman_heading":             "Non-Roman heading",
+            "non_ieee_citation":             "Citation format",
+            "non_ieee_reference_format":     "Reference format",
+            "invalid_figure_label":          "Invalid figure label",
+            "invalid_table_numbering":       "Invalid table label",
+            "equation_numbering":            "Equation numbering",
+            "figure_numbering_sequence":     "Figure seq. error",
+            "table_numbering_sequence":      "Table seq. error",
+            "reference_numbering_sequence":  "Reference seq. error",
+            "broken_url":                    "Broken URL",
+            "broken_doi":                    "Broken DOI",
+            "metadata_incomplete":           "Missing metadata",
+            "missing_required_section":      "Missing section",
+            "repeated_word":                 "Repeated word",
+            "writing_style":                 "First-person pronoun",
+            "punctuation_spacing":           "Punctuation spacing",
+            "punctuation_error":             "Punctuation error",
+            "citation_format":               "Citation format",
+            "spacing_error":                 "Spacing error",
+            "caption_placement":             "Caption placement",
+        }
+
+        # Margin note layout constants (points)
+        NOTE_W      = 110
+        NOTE_H      = 32
+        NOTE_GAP    = 4       # min vertical gap between stacked notes on same side
+        NOTE_FONT   = 6.5
+        MARGIN_PAD  = 4       # distance from page edge
+
+        # Track occupied y-ranges per (page_num, side) to avoid overlaps
+        # side: "left" or "right"
+        slots: Dict[Tuple[int, str], List[float]] = {}
 
         for error in errors:
             page = doc[error.page_num]
             color = color_map.get(error.error_type, (1.00, 1.00, 0.60))
+
+            # ── Highlight ────────────────────────────────────────────────────
             hl = page.add_highlight_annot(error.bbox)
             hl.set_colors(stroke=color)
             hl.set_opacity(0.5)
             hl.info["title"]   = f"Check #{error.check_id}: {error.check_name}"
             hl.info["content"] = f"{error.description}\n\nFound: '{error.text}'"
             hl.update()
+
+            # ── Margin note ──────────────────────────────────────────────────
+            pw = page.rect.width
+            ph = page.rect.height
+
+            # Pick the margin side opposite to where the error text sits
+            err_cx = (error.bbox[0] + error.bbox[2]) / 2
+            side   = "right" if err_cx < pw / 2 else "left"
+
+            if side == "right":
+                nx0 = pw - NOTE_W - MARGIN_PAD
+                nx1 = pw - MARGIN_PAD
+            else:
+                nx0 = MARGIN_PAD
+                nx1 = MARGIN_PAD + NOTE_W
+
+            # Ideal y: vertically centered on the highlighted text
+            err_cy = (error.bbox[1] + error.bbox[3]) / 2
+            ny0    = max(MARGIN_PAD, err_cy - NOTE_H / 2)
+            ny1    = ny0 + NOTE_H
+
+            # Shift down to avoid overlapping earlier notes on the same side
+            key = (error.page_num, side)
+            occupied = slots.get(key, [])
+            for prev_y1 in occupied:
+                if ny0 < prev_y1 + NOTE_GAP:
+                    ny0 = prev_y1 + NOTE_GAP
+                    ny1 = ny0 + NOTE_H
+
+            # Clamp to page bottom
+            if ny1 > ph - MARGIN_PAD:
+                ny1 = ph - MARGIN_PAD
+                ny0 = max(MARGIN_PAD, ny1 - NOTE_H)
+
+            slots.setdefault(key, []).append(ny1)
+
+            label      = short_labels.get(error.error_type, error.check_name)
+            snippet    = error.text[:35] + ("…" if len(error.text) > 35 else "")
+            note_text  = f"{label}:\n{snippet}"
+
+            ft = page.add_freetext_annot(
+                fitz.Rect(nx0, ny0, nx1, ny1),
+                note_text,
+                fontsize=NOTE_FONT,
+                fontname="helv",
+                text_color=(0.0, 0.0, 0.0),
+                fill_color=color,
+                align=fitz.TEXT_ALIGN_LEFT,
+            )
+            ft.set_border(width=0.6)
+            ft.set_opacity(0.88)
+            ft.update()
 
         doc.save(output_path, garbage=4, deflate=True)
         doc.close()
@@ -2687,6 +3519,7 @@ def process_pdf(
     required_sections: Optional[List[str]] = None,
     enabled_check_types: Optional[Set[str]] = None,
     start_page: int = 1,
+    progress_callback=None,
 ) -> Tuple[List[ErrorInstance], str, Dict, Dict, Dict]:
     """
     Full pipeline: open PDF → detect errors → annotate → save.
@@ -2697,6 +3530,8 @@ def process_pdf(
         required_sections   – sections that must exist (format-driven)
         enabled_check_types – set of error_type strings to keep; None = keep all
         start_page          – 1-indexed page to begin processing from (skips earlier pages)
+        progress_callback   – optional callable(check_key: str, check_name: str) fired after
+                              each logical check group completes, for live progress reporting
 
     Returns:
         errors             – list of ErrorInstance objects (filtered)
@@ -2706,7 +3541,9 @@ def process_pdf(
         reference_analysis – reference quality analysis from external API
     """
     detector = PDFErrorDetector(start_page=start_page)
-    errors, doc, statistics = detector.detect_errors(input_path, required_sections)
+    errors, doc, statistics = detector.detect_errors(
+        input_path, required_sections, progress_callback=progress_callback
+    )
 
     # Apply format whitelist: keep only errors whose type is enabled
     if enabled_check_types is not None:

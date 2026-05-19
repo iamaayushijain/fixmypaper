@@ -2,32 +2,74 @@
 
 import { useState, useEffect, useCallback } from "react";
 import DashboardShell from "@/components/DashboardShell";
-import { fetchFormats, uploadPDF, downloadURL, ERROR_DESCRIPTIONS } from "@/lib/data";
+import { fetchFormats, uploadPDF, pollProgress, fetchJobResult, downloadURL, ERROR_DESCRIPTIONS } from "@/lib/data";
 
 const FILTER_GROUPS = {
   all: null,
   missing_required_section: ["missing_required_section"],
   metadata_incomplete: ["metadata_incomplete"],
-  abstract_word_count: ["abstract_word_count"],
-  structure: ["missing_abstract", "missing_index_terms", "missing_references", "non_roman_heading", "missing_introduction"],
+  structure: ["non_roman_heading"],
   numbering: ["invalid_figure_label", "invalid_table_numbering", "equation_numbering"],
   sequence: ["figure_numbering_sequence", "table_numbering_sequence", "reference_numbering_sequence"],
   caption_placement: ["caption_placement"],
   url_doi: ["broken_url", "broken_doi"],
-  writing_style: ["writing_style"],
+  writing_style: [
+    "writing_style",
+    "repeated_word",
+    "punctuation_spacing",
+    "punctuation_error",
+    "spacing_error",
+    "citation_format",
+    "whitespace_error",
+  ],
 };
 
 const FILTER_LABELS = {
   all: "All",
   missing_required_section: "Sections",
   metadata_incomplete: "Metadata",
-  abstract_word_count: "Abstract",
   structure: "Structure",
   numbering: "Labels",
   sequence: "Sequence",
   caption_placement: "Captions",
   url_doi: "URLs / DOIs",
   writing_style: "Writing",
+};
+
+// Ordered list of progress stages emitted by the backend.
+// Each stage maps to a category + display name shown in the processing grid.
+const PROCESSING_STAGES = [
+  { key: "grobid_parsing",        name: "Parsing Document",         category: "Parsing"      },
+  { key: "reference_analysis",    name: "Reference Analysis",       category: "References"   },
+  { key: "metadata_completeness", name: "Metadata Completeness",    category: "Metadata"     },
+  { key: "roman_numeral_headings",name: "Roman Numeral Headings",   category: "Structure"    },
+  { key: "section_check",         name: "Section Existence",        category: "Structure"    },
+  { key: "label_formats",         name: "Figure & Table Labels",    category: "Numbering"    },
+  { key: "sequential_numbering",  name: "Sequential Numbering",     category: "Numbering"    },
+  { key: "caption_placement",     name: "Caption Placement",        category: "Formatting"   },
+  { key: "url_doi_validity",      name: "URL & DOI Validity",       category: "References"   },
+  { key: "writing_style",         name: "Writing Style",            category: "Writing"      },
+  { key: "punctuation_checks",    name: "Punctuation & Spacing",    category: "Writing"      },
+];
+
+const CATEGORY_COLORS = {
+  Parsing:    "blue",
+  Metadata:   "orange",
+  Structure:  "violet",
+  Numbering:  "indigo",
+  Formatting: "teal",
+  References: "rose",
+  Writing:    "emerald",
+};
+
+const COLOR_CLASSES = {
+  blue:    { ring: "ring-blue-400",    bg: "bg-blue-50",    text: "text-blue-700",    dot: "bg-blue-400"    },
+  orange:  { ring: "ring-orange-400",  bg: "bg-orange-50",  text: "text-orange-700",  dot: "bg-orange-400"  },
+  violet:  { ring: "ring-violet-400",  bg: "bg-violet-50",  text: "text-violet-700",  dot: "bg-violet-400"  },
+  indigo:  { ring: "ring-indigo-400",  bg: "bg-indigo-50",  text: "text-indigo-700",  dot: "bg-indigo-400"  },
+  teal:    { ring: "ring-teal-400",    bg: "bg-teal-50",    text: "text-teal-700",    dot: "bg-teal-400"    },
+  rose:    { ring: "ring-rose-400",    bg: "bg-rose-50",    text: "text-rose-700",    dot: "bg-rose-400"    },
+  emerald: { ring: "ring-emerald-400", bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-400" },
 };
 
 export default function StudentPage() {
@@ -40,6 +82,8 @@ export default function StudentPage() {
   const [result, setResult] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [filter, setFilter] = useState("all");
+  const [completedChecks, setCompletedChecks] = useState([]);
+  const [activeCheckKey, setActiveCheckKey] = useState(null);
 
   useEffect(() => {
     fetchFormats().then((f) => {
@@ -62,17 +106,56 @@ export default function StudentPage() {
 
       setFileName(file.name);
       setPhase("processing");
+      setCompletedChecks([]);
+      setActiveCheckKey(null);
 
       try {
-        const data = await uploadPDF(file, formatId, startPage);
-        if (data.success) {
-          setResult(data);
+        // uploadPDF now returns a job_id (string) immediately
+        const jobIdOrResult = await uploadPDF(file, formatId, startPage);
+
+        // Legacy fallback: if the server returned a full result object
+        if (typeof jobIdOrResult === "object" && jobIdOrResult.success) {
+          setResult(jobIdOrResult);
           setPhase("results");
           setActiveTab("overview");
           setFilter("all");
-        } else {
-          throw new Error("Processing failed");
+          return;
         }
+
+        const jobId = jobIdOrResult;
+
+        // Poll for progress until done
+        await new Promise((resolve, reject) => {
+          const intervalId = setInterval(async () => {
+            try {
+              const progress = await pollProgress(jobId);
+
+              if (progress.checks && progress.checks.length > 0) {
+                const keys = progress.checks.map((c) => c.key);
+                setCompletedChecks(keys);
+                setActiveCheckKey(keys[keys.length - 1]);
+              }
+
+              if (progress.done) {
+                clearInterval(intervalId);
+                if (progress.error) {
+                  reject(new Error(progress.error));
+                } else {
+                  resolve();
+                }
+              }
+            } catch (pollErr) {
+              clearInterval(intervalId);
+              reject(pollErr);
+            }
+          }, 400);
+        });
+
+        const data = await fetchJobResult(jobId);
+        setResult(data);
+        setPhase("results");
+        setActiveTab("overview");
+        setFilter("all");
       } catch (err) {
         setError(err.message);
         setPhase("upload");
@@ -89,6 +172,8 @@ export default function StudentPage() {
     setFilter("all");
     setActiveTab("overview");
     setError("");
+    setCompletedChecks([]);
+    setActiveCheckKey(null);
   };
 
   const onDrop = (e) => {
@@ -189,10 +274,77 @@ export default function StudentPage() {
 
       {/* Processing */}
       {phase === "processing" && (
-        <section className="bg-white border border-line rounded-card p-10 text-center animate-fade-in">
-          <div className="spinner mx-auto mb-5" />
-          <h3 className="text-lg font-bold mb-1">Analyzing document quality&hellip;</h3>
-          <p className="text-sm text-ink-soft">Please wait while your report is being prepared.</p>
+        <section className="bg-white border border-line rounded-card p-6 animate-fade-in">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-5">
+            <div className="spinner shrink-0" />
+            <div>
+              <h3 className="text-base font-bold">Analyzing document quality&hellip;</h3>
+              <p className="text-xs text-ink-soft mt-0.5">
+                {completedChecks.length === 0
+                  ? "Uploading and parsing document…"
+                  : `${completedChecks.length} of ${PROCESSING_STAGES.length} checks complete`}
+              </p>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden mb-6">
+            <div
+              className="h-full bg-gradient-to-r from-brand to-brand-dark rounded-full transition-all duration-500"
+              style={{ width: `${Math.round((completedChecks.length / PROCESSING_STAGES.length) * 100)}%` }}
+            />
+          </div>
+
+          {/* Check grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            {PROCESSING_STAGES.map((stage) => {
+              const isDone    = completedChecks.includes(stage.key);
+              const isActive  = !isDone && activeCheckKey !== null &&
+                PROCESSING_STAGES.findIndex((s) => s.key === activeCheckKey) >=
+                PROCESSING_STAGES.findIndex((s) => s.key === stage.key) - 1 &&
+                !completedChecks.includes(stage.key);
+              const color     = CATEGORY_COLORS[stage.category] || "blue";
+              const cls       = COLOR_CLASSES[color];
+
+              return (
+                <div
+                  key={stage.key}
+                  className={[
+                    "flex items-center gap-2.5 rounded-xl px-3 py-2.5 border transition-all duration-500",
+                    isDone
+                      ? `${cls.bg} border-transparent ring-1 ${cls.ring}`
+                      : isActive
+                        ? "bg-gray-50 border-gray-200 ring-1 ring-gray-300 animate-pulse"
+                        : "bg-gray-50 border-gray-100 opacity-50",
+                  ].join(" ")}
+                >
+                  {/* Icon */}
+                  <span className="shrink-0 w-6 h-6 flex items-center justify-center">
+                    {isDone ? (
+                      <svg className={`w-5 h-5 ${cls.text}`} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    ) : isActive ? (
+                      <span className={`inline-block w-2.5 h-2.5 rounded-full ${cls.dot} animate-ping`} />
+                    ) : (
+                      <span className="inline-block w-2 h-2 rounded-full bg-gray-300" />
+                    )}
+                  </span>
+
+                  {/* Label */}
+                  <div className="min-w-0">
+                    <p className={`text-xs font-semibold truncate ${isDone ? cls.text : "text-ink-soft"}`}>
+                      {stage.name}
+                    </p>
+                    <p className={`text-[10px] ${isDone ? cls.text + " opacity-70" : "text-gray-400"}`}>
+                      {stage.category}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </section>
       )}
 
@@ -304,7 +456,12 @@ function ResultsView({ result, activeTab, setActiveTab, filter, setFilter, onRes
           </div>
 
           {/* Sections status */}
-          <SectionsStatus mandatory={result.mandatory_sections} errors={errors} />
+          <SectionsStatus
+            mandatory={result.mandatory_sections}
+            errors={errors}
+            detectedSections={stats.detected_sections || []}
+            sectionDetection={stats.section_detection || []}
+          />
         </div>
       )}
 
@@ -424,30 +581,67 @@ function KPI({ value, label }) {
   );
 }
 
-function SectionsStatus({ mandatory, errors }) {
-  if (!mandatory || mandatory.length === 0) return null;
+function SectionsStatus({ mandatory, errors, detectedSections, sectionDetection }) {
   const missing = new Set(
-    (errors || []).filter((e) => e.error_type === "missing_required_section").map((e) => e.text),
+    (errors || [])
+      .filter((e) => e.error_type === "missing_required_section")
+      .map((e) => e.text),
   );
 
+  // Lookup of "matched heading" per canonical section, used to show how we
+  // identified the section in the PDF (GROBID tag or heading text).
+  const matchedBy = new Map(
+    (sectionDetection || []).map((d) => [d.section, d.matched_heading]),
+  );
+
+  const showRequired = mandatory && mandatory.length > 0;
+  const showDetected = detectedSections && detectedSections.length > 0;
+  if (!showRequired && !showDetected) return null;
+
   return (
-    <div className="border border-line bg-panel-muted rounded-xl p-4">
-      <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">Required Sections</p>
-      <div className="flex flex-wrap gap-2">
-        {mandatory.map((s) => {
-          const ok = !missing.has(s);
-          return (
-            <span
-              key={s}
-              className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
-              }`}
-            >
-              {ok ? "✓" : "✗"} {s}
-            </span>
-          );
-        })}
-      </div>
+    <div className="space-y-3">
+      {showRequired && (
+        <div className="border border-line bg-panel-muted rounded-xl p-4">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">
+            Required Sections
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {mandatory.map((s) => {
+              const ok = !missing.has(s);
+              return (
+                <span
+                  key={s}
+                  title={matchedBy.get(s) || ""}
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                    ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
+                  }`}
+                >
+                  {ok ? "✓" : "✗"} {s}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {showDetected && (
+        <div className="border border-line bg-panel-muted rounded-xl p-4">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">
+            Sections Detected in Document
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {detectedSections.map((s) => (
+              <span
+                key={s}
+                title={matchedBy.get(s) || ""}
+                className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-brand-dark"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
