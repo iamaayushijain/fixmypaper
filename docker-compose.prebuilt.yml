@@ -1,0 +1,33 @@
+services:
+  backend:
+    image: ${BACKEND_IMAGE}:${IMAGE_TAG}
+    container_name: research-paper-backend
+    ports:
+      - "5001:7860"
+    environment:
+      PORT: "7860"
+      REFERENCE_API_URL: ${REFERENCE_API_URL}
+    # Needed on Linux when REFERENCE_API_URL points to host.docker.internal.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:7860/health').getcode()==200 else sys.exit(1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    restart: always
+
+  frontend:
+    image: ${FRONTEND_IMAGE}:${IMAGE_TAG}
+    container_name: research-paper-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      BACKEND_INTERNAL_URL: ${BACKEND_INTERNAL_URL}
+      UPLOAD_PROXY_TIMEOUT_MS: ${UPLOAD_PROXY_TIMEOUT_MS}
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: always

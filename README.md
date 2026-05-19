@@ -113,6 +113,14 @@ This is expected for large papers — the ML models take time. The timeout is se
 
 ---
 
+## College Server Deploy (Prebuilt Images)
+
+Use the prebuilt deployment flow so the server only pulls and runs images (no source build on server).
+
+See [docs/DEPLOY_PREBUILT.md](docs/DEPLOY_PREBUILT.md) for exact publish and deploy commands.
+
+---
+
 ## License
 
 MIT

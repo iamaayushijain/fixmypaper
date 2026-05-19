@@ -4,13 +4,22 @@ export const runtime = "nodejs";
 
 function getBackendUrl() {
   return "http://localhost:7860".replace(/\/$/, "");
+  const raw = process.env.BACKEND_INTERNAL_URL;
+  if (!raw) {
+    throw new Error("Missing required environment variable: BACKEND_INTERNAL_URL");
+  }
+  return raw.replace(/\/$/, "");
 }
 
 function getUploadTimeoutMs() {
-  const raw = "900000";
+  const raw = process.env.UPLOAD_PROXY_TIMEOUT_MS;
+  if (!raw) {
+    throw new Error("Missing required environment variable: UPLOAD_PROXY_TIMEOUT_MS");
+  }
+
   const parsed = Number.parseInt(raw, 10);
   if (!Number.isFinite(parsed) || parsed < 0) {
-    return 900000;
+    throw new Error("UPLOAD_PROXY_TIMEOUT_MS must be a non-negative integer");
   }
   return parsed;
 }
@@ -20,8 +29,19 @@ function getUploadTimeoutMs() {
  * This avoids Next's rewrite proxy instability/timeouts during long PDF processing.
  */
 export async function POST(request) {
-  const API = getBackendUrl();
-  const timeoutMs = getUploadTimeoutMs();
+  let API;
+  let timeoutMs;
+
+  try {
+    API = getBackendUrl();
+    timeoutMs = getUploadTimeoutMs();
+  } catch (error) {
+    console.error("[UPLOAD PROXY] Invalid configuration:", error);
+    return NextResponse.json(
+      { error: "Upload proxy is misconfigured on server" },
+      { status: 500 },
+    );
+  }
 
   // Parse multipart from the client.
   const incoming = await request.formData();
